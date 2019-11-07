@@ -18,6 +18,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -102,37 +103,26 @@ public abstract class BaseModel {
         }
 
         Disposable disposable = observable.subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.add(oneTag);
-                        }
-                        if (showDialog) {
-                            liveData.postValue((T) Resource.loading(loadingMessage));
-                        }
+                .doOnSubscribe(disposable1 -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.add(oneTag);
                     }
-                }).observeOn(AndroidSchedulers.mainThread())
-                //防止RxJava内存泄漏
+                    if (showDialog) {
+                        liveData.postValue((T) Resource.loading(loadingMessage));
+                    }
+                })
+                .doFinally(() -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.remove(oneTag);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)
-                .subscribe(new Consumer() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        liveData.postValue((T) Resource.response((ResponModel<Object>) o));
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.remove(oneTag);
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        liveData.postValue((T) Resource.error(throwable));
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.remove(oneTag);
-                        }
-                    }
+                .subscribe(o -> {
+                    liveData.postValue((T) Resource.response((ResponModel<Object>) o));
+                }, throwable -> {
+                    liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
-
 
         if (cancleNet) {
             compositeDisposable.add(disposable);
@@ -169,55 +159,36 @@ public abstract class BaseModel {
         final int[] currentCount = {0};
 
         Disposable disposable = observable.subscribeOn(Schedulers.io())
-                .retryWhen(new Function<Observable<Throwable>, ObservableSource<?>>() {
-                    @Override
-                    public ObservableSource<?> apply(Observable<Throwable> throwableObservable) throws Exception {
-                        return throwableObservable.flatMap(new Function<Throwable, ObservableSource<?>>() {
-                            @Override
-                            public ObservableSource<?> apply(Throwable throwable) throws Exception {
-
-                                //如果还没到次数，就延迟5秒发起重连
-                                LogUtils.i("我看看是不是在重连", "当前的重连次数 == " + currentCount[0]);
-                                if (currentCount[0] <= maxCount) {
-                                    currentCount[0]++;
-                                    return Observable.just(1).delay(5000, TimeUnit.MILLISECONDS);
-                                } else {
-                                    //到次数了跑出异常
-                                    return Observable.error(new Throwable("重连次数已达最高,请求超时"));
-                                }
-                            }
-                        });
+                .retryWhen(throwable -> {
+                    //如果还没到次数，就延迟5秒发起重连
+                    if (currentCount[0] <= maxCount) {
+                        currentCount[0]++;
+                        return Observable.just(1).delay(5000, TimeUnit.MILLISECONDS);
+                    } else {
+                        //到次数了跑出异常
+                        return Observable.error(new Throwable("重连次数已达最高,请求超时"));
                     }
                 })
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.add(oneTag);
-                        }
-                        if (showDialog) {
-                            liveData.postValue((T) Resource.loading(loadingMessage));
-                        }
+                .doOnSubscribe(disposable1 -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.add(oneTag);
                     }
-                }).observeOn(AndroidSchedulers.mainThread())
+                    if (showDialog) {
+                        liveData.postValue((T) Resource.loading(loadingMessage));
+                    }
+                })
+                .doFinally(() -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.remove(oneTag);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 //防止RxJava内存泄漏
                 .compose(objectLifecycleTransformer)
-                .subscribe(new Consumer() {
-                    @Override
-                    public void accept(Object o) throws Exception {
-                        liveData.postValue((T) Resource.response((ResponModel<Object>) o));
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.remove(oneTag);
-                        }
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        liveData.postValue((T) Resource.error(throwable));
-                        if (!TextUtils.isEmpty(oneTag)) {
-                            onNetTags.remove(oneTag);
-                        }
-                    }
+                .subscribe(o -> {
+                    liveData.postValue((T) Resource.response((ResponModel<Object>) o));
+                }, throwable -> {
+                    liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
 
 
@@ -249,75 +220,51 @@ public abstract class BaseModel {
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.io())
-                .map(new Function<ResponseBody, File>() {
-                    @Override
-                    public File apply(ResponseBody responseBody) throws Exception {
-                        if (currentLength == 0) {
-                            return DownFileUtils.saveFile(responseBody, destDir, fileName, liveData);
-                        } else {
-                            return DownFileUtils.saveFile(responseBody, destDir, fileName, currentLength, liveData);
-                        }
+                .map(requestBody -> {
+                    if (currentLength == 0) {
+                        return DownFileUtils.saveFile((ResponseBody) requestBody, destDir, fileName, liveData);
+                    } else {
+                        return DownFileUtils.saveFile((ResponseBody) requestBody, destDir, fileName, currentLength, liveData);
                     }
-                }).compose(objectLifecycleTransformer)
+                })
+                .compose(objectLifecycleTransformer)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<File>() {
-                    @Override
-                    public void accept(File file) throws Exception {
-                        liveData.postValue((T) Resource.success(file));
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        liveData.postValue((T) Resource.error(throwable));
-                    }
+                .subscribe(file -> {
+                    liveData.postValue((T) Resource.success(file));
+                }, throwable -> {
+                    liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
         return liveData;
     }
 
-    public <T> MutableLiveData<T> upLoadFile(String url, String sequence, Map<String, File> files, MutableLiveData<T> liveData) {
 
-        MultipartBody.Part body = null;
-        if (files.keySet().size() > 1) {
-            UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(files, liveData);
-            body = MultipartBody.Part.create(uploadFileRequestBody);
-        } else {
-            File file = null;
-            for (String key : files.keySet()) {
-                file = files.get(key);
-            }
-            RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-            body = MultipartBody.Part.createFormData("file", file.getName(), requestFile);
-        }
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), sequence);
-        return upLoadFile(getApiService().uploadPic(url, requestBody, body), liveData, true, "");
+    //上传文件只有2个参数，showDialog：是否显示dialog；loadmessage：showDialog显示的文字
+    public <T> MutableLiveData<T> upLoadFile(Observable observable, MutableLiveData<T> liveData) {
+        return upLoadFile(observable, liveData, null);
     }
 
     //上传文件
-    public <T> MutableLiveData<T> upLoadFile(Observable observable, MutableLiveData<T> liveData, final boolean showDialog, final String message) {
-        LogUtils.i("不是是错误了", "开始上传了");
+    public <T> MutableLiveData<T> upLoadFile(Observable observable, MutableLiveData<T> liveData, ParamsBuilder paramsBuilder) {
+
+        if (paramsBuilder == null) {
+            paramsBuilder = paramsBuilder.build();
+        }
+        boolean showDialog = paramsBuilder.isShowDialog();
+        String loadingMessage = paramsBuilder.getLoadingMessage();
 
         observable.subscribeOn(Schedulers.io())
-                .doOnSubscribe(new Consumer<Disposable>() {
-                    @Override
-                    public void accept(Disposable disposable) throws Exception {
-                        if (showDialog) {
-                            liveData.postValue((T) Resource.loading(message));
-                        }
+                .doOnSubscribe(disposable -> {
+                    if (showDialog) {
+                        liveData.postValue((T) Resource.loading(loadingMessage));
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 //防止RxJava内存泄漏
                 .compose(objectLifecycleTransformer)
-                .subscribe(new Consumer<ResponseBody>() {
-                    @Override
-                    public void accept(ResponseBody responseBody) throws Exception {
-                        liveData.postValue((T) Resource.success("成功了"));
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        liveData.postValue((T) Resource.error(throwable));
-                    }
+                .subscribe(o -> {
+                    liveData.postValue((T) Resource.success("成功了"));
+                }, throwable -> {
+                    liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
 
         return liveData;

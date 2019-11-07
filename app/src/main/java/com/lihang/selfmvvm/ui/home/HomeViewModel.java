@@ -8,6 +8,7 @@ import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.utils.LogUtils;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,8 @@ public class HomeViewModel extends BaseViewModel<HomeRepository> {
         return getRepository().downFile(destDir,fileName);
     }
 
-    public LiveData<Resource<String>> uoLoad( String sequence, Map<String, File> files) {
-        return getRepository().upLoad(sequence,files);
+    public LiveData<Resource<String>> uoLoad(HashMap<String,String> map, Map<String, File> files) {
+        return getRepository().upLoad(map,files);
     }
 
 }

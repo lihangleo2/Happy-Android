@@ -2,11 +2,14 @@ package com.lihang.selfmvvm.ui.home;
 
 import com.lihang.selfmvvm.base.BaseModel;
 import com.lihang.selfmvvm.bean.BannerBean;
+import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
+import com.lihang.selfmvvm.utils.MultipartBodyUtils;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -40,9 +43,9 @@ public class HomeRepository extends BaseModel {
     }
 
     //上传文件
-    public MutableLiveData<Resource<String>> upLoad(String sequence, Map<String, File> files) {
+    public MutableLiveData<Resource<String>> upLoad(HashMap<String, String> map, Map<String, File> files) {
         MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return upLoadFile(SystemConst.DIFFERT_URL, sequence, files, liveData);
+        return upLoadFile(getApiService().uploadPic(map, MultipartBodyUtils.getBody(liveData, files)), liveData);
     }
 
 

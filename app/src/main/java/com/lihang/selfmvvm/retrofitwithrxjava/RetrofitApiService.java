@@ -46,10 +46,11 @@ public interface RetrofitApiService {
     Observable<ResponseBody> postAddGank(@FieldMap HashMap<String, String> map);
 
     //Retrofit 上传文件,前面的sequence是单表单@Part("sequence") RequestBody sequence
+    //Observable<ResponseBody> uploadPic(@Url String url,@Part("sequence") RequestBody sequence , @Part MultipartBody.Part file);
     // 多表单 @FieldMap Map<String, String> usermaps
-    @POST
+    @POST("upload/pic")
     @Multipart
-    Observable<ResponseBody> uploadPic(@Url String url,@Part("sequence") RequestBody sequence , @Part MultipartBody.Part file);
+    Observable<ResponseBody> uploadPic(@FieldMap HashMap<String, String> map, @Part MultipartBody.Part file);
 
     //Retrofit下载文件
     @GET
