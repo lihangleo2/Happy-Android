@@ -4,6 +4,9 @@ import android.app.Application;
 
 import com.lihang.selfmvvm.base.BaseViewModel;
 import com.lihang.selfmvvm.bean.BannerBean;
+import com.lihang.selfmvvm.bean.HomeBean;
+import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
+import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.utils.LogUtils;
 
@@ -35,6 +38,11 @@ public class HomeViewModel extends BaseViewModel<HomeRepository> {
     public LiveData<Resource<List<BannerBean>>> getBanner() {
         return getRepository().getBannerList();
     }
+
+    public LiveData<Resource<HomeFatherBean>> getHomeArticles(int curPage, ParamsBuilder paramsBuilder) {
+        return getRepository().getHomeArticles(curPage,paramsBuilder);
+    }
+
 
     public LiveData<Resource<File>> downFile(String destDir, String fileName) {
         return getRepository().downFile(destDir,fileName);

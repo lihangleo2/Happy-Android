@@ -2,6 +2,8 @@ package com.lihang.selfmvvm.retrofitwithrxjava;
 
 
 import com.lihang.selfmvvm.bean.BannerBean;
+import com.lihang.selfmvvm.bean.HomeBean;
+import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ResponModel;
 
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
@@ -30,10 +33,13 @@ import retrofit2.http.Url;
  * Retrofit 接口请求配置都在这
  */
 public interface RetrofitApiService {
-    //wanAndroid的
+    //wanAndroid的，轮播banner的接口
     @GET("banner/json")
     Observable<ResponModel<List<BannerBean>>> getBanner();
 
+    //首页文章,curPage拼接。从0开始
+    @GET("article/list/{curPage}/json")
+    Observable<ResponModel<HomeFatherBean>> getHomeArticles(@Path("curPage") int curPage);
 
     //Retrofit get请求
     @GET("xiandu/category/wow")

@@ -1,5 +1,7 @@
 package com.lihang.selfmvvm.bean.basebean;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
 /**
  * Created by leo
  * on 2019/10/16.
@@ -94,6 +96,39 @@ public class Resource<T> {
             callback.onCompleted();
         }
     }
+
+
+    public void handler(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
+        switch (state) {
+            case LOADING:
+                callback.onLoading(errorMsg);
+                break;
+            case SUCCESS:
+                callback.onSuccess(data);
+                smartRefreshLayout.finishRefresh();
+                smartRefreshLayout.finishLoadMore();
+                break;
+            case FAIL:
+                callback.onFailure(errorMsg);
+                smartRefreshLayout.finishRefresh(false);
+                smartRefreshLayout.finishLoadMore(false);
+                break;
+            case ERROR:
+                callback.onError(error);
+                smartRefreshLayout.finishRefresh(false);
+                smartRefreshLayout.finishLoadMore(false);
+                break;
+            case PROGRESS:
+                callback.onProgress(precent,total);
+                break;
+        }
+
+        if (state != LOADING) {
+            callback.onCompleted();
+        }
+    }
+
+
 
     public interface OnHandleCallback<T> {
         void onLoading(String showMessage);

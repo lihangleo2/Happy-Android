@@ -37,6 +37,9 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
     //处理逻辑业务
     protected abstract void processLogic();
 
+    //所有监听放这里
+    protected abstract void setListener();
+
 
     protected VM mViewModel;
     protected VDB binding;
@@ -50,6 +53,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         binding.setLifecycleOwner(this);
         createViewModel();
         processLogic();
+        setListener();
 
     }
 

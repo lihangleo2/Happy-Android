@@ -2,6 +2,8 @@ package com.lihang.selfmvvm.ui.home;
 
 import com.lihang.selfmvvm.base.BaseModel;
 import com.lihang.selfmvvm.bean.BannerBean;
+import com.lihang.selfmvvm.bean.HomeBean;
+import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.common.SystemConst;
@@ -29,6 +31,12 @@ public class HomeRepository extends BaseModel {
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
         return observeGo(getApiService().getBanner(), liveData);
     }
+
+    public MutableLiveData<Resource<HomeFatherBean>> getHomeArticles(int curPage, ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<HomeFatherBean>> liveData = new MutableLiveData<>();
+        return observeGo(getApiService().getHomeArticles(curPage), liveData, paramsBuilder);
+    }
+
 
     public MutableLiveData<Resource<File>> downFile(String destDir, String fileName) {
         MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();

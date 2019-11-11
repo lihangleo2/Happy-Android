@@ -69,6 +69,9 @@ public abstract class BaseModel {
     }
 
     public <T> MutableLiveData<T> observeGo(Observable observable, final MutableLiveData<T> liveData, ParamsBuilder paramsBuilder) {
+        if (paramsBuilder == null) {
+            paramsBuilder = ParamsBuilder.build();
+        }
         int retryCount = paramsBuilder.getRetryCount();
         if (retryCount > 0) {
             return observeWithRetry(observable, liveData, paramsBuilder);
