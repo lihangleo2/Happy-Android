@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="true">
+    <item
+        android:drawable="@mipmap/card_zan_1"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_2"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_3"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_4"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_5"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_6"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_7"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_8"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_9"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_10"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_11"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_12"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_13"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_14"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_15"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_16"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_17"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_18"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_19"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_20"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_21"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_22"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_23"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_24"
+        android:duration="20" />
+    <item
+        android:drawable="@mipmap/card_zan_35"
+        android:duration="20" />
+
+</animation-list>

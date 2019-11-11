@@ -1,7 +1,8 @@
 <resources>
-    <string name="app_name">SelfMVVM</string>
+    <string name="app_name">Happy-Android</string>
     <string name="result_network_error">网络不给力，请检查网络</string>
     <string name="result_server_error">服务器连接失败，请稍后再试</string>
     <string name="result_server_timeout">服务器连接超时，请稍后再试</string>
     <string name="result_empty_error">系统繁忙，请稍后再试</string>
+
 </resources>

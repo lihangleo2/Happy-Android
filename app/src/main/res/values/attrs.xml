@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LeoTitleBar">
+        <attr name="hl_background" format="color" />
+        <attr name="hl_textTitleColor" format="color" />
+        <attr name="hl_textTitleSize" format="integer" />
+        <attr name="hl_textTitle" format="string" />
+        <attr name="hl_showLeftBtn" format="boolean" />
+        <attr name="hl_leftBtnDrawable" format="reference" />
+        <attr name="hl_showRightText" format="string" />
+        <attr name="hl_rightBtnDrawable" format="reference" />
+        <attr name="hl_divideColor" format="color" />
+
+
+
+
+        <!--        <attr name="rightBtnDrawable" format="reference" />-->
+        <!--        <attr name="backgroundDrawable" format="reference" />-->
+        <!--        <attr name="leftBtnText" format="string" />-->
+        <!--        <attr name="rightBtnText" format="string" />-->
+        <!--        <attr name="barTips" format="string" />-->
+        <!--        <attr name="barTitle" format="string" />-->
+        <!--        <attr name="isShowTips" format="boolean" />-->
+        <!--        <attr name="isShowTitle" format="boolean" />-->
+        <!--        <attr name="isShowLeft" format="boolean" />-->
+        <!--        <attr name="isShowRight" format="boolean" />-->
+        <!--        <attr name="barBackground" format="reference" />-->
+        <!--        <attr name="isShowRightImage" format="boolean" />-->
+        <!--        <attr name="isShowClose" format="boolean" />-->
+    </declare-styleable>
+
+</resources>

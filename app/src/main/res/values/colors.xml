@@ -8,4 +8,7 @@
     <color name="black">#000000</color>
     <color name="red">#ff0000</color>
     <color name="yellow">#FAE104</color>
+    <color name="status_background">#1EB0F1</color>
+    <color name="line">#EEEEEE</color>
+    <color name="text_pressed">#3EB8EF</color>
 </resources>
