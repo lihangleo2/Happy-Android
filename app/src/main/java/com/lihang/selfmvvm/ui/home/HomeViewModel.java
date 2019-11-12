@@ -4,11 +4,9 @@ import android.app.Application;
 
 import com.lihang.selfmvvm.base.BaseViewModel;
 import com.lihang.selfmvvm.bean.BannerBean;
-import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
-import com.lihang.selfmvvm.utils.LogUtils;
 
 import java.io.File;
 import java.util.HashMap;
@@ -22,7 +20,7 @@ import androidx.lifecycle.LiveData;
  * Created by leo
  * on 2019/10/16.
  */
-public class HomeViewModel extends BaseViewModel<HomeRepository> {
+public class HomeViewModel extends BaseViewModel<RepositoryImpl> {
 
 
     public HomeViewModel(@NonNull Application application) {
@@ -30,8 +28,8 @@ public class HomeViewModel extends BaseViewModel<HomeRepository> {
     }
 
     @Override
-    protected HomeRepository createRepository() {
-        return new HomeRepository();
+    protected RepositoryImpl createRepository() {
+        return new RepositoryImpl();
     }
 
 
