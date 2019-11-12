@@ -2,7 +2,9 @@ package com.lihang.selfmvvm;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
+import com.lihang.selfmvvm.customview.x5webview.X5InitService;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
 import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
@@ -42,6 +44,12 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        initX5web();
+    }
+
+    private void initX5web() {
+        Intent intent = new Intent(this, X5InitService.class);
+        startService(intent);
     }
 
     public static Context getContext() {

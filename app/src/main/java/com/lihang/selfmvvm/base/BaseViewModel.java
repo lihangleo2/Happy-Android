@@ -35,9 +35,11 @@ public abstract class BaseViewModel<T extends BaseModel> extends AndroidViewMode
     }
 
     public void setObjectLifecycleTransformer(LifecycleTransformer objectLifecycleTransformer) {
-        repository.setObjectLifecycleTransformer(objectLifecycleTransformer);
-        repository.setCompositeDisposable(compositeDisposable);
-        repository.setOnNetTags(onNetTags);
+        if (repository!=null){
+            repository.setObjectLifecycleTransformer(objectLifecycleTransformer);
+            repository.setCompositeDisposable(compositeDisposable);
+            repository.setOnNetTags(onNetTags);
+        }
     }
 
     public T getRepository() {

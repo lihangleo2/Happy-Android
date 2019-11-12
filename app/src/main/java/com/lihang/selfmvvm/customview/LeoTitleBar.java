@@ -25,16 +25,16 @@ import androidx.annotation.Nullable;
  * on 2019/11/8.
  */
 public class LeoTitleBar extends FrameLayout {
-    LinearLayout leoBar;
-    TextView txt_title;
-    RelativeLayout bar_left_btn;
-    ImageView image_left;
-    TextView bar_right_text;
-    RelativeLayout bar_right_btn;
-    ImageView image_right;
+    public LinearLayout leoBar;
+    public TextView txt_title;
+    public RelativeLayout bar_left_btn;
+    public ImageView image_left;
+    public TextView bar_right_text;
+    public RelativeLayout bar_right_btn;
+    public ImageView image_right;
     //这个用来添加子view
-    RelativeLayout view_container;
-    TextView line;
+    public RelativeLayout view_container;
+    public TextView line;
 
     public LeoTitleBar(@NonNull Context context) {
         this(context, null);
@@ -84,11 +84,11 @@ public class LeoTitleBar extends FrameLayout {
         //toolbar标题
         int titleColor = typedArray.getColor(R.styleable.LeoTitleBar_hl_textTitleColor, Color.BLACK);
         txt_title.setTextColor(titleColor);
-        int titleSize = (int) typedArray.getDimension(R.styleable.LeoTitleBar_hl_textTitleSize, 20);
+        int titleSize = (int) typedArray.getDimension(R.styleable.LeoTitleBar_hl_textTitleSize, 18);
         txt_title.setTextSize(titleSize);
         String titleStr = typedArray.getString(R.styleable.LeoTitleBar_hl_textTitle);
         if (TextUtils.isEmpty(titleStr)) {
-            txt_title.setText(R.string.app_name);
+            txt_title.setText("");
         } else {
             txt_title.setText(titleStr);
         }

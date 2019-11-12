@@ -1,9 +1,9 @@
 package com.lihang.selfmvvm.ui.home;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
@@ -13,19 +13,11 @@ import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.databinding.ActivityHomeTestBinding;
+import com.lihang.selfmvvm.ui.WebActivity;
 import com.lihang.selfmvvm.utils.GlideImageLoader;
-import com.lihang.selfmvvm.utils.ToastUtils;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import io.reactivex.Observable;
 
 
 /**
@@ -49,7 +41,7 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
         binding.setOnclickListener(this);
         initBanner();
         getBanner();
-        getHomeArticles(curPage,null);
+        getHomeArticles(curPage, null);
         adapter = new HomeAdapter(this);
         adapter.setOnItemClickListener(this);
         adapter.setDataList(homeBeans);
@@ -60,16 +52,18 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
     @Override
     protected void setListener() {
         binding.banner.setOnBannerListener(position -> {
-            ToastUtils.showToast("当前点击的内容" + position);
+            Intent intent = new Intent(this, WebActivity.class);
+            intent.putExtra("url", bannerBeans.get(position).getUrl());
+            startActivity(intent);
         });
         binding.smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             curPage = 0;
-            getHomeArticles(curPage,ParamsBuilder.build().isShowDialog(false));
+            getHomeArticles(curPage, ParamsBuilder.build().isShowDialog(false));
         });
 
         binding.smartRefreshLayout.setOnLoadMoreListener(refreshLayout -> {
             curPage++;
-            getHomeArticles(curPage,ParamsBuilder.build().isShowDialog(false));
+            getHomeArticles(curPage, ParamsBuilder.build().isShowDialog(false));
         });
 
     }
@@ -86,7 +80,7 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
     }
 
     private void getHomeArticles(int currenPage, ParamsBuilder paramsBuilder) {
-        mViewModel.getHomeArticles(currenPage,paramsBuilder).observe(this, resource -> resource.handler(new OnCallback<HomeFatherBean>() {
+        mViewModel.getHomeArticles(currenPage, paramsBuilder).observe(this, resource -> resource.handler(new OnCallback<HomeFatherBean>() {
             @Override
             public void onSuccess(HomeFatherBean data) {
                 if (data.getDatas().size() > 0) {
@@ -158,6 +152,8 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
 
     @Override
     public void onItemClick(HomeBean item, int position) {
-        ToastUtils.showToast("点击了条目了");
+        Intent intent = new Intent(this, WebActivity.class);
+        intent.putExtra("url", item.getLink());
+        startActivity(intent);
     }
 }
