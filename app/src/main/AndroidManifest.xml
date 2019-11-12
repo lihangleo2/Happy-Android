@@ -13,11 +13,13 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/WhiteFront_AppTheme">
         <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
@@ -26,6 +28,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ui.WebActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
+
+        <service android:name=".customview.x5webview.X5InitService" />
+
     </application>
 
 </manifest>
