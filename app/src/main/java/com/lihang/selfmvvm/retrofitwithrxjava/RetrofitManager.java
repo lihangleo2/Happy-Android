@@ -2,18 +2,18 @@ package com.lihang.selfmvvm.retrofitwithrxjava;
 
 import android.os.Environment;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.HttpLogInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.OfflineCacheInterceptor;
+import com.lihang.selfmvvm.utils.Utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.disposables.Disposable;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -28,10 +28,16 @@ public class RetrofitManager {
     private static RetrofitManager retrofitManager;
     private OkHttpClient okHttpClient;
     private Retrofit retrofit;
+    private PersistentCookieJar cookieJar;
 
 
     private RetrofitApiService retrofitApiService;
+
     private RetrofitManager() {
+        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(Utils.getApp()));
+        //如果后端没有提供退出登录接口，还可以通过以下主动清理
+//        cookieJar.clear();
+//        cookieJar.clearSession();
         initOkHttpClient();
         initRetrofit();
     }
@@ -50,6 +56,9 @@ public class RetrofitManager {
 
 
     public static RetrofitApiService getApiService() {
+        if (retrofitManager == null) {
+            retrofitManager = getRetrofitManager();
+        }
         return retrofitManager.retrofitApiService;
     }
 
@@ -76,8 +85,8 @@ public class RetrofitManager {
                 //设置在线和离线缓存
                 .addInterceptor(OfflineCacheInterceptor.getInstance())
                 .addNetworkInterceptor(NetCacheInterceptor.getInstance())
+                .cookieJar(cookieJar)
                 .build();
     }
-
 
 }

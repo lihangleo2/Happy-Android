@@ -3,6 +3,7 @@ package com.lihang.selfmvvm.retrofitwithrxjava;
 
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
+import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ResponModel;
 
@@ -15,6 +16,7 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -40,6 +42,38 @@ public interface RetrofitApiService {
     //首页文章,curPage拼接。从0开始
     @GET("article/list/{curPage}/json")
     Observable<ResponModel<HomeFatherBean>> getHomeArticles(@Path("curPage") int curPage);
+
+    //收藏文章列表
+    @GET("lg/collect/list/{curPage}/json")
+    Observable<ResponModel<HomeFatherBean>> getCollectArticles(@Path("curPage") int curPage);
+
+    //收藏站内文章
+    @POST("lg/collect/{id}/json")
+    Observable<ResponModel<String>> collectArticle(@Path("id") int id);
+
+    //收藏站外文章
+    @FormUrlEncoded
+    @POST("lg/collect/add/json")
+    Observable<ResponModel<String>> collectOutArticle(@Field("title") String title, @Field("author") String author, @Field("link") String link);
+
+    //取消收藏 -- 首页文章列表
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<ResponModel<String>> unCollectByHome(@Path("id") int id);
+
+    //取消收藏 -- 我的收藏列表
+    @FormUrlEncoded
+    @POST("lg/uncollect/{id}/json")
+    Observable<ResponModel<String>> unCollectByMe(@Path("id") int id,@Field("originId")int originId);
+
+
+
+    //退出登录
+    @GET("user/logout/json")
+    Observable<ResponModel<String>> loginOut();
+
+    @POST("user/login")
+    @FormUrlEncoded
+    Observable<ResponModel<User>> login(@FieldMap HashMap<String, Object> map);
 
     //Retrofit get请求
     @GET("xiandu/category/wow")

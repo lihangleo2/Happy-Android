@@ -1,6 +1,5 @@
 package com.lihang.selfmvvm.utils;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 
 
@@ -17,76 +16,22 @@ import java.util.Map;
 
 public final class PreferenceUtil {
 
-    private static Context context = MyApplication.getContext();
     public static final String FILE_NAME = "leo_pro";
 
     private PreferenceUtil() {
 
     }
 
-
-    public static <T extends Serializable> boolean save(T entity, String key) {
-        if (entity == null) {
-            return false;
-        }
-        String prefFileName = entity.getClass().getName();
-        SharedPreferences sp = context.getSharedPreferences(prefFileName, 0);
-        SharedPreferences.Editor et = sp.edit();
-        String json = GsonUtil.ser(entity);
-        et.putString(key, json);
-        return et.commit();
-    }
-
-    public static <T extends Serializable> List<T> findAll(Class<T> clazz) {
-        String prefFileName = clazz.getName();
-        SharedPreferences sp = context.getSharedPreferences(prefFileName, 0);
-        Map<String, String> values = (Map<String, String>) sp.getAll();
-        List<T> results = new ArrayList<T>();
-        if (values == null || values.isEmpty())
-            return results;
-        Collection<String> colles = values.values();
-        for (String json : colles) {
-            results.add(GsonUtil.deser(json, clazz));
-        }
-        return results;
-    }
-
-    public static <T extends Serializable> T find(String key, Class<T> clazz) {
-        String prefFileName = clazz.getName();
-        SharedPreferences sp = context.getSharedPreferences(prefFileName, 0);
-
-        String json = sp.getString(key, null);
-        if (json == null) {
-            return null;
-        }
-        return GsonUtil.deser(json, clazz);
-    }
-
-    public static <T extends Serializable> void delete(String key, Class<T> clazz) {
-        String prefFileName = clazz.getName();
-        SharedPreferences sp = context.getSharedPreferences(prefFileName, 0);
-        if (sp.contains(key)) {
-            sp.edit().remove(key).commit();
-        }
-    }
-
-    public static <T extends Serializable> void deleteAll(Class<T> clazz) {
-        String prefFileName = clazz.getName();
-        SharedPreferences sp = context.getSharedPreferences(prefFileName, 0);
-        sp.edit().clear().commit();
-    }
-
-
     /**
-     * 保存数据的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
-     *
-     * @param key
-     * @param object
+     * 这里是对基本数据类型进行的操作
      */
+    /*
+     * 这里是保存基本数据类型 -- 表名是上面设置的FILE_NAME
+     * */
     public static void put(String key, Object object) {
 
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
         if (object instanceof String) {
@@ -102,20 +47,16 @@ public final class PreferenceUtil {
         } else {
             editor.putString(key, object.toString());
         }
-
-        SharedPreferencesCompat.apply(editor);
+        editor.commit();
     }
 
-    /**
-     * 得到保存数据的方法，我们根据默认值得到保存的数据的具体类型，然后调用相对于的方法获取值
-     *
-     * @param key
-     * @param defaultObject
-     * @return
-     */
+    /*
+     * 这里是根据key，获取数据。表名是 -- FILE_NAME
+     * 第二个参数是  默认值
+     * */
     public static Object get(String key, Object defaultObject) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
 
         if (defaultObject instanceof String) {
             return sp.getString(key, (String) defaultObject);
@@ -132,94 +73,119 @@ public final class PreferenceUtil {
         return null;
     }
 
-    /**
-     * 移除某个key值已经对应的值
-     *
-     * @param key
-     */
+
+    /*
+     * 根据某个key值获取数据  表名 -- FILE_NAME
+     * */
     public static void remove(String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(key);
-        SharedPreferencesCompat.apply(editor);
+        editor.commit();
     }
 
-    /**
-     * 清除所有数据
-     */
+    /*
+     * 清楚 表名 -- FILE_NAME 里所有的数据
+     * */
     public static void clear() {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.clear();
-        SharedPreferencesCompat.apply(editor);
+        editor.commit();
     }
 
-    /**
-     * 查询某个key是否已经存在
-     *
-     * @param key
-     * @return
-     */
+    /*
+     * 判断当前key值 是否存在于  表名--FILE_NAME 表里
+     * */
     public static boolean contains(String key) {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
         return sp.contains(key);
     }
 
-    /**
-     * 返回所有的键值对
-     *
-     * @return
-     */
+
+    /*
+     * 返回表名 -- FILE_NAME里所有的数据，以Map键值对的方式
+     * */
     public static Map<String, ?> getAll() {
-        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
-                Context.MODE_PRIVATE);
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(FILE_NAME,
+                Utils.getApp().MODE_PRIVATE);
         return sp.getAll();
     }
 
+
     /**
-     * 创建一个解决SharedPreferencesCompat.apply方法的一个兼容类
-     *
-     * @author zhy
+     * 以下是保存类的方式，跟上面的FILE_NAME表不在一个表里
      */
-    private static class SharedPreferencesCompat {
-        private static final Method sApplyMethod = findApplyMethod();
+    /*
+     * 保存类，当前SharedPreferences以 class类名被表名
+     * */
+    public static <T extends Serializable> boolean putByClass(String key, T entity) {
+        if (entity == null) {
+            return false;
+        }
+        String prefFileName = entity.getClass().getName();
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(prefFileName, 0);
+        SharedPreferences.Editor et = sp.edit();
+        String json = GsonUtil.ser(entity);
+        et.putString(key, json);
+        return et.commit();
+    }
 
-        /**
-         * 反射查找apply的方法
-         *
-         * @return
-         */
-        @SuppressWarnings({"unchecked", "rawtypes"})
-        private static Method findApplyMethod() {
-            try {
-                Class clz = SharedPreferences.Editor.class;
-                return clz.getMethod("apply");
-            } catch (NoSuchMethodException e) {
-            }
 
+    /*
+     * 获取某个以class 为表名的。所有class 对象
+     * */
+    public static <T extends Serializable> List<T> getAllByClass(Class<T> clazz) {
+        String prefFileName = clazz.getName();
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(prefFileName, 0);
+        Map<String, String> values = (Map<String, String>) sp.getAll();
+        List<T> results = new ArrayList<T>();
+        if (values == null || values.isEmpty())
+            return results;
+        Collection<String> colles = values.values();
+        for (String json : colles) {
+            results.add(GsonUtil.deser(json, clazz));
+        }
+        return results;
+    }
+
+    /*
+     * 获取以类名为表名的，某个key值上的value
+     * 第二个参数是，类名class,也就是当前的表名
+     * */
+    public static <T extends Serializable> T getByClass(String key, Class<T> clazz) {
+        String prefFileName = clazz.getName();
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(prefFileName, 0);
+
+        String json = sp.getString(key, null);
+        if (json == null) {
             return null;
         }
+        return GsonUtil.deser(json, clazz);
+    }
 
-        /**
-         * 如果找到则使用apply执行，否则使用commit
-         *
-         * @param editor
-         */
-        public static void apply(SharedPreferences.Editor editor) {
-            try {
-                if (sApplyMethod != null) {
-                    sApplyMethod.invoke(editor);
-                    return;
-                }
-            } catch (IllegalArgumentException e) {
-            } catch (IllegalAccessException e) {
-            } catch (InvocationTargetException e) {
-            }
-            editor.commit();
+    /*
+     * 在以类名为表名的表上，移除key值
+     * 第二个参数是，类名class,也就是当前的表名
+     * */
+    public static <T extends Serializable> void removeByClass(String key, Class<T> clazz) {
+        String prefFileName = clazz.getName();
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(prefFileName, 0);
+        if (sp.contains(key)) {
+            sp.edit().remove(key).commit();
         }
+    }
+
+    /*
+     * 移除 某个以类名为表名上的所有的值
+     * */
+    public static <T extends Serializable> void clearByClass(Class<T> clazz) {
+        String prefFileName = clazz.getName();
+        SharedPreferences sp = Utils.getApp().getSharedPreferences(prefFileName, 0);
+        sp.edit().clear().commit();
     }
 
 }

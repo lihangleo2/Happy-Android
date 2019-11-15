@@ -4,47 +4,31 @@ import android.text.TextUtils;
 
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.ResponModel;
-import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.OfflineCacheInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.RetrofitApiService;
 import com.lihang.selfmvvm.retrofitwithrxjava.RetrofitManager;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.retrofitwithrxjava.downloadutils.DownFileUtils;
-import com.lihang.selfmvvm.retrofitwithrxjava.uploadutils.FileUploadObserver;
-import com.lihang.selfmvvm.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
-import com.lihang.selfmvvm.utils.LogUtils;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 
 /**
  * Created by leo
  * on 2019/10/15.
+ * 这是model层的基类，封装这层的原因是，减少大量重复性工作
  */
 public abstract class BaseModel {
 
     public LifecycleTransformer objectLifecycleTransformer;
-    public CompositeDisposable compositeDisposable;
     public ArrayList<String> onNetTags;
 
 
@@ -56,9 +40,6 @@ public abstract class BaseModel {
         this.objectLifecycleTransformer = objectLifecycleTransformer;
     }
 
-    public void setCompositeDisposable(CompositeDisposable compositeDisposable) {
-        this.compositeDisposable = compositeDisposable;
-    }
 
     public void setOnNetTags(ArrayList<String> onNetTags) {
         this.onNetTags = onNetTags;
@@ -90,7 +71,6 @@ public abstract class BaseModel {
         String loadingMessage = paramsBuilder.getLoadingMessage();
         int onlineCacheTime = paramsBuilder.getOnlineCacheTime();
         int offlineCacheTime = paramsBuilder.getOfflineCacheTime();
-        boolean cancleNet = paramsBuilder.isCancleNet();
 
         if (onlineCacheTime > 0) {
             setOnlineCacheTime(onlineCacheTime);
@@ -104,8 +84,7 @@ public abstract class BaseModel {
                 return liveData;
             }
         }
-
-        Disposable disposable = observable.subscribeOn(Schedulers.io())
+        observable.subscribeOn(Schedulers.io())
                 .doOnSubscribe(disposable1 -> {
                     if (!TextUtils.isEmpty(oneTag)) {
                         onNetTags.add(oneTag);
@@ -127,11 +106,9 @@ public abstract class BaseModel {
                     liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
 
-        if (cancleNet) {
-            compositeDisposable.add(disposable);
-        }
         return liveData;
     }
+
 
     //把统一操作全部放在这，这是带重连的
     public <T> MutableLiveData<T> observeWithRetry(Observable observable, final MutableLiveData<T> liveData, ParamsBuilder paramsBuilder) {
@@ -142,7 +119,6 @@ public abstract class BaseModel {
         String loadingMessage = paramsBuilder.getLoadingMessage();
         int onlineCacheTime = paramsBuilder.getOnlineCacheTime();
         int offlineCacheTime = paramsBuilder.getOfflineCacheTime();
-        boolean cancleNet = paramsBuilder.isCancleNet();
 
         if (onlineCacheTime > 0) {
             setOnlineCacheTime(onlineCacheTime);
@@ -186,7 +162,6 @@ public abstract class BaseModel {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                //防止RxJava内存泄漏
                 .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
                     liveData.postValue((T) Resource.response((ResponModel<Object>) o));
@@ -194,10 +169,6 @@ public abstract class BaseModel {
                     liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
 
-
-        if (cancleNet) {
-            compositeDisposable.add(disposable);
-        }
         return liveData;
     }
 
@@ -230,7 +201,6 @@ public abstract class BaseModel {
                         return DownFileUtils.saveFile((ResponseBody) requestBody, destDir, fileName, currentLength, liveData);
                     }
                 })
-                .compose(objectLifecycleTransformer)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(file -> {
                     liveData.postValue((T) Resource.success(file));
@@ -263,7 +233,6 @@ public abstract class BaseModel {
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 //防止RxJava内存泄漏
-                .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
                     liveData.postValue((T) Resource.success("成功了"));
                 }, throwable -> {

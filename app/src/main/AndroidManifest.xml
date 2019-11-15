@@ -4,6 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -11,6 +13,7 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
+        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
@@ -19,9 +22,12 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
-        android:supportsRtl="true"
-        android:theme="@style/WhiteFront_AppTheme">
-        <activity android:name=".ui.home.HomeActivity">
+        android:supportsRtl="true">
+        <activity
+            android:name=".ui.activity.WelComeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreen_AppTheme"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,11 +36,31 @@
         </activity>
 
         <activity
-            android:name=".ui.WebActivity"
+            android:name=".ui.login.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme"
+            />
+
+        <activity
+            android:name=".ui.collect.CollectActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme"
+            />
+
+
+        <activity
+            android:name=".ui.home.HomeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
+
+        <activity
+            android:name=".ui.activity.WebActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme" />
 
         <service android:name=".customview.x5webview.X5InitService" />
+
+
 
     </application>
 

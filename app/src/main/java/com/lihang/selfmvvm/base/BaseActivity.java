@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.google.gson.JsonSyntaxException;
 import com.lihang.selfmvvm.R;
@@ -11,7 +13,6 @@ import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.utils.ToastUtils;
 import com.lihang.selfmvvm.utils.networks.NetWorkUtils;
-import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 
 import java.lang.reflect.ParameterizedType;
@@ -22,6 +23,7 @@ import java.net.SocketTimeoutException;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 /**
@@ -68,15 +70,10 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
                 modelClass = BaseViewModel.class;
             }
             mViewModel = (VM) ViewModelProviders.of(this).get(modelClass);
-            mViewModel.setObjectLifecycleTransformer(bindLifecycle());
+            mViewModel.setObjectLifecycleTransformer(bindToLifecycle());
         }
     }
 
-
-    public LifecycleTransformer bindLifecycle() {
-        LifecycleTransformer objectLifecycleTransformer = bindToLifecycle();
-        return objectLifecycleTransformer;
-    }
 
     public Context getContext() {
         return this;
@@ -132,5 +129,16 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         public void onProgress(int precent, long total) {
 
         }
+    }
+
+
+    //快速获取textView 或 EditText上文字内容
+    public String getStringByUI(View view) {
+        if (view instanceof EditText) {
+            return ((EditText) view).getText().toString().trim();
+        } else if (view instanceof TextView) {
+            return ((TextView) view).getText().toString().trim();
+        }
+        return "";
     }
 }

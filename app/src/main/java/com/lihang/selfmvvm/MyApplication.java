@@ -4,18 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
+import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.customview.x5webview.X5InitService;
+import com.lihang.selfmvvm.utils.PreferenceUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshFooterCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
-import com.scwang.smartrefresh.layout.api.DefaultRefreshInitializer;
-import com.scwang.smartrefresh.layout.api.RefreshFooter;
-import com.scwang.smartrefresh.layout.api.RefreshHeader;
-import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-
-import androidx.annotation.NonNull;
 
 /**
  * Created by leo
@@ -39,13 +33,35 @@ public class MyApplication extends Application {
 
 
     private static MyApplication context;
+    private static User loginUser;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        //捕获崩溃日志，位置在外部存储的LianSou
+//        CrashHandler crashHandler = CrashHandler.getInstance();
+//        crashHandler.init(getApplicationContext());
         context = this;
         initX5web();
     }
+
+    public static User getLoginUser() {
+        if (loginUser == null) {
+            loginUser = PreferenceUtil.getByClass("user", User.class);
+        }
+        return loginUser;
+    }
+
+    public static void updateUser(User user) {
+        PreferenceUtil.putByClass("user", user);
+        loginUser = user;
+    }
+
+    public static void logOut() {
+        loginUser = null;
+        PreferenceUtil.clearByClass(User.class);
+    }
+
 
     private void initX5web() {
         Intent intent = new Intent(this, X5InitService.class);

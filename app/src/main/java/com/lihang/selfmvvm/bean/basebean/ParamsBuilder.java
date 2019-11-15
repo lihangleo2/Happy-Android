@@ -9,8 +9,6 @@ public class ParamsBuilder {
     private int onlineCacheTime;
     //okhttp 离线缓存时间，不设置就是不用
     private int offlineCacheTime;
-    //离开页面的时候 是否取消网络。( 默认是取消 )
-    private boolean cancleNet = true;
 
     //重连次数，默认为0 不重连。大于0 开启重连
     private int  retryCount;
@@ -53,13 +51,6 @@ public class ParamsBuilder {
         return this;
     }
 
-
-    public ParamsBuilder cancleNet(boolean cancleNet){
-        this.cancleNet = cancleNet;
-        return this;
-    }
-
-
     public ParamsBuilder offlineCacheTime(int offlineCacheTime){
         this.offlineCacheTime = offlineCacheTime;
         return this;
@@ -85,14 +76,6 @@ public class ParamsBuilder {
 
     public void setOfflineCacheTime(int offlineCacheTime) {
         this.offlineCacheTime = offlineCacheTime;
-    }
-
-    public boolean isCancleNet() {
-        return cancleNet;
-    }
-
-    public void setCancleNet(boolean cancleNet) {
-        this.cancleNet = cancleNet;
     }
 
     public int getRetryCount() {

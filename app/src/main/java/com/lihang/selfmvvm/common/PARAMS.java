@@ -18,6 +18,13 @@ import okhttp3.RequestBody;
 public class PARAMS {
     public static String pageSize = "10";
 
+    public static HashMap<String, Object> login(String username, String password) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("username", username);
+        map.put("password", password);
+        return map;
+    }
+
     public static HashMap<String, String> gankPost(String url, String desc, String who, String type, String debug) {
         HashMap<String, String> map = new HashMap<>();
         map.put("url", url);

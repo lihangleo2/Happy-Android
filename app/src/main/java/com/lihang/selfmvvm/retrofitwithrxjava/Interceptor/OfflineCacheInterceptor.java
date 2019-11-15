@@ -2,6 +2,7 @@ package com.lihang.selfmvvm.retrofitwithrxjava.Interceptor;
 
 
 import com.lihang.selfmvvm.MyApplication;
+import com.lihang.selfmvvm.utils.LogUtils;
 import com.lihang.selfmvvm.utils.networks.NetWorkUtils;
 
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class OfflineCacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        LogUtils.i("我真的是醉了","22222");
         Request request = chain.request();
 
         if (!NetWorkUtils.isNetworkConnected(MyApplication.getContext())) {

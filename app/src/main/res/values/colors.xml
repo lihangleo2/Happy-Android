@@ -11,4 +11,9 @@
     <color name="status_background">#1EB0F1</color>
     <color name="line">#EEEEEE</color>
     <color name="text_pressed">#3EB8EF</color>
+
+    <color name="test_1">#479cea</color>
+    <color name="test_2">#f2faff</color>
+    <color name="blackdb">#dbdbdb</color>
+    <color name="homeyellow">#F4AA4E</color>
 </resources>

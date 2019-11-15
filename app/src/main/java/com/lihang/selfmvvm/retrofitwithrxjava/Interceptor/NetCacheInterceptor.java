@@ -3,6 +3,7 @@ package com.lihang.selfmvvm.retrofitwithrxjava.Interceptor;
 import android.text.TextUtils;
 
 
+import com.lihang.selfmvvm.utils.LogUtils;
 import com.lihang.selfmvvm.utils.PreferenceUtil;
 
 import java.io.IOException;
@@ -48,6 +49,7 @@ public class NetCacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        LogUtils.i("我真的是醉了","11111111");
         Request request = chain.request();
         Request.Builder builder1 = request.newBuilder();
 

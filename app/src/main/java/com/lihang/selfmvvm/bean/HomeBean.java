@@ -68,7 +68,7 @@ public class HomeBean implements Serializable {
     private int userId;
     private int visible;
     private int zan;
-
+    private int originId;
     public String getApkLink() {
         return apkLink;
     }
@@ -291,5 +291,13 @@ public class HomeBean implements Serializable {
 
     public void setZan(int zan) {
         this.zan = zan;
+    }
+
+    public int getOriginId() {
+        return originId;
+    }
+
+    public void setOriginId(int originId) {
+        this.originId = originId;
     }
 }

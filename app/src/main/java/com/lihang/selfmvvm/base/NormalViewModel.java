@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 /**
  * Created by leo
  * on 2019/11/12.
+ * 不需要用ViewModel的,请用此类代替
  */
 public class NormalViewModel extends BaseViewModel {
 
@@ -15,8 +16,4 @@ public class NormalViewModel extends BaseViewModel {
         super(application);
     }
 
-    @Override
-    protected BaseModel createRepository() {
-        return null;
-    }
 }

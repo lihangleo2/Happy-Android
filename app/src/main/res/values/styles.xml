@@ -8,13 +8,25 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- 全屏样式 -->
-    <style name="FullScreen_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+<!--    &lt;!&ndash; 全屏样式 &ndash;&gt;-->
+<!--    <style name="FullScreen_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">-->
+<!--        <item name="android:windowNoTitle">true</item>-->
+<!--        <item name="windowActionBar">false</item>-->
+<!--        <item name="android:windowFullscreen">true</item>-->
+<!--        <item name="android:windowContentOverlay">@null</item>-->
+<!--    </style>-->
+
+
+    <!--全屏模式-->
+    <style name="FullScreen_AppTheme" parent="@android:style/Theme.Translucent.NoTitleBar">
         <item name="android:windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowDisablePreview">true</item>
     </style>
+
 
     <!-- 状态栏字体白色，背景颜色随意更改 -->
     <style name="WhiteFront_AppTheme" parent="Theme.AppCompat.Light">
@@ -44,4 +56,19 @@
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowNoTitle">true</item>
     </style>
+
+
+    <!-- 自定义仿IOS的AlertDialog的样式 -->
+    <style name="AlertDialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+
+
 </resources>

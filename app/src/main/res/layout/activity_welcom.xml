@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#117de9">
+
+        <TextView
+            android:id="@+id/txt_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/relative_svg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="玩安卓"
+            android:textColor="@color/white"
+            android:textSize="@dimen/dp_23" />
+
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_170"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/welcome_bottom" />
+
+
+        <RelativeLayout
+            android:id="@+id/relative_svg"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp_158"
+            android:layout_width="@dimen/dp_110"
+            android:layout_height="@dimen/dp_110">
+
+            <com.jaredrummler.android.widget.AnimatedSvgView
+                android:layout_centerInParent="true"
+                android:id="@+id/img_svg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:animatedSvgFillColors="@array/google_glyph_colors"
+                app:animatedSvgFillStart="1200"
+                app:animatedSvgFillTime="1000"
+                app:animatedSvgGlyphStrings="@array/google_glyph_strings"
+                app:animatedSvgTraceTime="1500"
+                app:animatedSvgTraceTimePerGlyph="1000"
+                app:animatedSvgTraceMarkerLength="40" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>
