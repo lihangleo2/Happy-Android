@@ -87,7 +87,6 @@ public class X5WebView extends WebView {
     private WebChromeClient webChromeClient = new WebChromeClient() {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
-            Log.e("那个最后结束", newProgress + "");
             if (newProgress == 100) {
                 if (mProgressBar.getVisibility() == View.VISIBLE) {
                     mProgressBar.setVisibility(View.GONE);

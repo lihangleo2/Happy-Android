@@ -1,8 +1,6 @@
 package com.lihang.selfmvvm.ui.login;
 
 import android.animation.Animator;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -16,7 +14,6 @@ import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
@@ -54,6 +51,7 @@ public class LoginActivity extends BaseActivity<LoginViewModel, ActivityLoginBin
             }
             switch (msg.what) {
                 case 11:
+
                     KeyBoardUtils.openKeybord(binding.editPhone, LoginActivity.this);
                     break;
 

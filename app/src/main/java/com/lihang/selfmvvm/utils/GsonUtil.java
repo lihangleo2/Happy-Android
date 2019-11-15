@@ -87,10 +87,8 @@ public final class GsonUtil {
         T result;
         try {
             result = new Gson().fromJson(s, class1);
-            Log.d(class1.toString() + "------Json Msg", s);
         } catch (Exception e) {
             result = null;
-            Log.e(class1.toString() + "------Json Error", s);
         }
 
         return result;

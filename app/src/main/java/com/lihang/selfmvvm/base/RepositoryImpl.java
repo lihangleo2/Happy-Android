@@ -6,7 +6,6 @@ import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
 import com.lihang.selfmvvm.common.SystemConst;
-import com.lihang.selfmvvm.retrofitwithrxjava.RetrofitManager;
 import com.lihang.selfmvvm.utils.LogUtils;
 import com.lihang.selfmvvm.utils.MultipartBodyUtils;
 
@@ -24,21 +23,6 @@ import androidx.lifecycle.MutableLiveData;
  */
 public class RepositoryImpl extends BaseModel {
 
-//    private static RepositoryImpl repositoryImpl;
-
-//    private RepositoryImpl() { }
-
-//    public static RepositoryImpl getRepositoryImpl() {
-//        if (repositoryImpl == null) {
-//            synchronized (RepositoryImpl.class) {
-//                if (repositoryImpl == null) {
-//                    repositoryImpl = new RepositoryImpl();
-//                }
-//            }
-//        }
-//        return repositoryImpl;
-//    }
-
     //获取 banner列表
     public MutableLiveData<Resource<List<BannerBean>>> getBannerList() {
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
@@ -47,7 +31,7 @@ public class RepositoryImpl extends BaseModel {
 
     //获取首页文章
     public MutableLiveData<Resource<HomeFatherBean>> getHomeArticles(int curPage, ParamsBuilder paramsBuilder) {
-        LogUtils.i("我就不信了", "4 ==> " + curPage);
+
         MutableLiveData<Resource<HomeFatherBean>> liveData = new MutableLiveData<>();
         return observeGo(getApiService().getHomeArticles(curPage), liveData, paramsBuilder);
     }

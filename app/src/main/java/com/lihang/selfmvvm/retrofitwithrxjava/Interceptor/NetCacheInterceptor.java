@@ -49,7 +49,7 @@ public class NetCacheInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
-        LogUtils.i("我真的是醉了","11111111");
+
         Request request = chain.request();
         Request.Builder builder1 = request.newBuilder();
 
