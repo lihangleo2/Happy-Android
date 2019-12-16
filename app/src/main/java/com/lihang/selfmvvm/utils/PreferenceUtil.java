@@ -2,12 +2,7 @@ package com.lihang.selfmvvm.utils;
 
 import android.content.SharedPreferences;
 
-
-import com.lihang.selfmvvm.MyApplication;
-
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
