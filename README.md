@@ -9,3 +9,9 @@
 [Android从零开始搭建MVVM架构（5）————Lifecycles](https://juejin.im/post/5da41d55f265da5bb977d15e)  
 [Android从零开始搭建MVVM架构（6）————使用玩Android API带你搭建MVVM框架（初级篇）](https://juejin.im/post/5da6c0acf265da5bbb1e4df7)  
 [Android从零开始搭建MVVM架构（7） ———— 使用玩Android API带你搭建MVVM框架（终极篇）](https://juejin.im/post/5da90c54f265da5b932e7960)
+<details>
+<summary>展开查看</summary>
+<pre><code>
+System.out.println("Hello to see U!");
+</code></pre>
+</details>
