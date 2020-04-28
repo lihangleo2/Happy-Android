@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx'
 
 android {
     compileSdkVersion 29
@@ -49,7 +50,6 @@ dependencies {
 
     //放着没有及时回收造成RxJava内存泄漏
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
-
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
     //Room的依赖引用

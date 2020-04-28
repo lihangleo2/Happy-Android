@@ -9,6 +9,7 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
+import com.lihang.selfmvvm.aop.NeedLogin;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
@@ -24,6 +25,7 @@ import com.lihang.selfmvvm.ui.login.LoginActivity;
 import com.lihang.selfmvvm.utils.ActivityUtils;
 import com.lihang.selfmvvm.utils.ButtonClickUtils;
 import com.lihang.selfmvvm.utils.GlideImageLoader;
+import com.lihang.selfmvvm.utils.LogUtils;
 import com.lihang.selfmvvm.utils.ToastUtils;
 import com.youth.banner.BannerConfig;
 
@@ -198,31 +200,10 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
         }
         switch (v.getId()) {
             case R.id.image_zan:
-                if (MyApplication.getLoginUser() == null) {
-                    ActivityUtils.startActivity(this, LoginActivity.class);
-                    return;
-                }
-                ImageView imageView = (ImageView) v;
-                HomeBean homeBean = (HomeBean) v.getTag();
-                if (homeBean.isCollect()) {
-                    imageView.setImageResource(R.mipmap.card_zan_1);
-                    homeBean.setCollect(false);
-                    unCollectArt(homeBean.getId());
-                } else {
-                    imageView.setImageResource(R.drawable.zan_click_userdetail);
-                    AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
-                    animationDrawable.start();
-                    homeBean.setCollect(true);
-                    collectArt(homeBean);
-                }
+                followBog(v);
                 break;
             case R.id.bar_left_btn:
-                if (MyApplication.getLoginUser() == null) {
-                    ActivityUtils.startActivity(this, LoginActivity.class);
-                } else {
-                    binding.txtName.setText(MyApplication.getLoginUser().getPublicName());
-                    openDrawLayout();
-                }
+                openMymessage();
                 break;
 
             case R.id.bar_right_btn:
@@ -246,6 +227,29 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
             case R.id.txt_collect:
                 ActivityUtils.startActivity(this, CollectActivity.class);
                 break;
+        }
+    }
+
+    @NeedLogin
+    private void openMymessage() {
+        binding.txtName.setText(MyApplication.getLoginUser().getPublicName());
+        openDrawLayout();
+    }
+
+    @NeedLogin
+    private void followBog(View v) {
+        ImageView imageView = (ImageView) v;
+        HomeBean homeBean = (HomeBean) v.getTag();
+        if (homeBean.isCollect()) {
+            imageView.setImageResource(R.mipmap.card_zan_1);
+            homeBean.setCollect(false);
+            unCollectArt(homeBean.getId());
+        } else {
+            imageView.setImageResource(R.drawable.zan_click_userdetail);
+            AnimationDrawable animationDrawable = (AnimationDrawable) imageView.getDrawable();
+            animationDrawable.start();
+            homeBean.setCollect(true);
+            collectArt(homeBean);
         }
     }
 

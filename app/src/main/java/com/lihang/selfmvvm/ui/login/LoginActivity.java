@@ -115,7 +115,6 @@ public class LoginActivity extends BaseActivity<LoginViewModel, ActivityLoginBin
         binding.smartLoadingView.cannotClick();
         initXiey();
         openKeyBord();
-
     }
 
     private void openKeyBord() {
