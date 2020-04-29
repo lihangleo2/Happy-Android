@@ -21,11 +21,9 @@ import com.lihang.selfmvvm.databinding.ActivityHomeTestBinding;
 import com.lihang.selfmvvm.ui.activity.WebActivity;
 import com.lihang.selfmvvm.ui.collect.CollectActivity;
 import com.lihang.selfmvvm.ui.home.adapter.HomeAdapter;
-import com.lihang.selfmvvm.ui.login.LoginActivity;
 import com.lihang.selfmvvm.utils.ActivityUtils;
 import com.lihang.selfmvvm.utils.ButtonClickUtils;
 import com.lihang.selfmvvm.utils.GlideImageLoader;
-import com.lihang.selfmvvm.utils.LogUtils;
 import com.lihang.selfmvvm.utils.ToastUtils;
 import com.youth.banner.BannerConfig;
 
@@ -70,17 +68,20 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
     @Override
     protected void processLogic() {
         EventBus.getDefault().register(this);
-        initStatusBar();
         //关闭手势运动
         binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         binding.setOnclickListener(this);
+        initStatusBar();
         initBanner();
-        getBanner();
-        getHomeArticles(curPage, null);
+
         adapter = new HomeAdapter(this);
         adapter.setOnItemClickListener(this);
         adapter.setDataList(homeBeans);
         binding.recyclerView.setAdapter(adapter);
+
+        getBanner();
+        getHomeArticles(curPage, null);
+
     }
 
     @Override

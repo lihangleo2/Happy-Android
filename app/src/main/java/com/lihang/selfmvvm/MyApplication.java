@@ -20,6 +20,11 @@ public class MyApplication extends Application {
     private static User loginUser;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         //捕获崩溃日志，位置在外部存储的LianSou
