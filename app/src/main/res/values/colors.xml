@@ -11,6 +11,7 @@
     <color name="status_background">#1EB0F1</color>
     <color name="line">#EEEEEE</color>
     <color name="text_pressed">#3EB8EF</color>
+    <color name="background_color">#117de9</color>
 
     <color name="test_1">#479cea</color>
     <color name="test_2">#f2faff</color>
