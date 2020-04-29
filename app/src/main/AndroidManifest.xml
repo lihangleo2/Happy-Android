@@ -58,9 +58,6 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme" />
 
-        <service android:name=".customview.x5webview.X5InitService" />
-
-
 
     </application>
 
