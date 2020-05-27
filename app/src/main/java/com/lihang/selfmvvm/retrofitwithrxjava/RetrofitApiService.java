@@ -24,6 +24,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.Streaming;
@@ -85,12 +86,16 @@ public interface RetrofitApiService {
     @FormUrlEncoded
     Observable<ResponseBody> postAddGank(@FieldMap HashMap<String, String> map);
 
-    //Retrofit 上传文件,前面的sequence是单表单@Part("sequence") RequestBody sequence
-    //Observable<ResponseBody> uploadPic(@Url String url,@Part("sequence") RequestBody sequence , @Part MultipartBody.Part file);
-    // 多表单 @FieldMap Map<String, String> usermaps
+    //单张图片上传
     @POST("upload/pic")
     @Multipart
-    Observable<ResponseBody> uploadPic(@FieldMap HashMap<String, String> map, @Part MultipartBody.Part file);
+    Observable<ResponModel<String>> uploadPic(@Part("type") RequestBody type, @Part MultipartBody.Part file);
+
+
+    //单张图片上传
+    @POST("upload/picss")
+    @Multipart
+    Observable<ResponModel<String>> uploadPicss(@Part("type") RequestBody type,  @PartMap Map<String, RequestBody> maps);
 
     //Retrofit下载文件
     @GET

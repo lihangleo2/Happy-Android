@@ -76,8 +76,8 @@ public class HomeViewModel extends BaseViewModel<RepositoryImpl> {
         return getRepository().downFile(destDir, fileName);
     }
 
-    public LiveData<Resource<String>> uoLoad(HashMap<String, String> map, Map<String, File> files) {
-        return getRepository().upLoad(map, files);
+    public LiveData<Resource<String>> upLoadPic(String type, String key, File file) {
+        return getRepository().upLoadPic(type, key, file);
     }
 
 }

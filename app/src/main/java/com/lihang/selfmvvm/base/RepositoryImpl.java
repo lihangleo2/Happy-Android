@@ -5,9 +5,9 @@ import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.basebean.Resource;
+import com.lihang.selfmvvm.common.PARAMS;
 import com.lihang.selfmvvm.common.SystemConst;
-import com.lihang.selfmvvm.utils.LogUtils;
-import com.lihang.selfmvvm.utils.MultipartBodyUtils;
+import com.lihang.selfmvvm.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
 
 import java.io.File;
 import java.util.HashMap;
@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Map;
 
 import androidx.lifecycle.MutableLiveData;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 /**
  * Created by leo
@@ -94,10 +96,31 @@ public class RepositoryImpl extends BaseModel {
         return downLoadFile(getApiService().downloadFile(SystemConst.QQ_APK, range), liveData, destDir, fileName, currentLength);
     }
 
-    //上传文件
-    public MutableLiveData<Resource<String>> upLoad(HashMap<String, String> map, Map<String, File> files) {
+    //上传文件(进度监听)
+    public MutableLiveData<Resource<String>> upLoadPic(String type, String key, File file) {
         MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return upLoadFile(getApiService().uploadPic(map, MultipartBodyUtils.getBody(liveData, files)), liveData);
+
+        UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(file, liveData);
+        //"file"  是key
+        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), uploadFileRequestBody);
+        return upLoadFile(getApiService().uploadPic(PARAMS.changeToRquestBody(type), body), liveData);
+    }
+
+
+    //上传多张图片(进度监听)  多张图片进度监听，图片一张一张上传 所以用到了PictureProgressUtil工具类。用之前init初始数据，setProgress即可
+    public MutableLiveData<Resource<String>> upLoadPicss(String type, HashMap<String, File> files) {
+        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
+
+        Map<String, RequestBody> bodyMap = new HashMap<>();
+        for (int i = 0; i < files.size(); i++) {
+            File file = files.get(i);
+            UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(file, liveData);
+            bodyMap.put("files" + "\"; filename=\"" + file.getName(), uploadFileRequestBody);
+        }
+
+        //如果是传统的不带进度监听 只需要
+//        bodyMap=PARAMS.manyFileToPartBody(files);
+        return upLoadFile(getApiService().uploadPicss(PARAMS.changeToRquestBody(type), bodyMap), liveData);
     }
 
 

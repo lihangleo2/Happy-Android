@@ -34,48 +34,6 @@ public class UploadFileRequestBody extends RequestBody {
         this.liveData = liveData;
     }
 
-
-    //同一key 不同文件
-    public UploadFileRequestBody(String key, ArrayList<File> files, MutableLiveData liveData) {
-        MultipartBody.Builder mBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (files != null) {
-            RequestBody fileBody = null;
-            for (int i = 0; i < files.size(); i++) {
-                File file = files.get(i);
-                String fileKeyName = key;
-                String fileName = file.getName();
-                fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileName)), file);
-                mBuilder.addPart(Headers.of("Content-Disposition",
-                        "form-data; name=\"" + fileKeyName + "\"; filename=\"" + fileName + "\""),
-                        fileBody);
-            }
-        }
-
-        this.mRequestBody = mBuilder.build();
-        this.liveData = liveData;
-    }
-
-
-    //多文件上传，图片进度监听(不同key,不同图片)
-    public UploadFileRequestBody(Map<String, File> fileMap,MutableLiveData liveData) {
-        MultipartBody.Builder mBuilder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if (fileMap != null) {
-            RequestBody fileBody = null;
-            for (String key : fileMap.keySet()) {
-                File file = fileMap.get(key);
-                String fileKeyName = key;
-                String fileName = file.getName();
-                fileBody = RequestBody.create(MediaType.parse(guessMimeType(fileName)), file);
-                mBuilder.addPart(Headers.of("Content-Disposition",
-                        "form-data; name=\"" + fileKeyName + "\"; filename=\"" + fileName + "\""),
-                        fileBody);
-            }
-        }
-        this.mRequestBody = mBuilder.build();
-        this.liveData = liveData;
-    }
-
-
     private String guessMimeType(String path) {
         FileNameMap fileNameMap = URLConnection.getFileNameMap();
         String contentTypeFor = fileNameMap.getContentTypeFor(path);
