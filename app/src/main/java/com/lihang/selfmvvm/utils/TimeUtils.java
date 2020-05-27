@@ -98,4 +98,11 @@ public class TimeUtils {
         return returnText;
     }
 
+
+    public static String getDateToStringLeo(String milSecond) {
+        long lcc_time = Long.valueOf(milSecond);
+        Date date = new Date(lcc_time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmssSS");
+        return format.format(date);
+    }
 }
