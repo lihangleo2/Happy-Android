@@ -1,5 +1,6 @@
 package com.lihang.selfmvvm.retrofitwithrxjava.Interceptor;
 
+import android.os.SystemClock;
 import android.text.TextUtils;
 
 
@@ -9,9 +10,13 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
+import java.util.HashMap;
+import java.util.List;
 
+import okhttp3.Headers;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -24,143 +29,138 @@ import okio.BufferedSource;
  * on 2019/8/19.
  */
 public class HttpLogInterceptor implements Interceptor {
-    private final Charset UTF8 = Charset.forName("UTF-8");
+    private static HashMap<String, String> headerIgnoreMap = new HashMap<>();
+
+    static {
+        headerIgnoreMap.put("Host", "");
+        headerIgnoreMap.put("Connection", "");
+        headerIgnoreMap.put("Accept-Encoding", "");
+    }
+
+    protected void log(String message) {
+        LogUtils.i("网络请求", message);
+    }
+
+    private boolean isPlainText(MediaType mediaType) {
+        if (null != mediaType) {
+            String mediaTypeString = (null != mediaType ? mediaType.toString() : null);
+            if (!TextUtils.isEmpty(mediaTypeString)) {
+                mediaTypeString = mediaTypeString.toLowerCase();
+                if (mediaTypeString.contains("text") || mediaTypeString.contains("application/json")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
-        StringBuffer sbf = new StringBuffer();
+    public okhttp3.Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
+        long startTime = SystemClock.elapsedRealtime();
+        okhttp3.Response response = chain.proceed(chain.request());
+        long endTime = SystemClock.elapsedRealtime();
+        long duration = endTime - startTime;
+
+
+        //url
+        String url = request.url().toString();
+        log("----------Request Start----------");
+        log("" + request.method() + " " + url);
+
+        //headers
+        Headers headers = request.headers();
+        if (null != headers) {
+            for (int i = 0, count = headers.size(); i < count; i++) {
+                if (!headerIgnoreMap.containsKey(headers.name(i))) {
+                    log(headers.name(i) + ": " + headers.value(i));
+                }
+            }
+        }
+
+        //param
         RequestBody requestBody = request.body();
-        String body = null;
-        try {
-            if (requestBody != null) {
-                Buffer buffer = new Buffer();
-                requestBody.writeTo(buffer);
-                Charset charset = UTF8;
-                MediaType contentType = requestBody.contentType();
-                if (contentType != null) {
-                    charset = contentType.charset(UTF8);
-                }
-                body = buffer.clone().readString(charset);
-                if (!TextUtils.isEmpty(body)) {
-                    //如果是图片上传调用URLDecoder会报错，即使tryCache都没用，what!!!
-                    String netUrl = request.url().toString();
-                    body = URLDecoder.decode(body, "utf-8");
-                }
-            }
-        } catch (IOException e) {
-            LogUtils.i("上传文件或者，下载文件", "取消打印");
+        String paramString = readRequestParamString(requestBody);
+        if (!TextUtils.isEmpty(paramString)) {
+            log("Params:" + paramString);
         }
-        sbf.append(" \n请求方式：==> " + request.method())
-                .append("\nurl：" + request.url())
-                .append("\n请求头：" + request.headers())
-                .append("\n请求参数: " + body);
 
-        Response response = chain.proceed(request);
+        //response
         ResponseBody responseBody = response.body();
-        String rBody;
-
-        BufferedSource source = responseBody.source();
-        source.request(Long.MAX_VALUE);
-        Buffer buffer = source.buffer();
-
-        Charset charset = UTF8;
-        MediaType contentType = responseBody.contentType();
-        if (contentType != null) {
-            try {
-                charset = contentType.charset(UTF8);
-            } catch (UnsupportedCharsetException e) {
-                e.printStackTrace();
+        String responseString = "";
+        if (null != responseBody) {
+            if (isPlainText(responseBody.contentType())) {
+                responseString = readContent(response);
+            } else {
+                responseString = "other-type=" + responseBody.contentType();
             }
         }
-        rBody = buffer.clone().readString(charset);
 
-        try {
-            if (!TextUtils.isEmpty(rBody)) {
-                rBody = decodeUnicode(rBody);
-            }
-        } catch (Exception e) {
-            rBody = "";
-            LogUtils.i("上传文件或者，下载文件", "取消打印");
-        }
-
-        sbf.append("\n收到响应: code ==> " + response.code())
-                .append("\nResponse: " + rBody);
-        LogUtils.i("网络请求", sbf.toString());
+        log("Response Body:" + responseString);
+        log("Time:" + duration + " ms");
+        log("----------Request End----------");
         return response;
     }
 
-
-    /**
-     * http 请求数据返回 json 中中文字符为 unicode 编码转汉字转码
-     *
-     * @param theString
-     * @return 转化后的结果.
-     */
-    public static String decodeUnicode(String theString) {
-        char aChar;
-        int len = theString.length();
-        StringBuffer outBuffer = new StringBuffer(len);
-        for (int x = 0; x < len; ) {
-            aChar = theString.charAt(x++);
-            if (aChar == '\\') {
-                aChar = theString.charAt(x++);
-                if (aChar == 'u') {
-                    int value = 0;
-                    for (int i = 0; i < 4; i++) {
-                        aChar = theString.charAt(x++);
-                        switch (aChar) {
-                            case '0':
-                            case '1':
-                            case '2':
-                            case '3':
-                            case '4':
-                            case '5':
-                            case '6':
-                            case '7':
-                            case '8':
-                            case '9':
-                                value = (value << 4) + aChar - '0';
-                                break;
-                            case 'a':
-                            case 'b':
-                            case 'c':
-                            case 'd':
-                            case 'e':
-                            case 'f':
-                                value = (value << 4) + 10 + aChar - 'a';
-                                break;
-                            case 'A':
-                            case 'B':
-                            case 'C':
-                            case 'D':
-                            case 'E':
-                            case 'F':
-                                value = (value << 4) + 10 + aChar - 'A';
-                                break;
-                            default:
-                                throw new IllegalArgumentException(
-                                        "Malformed   \\uxxxx   encoding.");
-                        }
-
+    private String readRequestParamString(RequestBody requestBody) {
+        String paramString;
+        if (requestBody instanceof MultipartBody) {//判断是否有文件
+            StringBuilder sb = new StringBuilder();
+            MultipartBody body = (MultipartBody) requestBody;
+            List<MultipartBody.Part> parts = body.parts();
+            RequestBody partBody;
+            for (int i = 0, size = parts.size(); i < size; i++) {
+                partBody = parts.get(i).body();
+                if (null != partBody) {
+                    if (sb.length() > 0) {
+                        sb.append(",");
                     }
-                    outBuffer.append((char) value);
-                } else {
-                    if (aChar == 't')
-                        aChar = '\t';
-                    else if (aChar == 'r')
-                        aChar = '\r';
-                    else if (aChar == 'n')
-                        aChar = '\n';
-                    else if (aChar == 'f')
-                        aChar = '\f';
-                    outBuffer.append(aChar);
+                    if (isPlainText(partBody.contentType())) {
+                        sb.append(readContent(partBody));
+                    } else {
+                        sb.append("other-param-type=").append(partBody.contentType());
+                    }
                 }
-            } else
-                outBuffer.append(aChar);
+            }
+            paramString = sb.toString();
+        } else {
+            paramString = readContent(requestBody);
         }
-        return outBuffer.toString();
+        return paramString;
+    }
+
+    private String readContent(Response response) {
+        if (response == null) {
+            return "";
+        }
+
+        try {
+            return response.peekBody(Long.MAX_VALUE).string();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    private String readContent(RequestBody body) {
+        if (body == null) {
+            return "";
+        }
+
+        Buffer buffer = new Buffer();
+
+        try {
+            //小于2m
+            if (body.contentLength() <= 2 * 1024 * 1024) {
+                body.writeTo(buffer);
+            } else {
+                return "content is more than 2M";
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return buffer.readUtf8();
     }
 
 }
