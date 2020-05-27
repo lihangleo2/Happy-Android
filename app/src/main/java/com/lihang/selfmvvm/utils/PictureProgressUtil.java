@@ -26,6 +26,10 @@ public class PictureProgressUtil {
             currentProgress += trueCount;
             oldProgress = progress;
         }
+
+        if (currentProgress >= totalProgress) {
+            currentProgress = totalProgress;
+        }
         return currentProgress * 100 / totalProgress;
     }
 }
