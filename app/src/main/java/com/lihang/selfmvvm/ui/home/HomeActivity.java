@@ -9,7 +9,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
-import com.lihang.selfmvvm.aop.NeedLogin;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
@@ -21,10 +20,12 @@ import com.lihang.selfmvvm.databinding.ActivityHomeTestBinding;
 import com.lihang.selfmvvm.ui.activity.WebActivity;
 import com.lihang.selfmvvm.ui.collect.CollectActivity;
 import com.lihang.selfmvvm.ui.home.adapter.HomeAdapter;
+import com.lihang.selfmvvm.ui.login.LoginActivity;
 import com.lihang.selfmvvm.utils.ActivityUtils;
 import com.lihang.selfmvvm.utils.ButtonClickUtils;
 import com.lihang.selfmvvm.utils.GlideImageLoader;
 import com.lihang.selfmvvm.utils.ToastUtils;
+import com.lihang.selfmvvm.utils.Utils;
 import com.youth.banner.BannerConfig;
 
 import org.greenrobot.eventbus.EventBus;
@@ -201,10 +202,19 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
         }
         switch (v.getId()) {
             case R.id.image_zan:
-                followBog(v);
+                if (MyApplication.getLoginUser() != null) {
+                    followBog(v);
+                } else {
+                    ActivityUtils.startActivity(this, LoginActivity.class);
+                }
                 break;
             case R.id.bar_left_btn:
-                openMymessage();
+
+                if (MyApplication.getLoginUser() != null) {
+                    openMymessage();
+                } else {
+                    ActivityUtils.startActivity(this, LoginActivity.class);
+                }
                 break;
 
             case R.id.bar_right_btn:
@@ -231,13 +241,11 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
         }
     }
 
-    @NeedLogin
     private void openMymessage() {
         binding.txtName.setText(MyApplication.getLoginUser().getPublicName());
         openDrawLayout();
     }
 
-    @NeedLogin
     private void followBog(View v) {
         ImageView imageView = (ImageView) v;
         HomeBean homeBean = (HomeBean) v.getTag();
