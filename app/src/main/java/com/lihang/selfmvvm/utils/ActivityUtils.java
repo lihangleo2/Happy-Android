@@ -33,10 +33,10 @@ public class ActivityUtils {
         return intent;
     }
 
-    public static void startHome(){
-        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-        homeIntent.addCategory(Intent.CATEGORY_HOME);
-        homeIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        MyApplication.getContext().startActivity(homeIntent);
+    public static void startHome(Context context){
+Intent home = new Intent(Intent.ACTION_MAIN);
+        home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        home.addCategory(Intent.CATEGORY_HOME);
+        context.startActivity(home);
     }
 }
