@@ -306,7 +306,7 @@ public class HomeActivity extends BaseActivity<HomeViewModel, ActivityHomeTestBi
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
             //点击返回键，不退出应用程序。直接返回后台
-            ActivityUtils.startHome();
+            ActivityUtils.startHome(HomeActivity.this);
             return true;
         }
         return super.onKeyDown(keyCode, event);
