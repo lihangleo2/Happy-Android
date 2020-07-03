@@ -47,7 +47,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
 
-    //放着没有及时回收造成RxJava内存泄漏
+    //解决RxJava内存泄漏，但在联网请求的时候使用了liveData，其实已经解决了。观察事件不能取消。
+    //同时在单独使用rxJava的时候还是要用。比如在启动页，还未去主页面，手动点击返回键的时候有效
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
