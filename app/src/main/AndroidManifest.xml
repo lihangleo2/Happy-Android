@@ -29,6 +29,7 @@
             android:name=".ui.activity.WelComeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
+            android:windowSoftInputMode="stateAlwaysHidden"
             >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
