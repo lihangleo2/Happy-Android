@@ -42,24 +42,30 @@
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme"
+            android:launchMode="singleTop"
             />
 
         <activity
             android:name=".ui.collect.CollectActivity"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme"
+            android:launchMode="singleTop"
             />
 
 
         <activity
             android:name=".ui.home.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
+            android:theme="@style/WhiteFront_AppTheme"
+            android:launchMode="singleTop"
+            />
 
         <activity
             android:name=".ui.activity.WebActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
+            android:theme="@style/WhiteFront_AppTheme"
+            android:launchMode="singleTop"
+            />
 
         <!--多渠道打包需要配置-->
         <meta-data
