@@ -20,15 +20,58 @@ android {
         enabled = true
     }
 
+
+    //签名 (需要签名文件)
+    signingConfigs {
+        key {
+            storeFile file("leo.jks")//签名文件
+            storePassword "5888062"
+            keyAlias "happyandroid"
+            keyPassword "5888062"//签名密码
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            //混淆
+            minifyEnabled true
+            //移除无用的resource文件
+            shrinkResources true
+            //zipalign优化
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //加上签名文件了需要放开
+            signingConfig signingConfigs.key
+        }
+
+        debug {
+            signingConfig signingConfigs.key
         }
     }
     compileOptions {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
+    }
+
+    //多渠道打包
+    flavorDimensions "mark" //相当于一个标记
+    productFlavors {
+        medical { dimension "mark" }
+    }
+
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [ATMAN_CHANNEL_VALUE: name]
+    }
+
+    //自定义打包时apk名字
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            // abc_渠道名_版本名.apk  还可以拼接其他app内容：variant.versionCode  variant.buildType.name
+//            outputFileName = "FastMedical_${variant.name}_${variant.versionName}_${new Date().format("yyyy-MM-dd")}.apk"
+            outputFileName = "Happy_Android_${variant.versionName}_${variant.buildType.name}_${new Date().format("yyyy-MM-dd_HH_mm")}.apk"
+
+        }
     }
 }
 

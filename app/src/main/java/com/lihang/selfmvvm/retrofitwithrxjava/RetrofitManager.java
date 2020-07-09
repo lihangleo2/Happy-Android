@@ -5,6 +5,7 @@ import android.os.Environment;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.lihang.selfmvvm.BuildConfig;
 import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.HttpLogInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
@@ -64,8 +65,15 @@ public class RetrofitManager {
 
 
     private void initRetrofit() {
+        String baseUrl = SystemConst.DEFAULT_SERVER_DEBUG;
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            baseUrl = SystemConst.DEFAULT_SERVER_DEBUG;
+        } else {
+            baseUrl = SystemConst.DEFAULT_SERVER_RELEASE;
+        }
+
         retrofit = new Retrofit.Builder()
-                .baseUrl(SystemConst.DEFAULT_SERVER)
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
