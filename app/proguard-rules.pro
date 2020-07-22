@@ -278,8 +278,7 @@
 	public <fields>;
 	public <methods>;
 }
--keep public class * extends android.app.Application
-{
+-keep public class * extends android.app.Application{
 	public <fields>;
 	public <methods>;
 }
