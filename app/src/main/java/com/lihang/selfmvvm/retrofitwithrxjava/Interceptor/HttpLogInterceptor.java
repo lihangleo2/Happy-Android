@@ -66,15 +66,16 @@ public class HttpLogInterceptor implements Interceptor {
 
         //url
         String url = request.url().toString();
-        log("----------Request Start----------");
-        log("" + request.method() + " " + url);
-
+        log("┌───────Request Start────────────────────────────");
+        log("请求方式 -->>" + request.method() + ": " + url);
+        log("请求方式 -->>"+"Time:" + duration + " ms");
         //headers
         Headers headers = request.headers();
         if (null != headers) {
             for (int i = 0, count = headers.size(); i < count; i++) {
                 if (!headerIgnoreMap.containsKey(headers.name(i))) {
-                    log(headers.name(i) + ": " + headers.value(i));
+                    log("请求头部 -->>" + headers.name(i) + ": " + headers.value(i));
+
                 }
             }
         }
@@ -83,7 +84,7 @@ public class HttpLogInterceptor implements Interceptor {
         RequestBody requestBody = request.body();
         String paramString = readRequestParamString(requestBody);
         if (!TextUtils.isEmpty(paramString)) {
-            log("Params:" + paramString);
+            log("请求参数 -->>" + paramString);
         }
 
         //response
@@ -97,9 +98,10 @@ public class HttpLogInterceptor implements Interceptor {
             }
         }
 
-        log("Response Body:" + responseString);
-        log("Time:" + duration + " ms");
-        log("----------Request End----------");
+        log("请求返回 -->>" + responseString);
+
+
+        log("└───────Request End─────────────────────────────" + "\n" + "-");
         return response;
     }
 
@@ -162,5 +164,4 @@ public class HttpLogInterceptor implements Interceptor {
         }
         return buffer.readUtf8();
     }
-
 }
