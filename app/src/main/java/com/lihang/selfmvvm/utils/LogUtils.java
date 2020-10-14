@@ -10,14 +10,9 @@ public class LogUtils {
 
     //可以全局控制是否打印log日志
     private static boolean isEnableLog = true;
-    private static int LOG_MAXLENGTH = 4000;
+    private static int LOG_MAXLENGTH = 3000;
     public static final String TAG = LogUtils.class.getSimpleName();
-    private static final String TOP_DIVIDER =
-            "┌────────────────────────────────────────────────────────";
 
-    private static final String BOTTOM_DIVIDER =
-            "└────────────────────────────────────────────────────────";
-    private static final String MIDDLE_DIVIDER = "----------- 换行 ------------\n";
 
     public static void v(String msg) {
         v(TAG, msg);
@@ -25,32 +20,39 @@ public class LogUtils {
 
     public static void v(String tagName, String msg) {
         if (isEnableLog) {
+            //如果是null
             if (msg == null) {
                 Log.v(tagName, "null");
                 return;
             }
+
+            //如果是空的话
+            if (TextUtils.isEmpty(msg)) {
+                Log.v(tagName, "\"\"");
+                return;
+            }
+
+
             int strLength = msg.length();
-            int start = 0;
-            int end = LOG_MAXLENGTH;
-            if (strLength > end) {
-                StringBuffer sbf = new StringBuffer();
-                sbf.append(" \n" + TOP_DIVIDER).append(msg);
-                String trueMsg = sbf.toString();
-                strLength = trueMsg.length();
-                while (strLength > end) {
-                    if (start == 0) {
-                        Log.v(tagName, trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+            if (strLength > LOG_MAXLENGTH) {
+                //如果打印长度大于，限制的最大长度后，我们就需要分段打印
+                //已经打印的长度
+                int printLenght = 0;
+                //初始化一个开始打印的index
+                int printStart = 0;
+                //总长度大于已打印的长度，那么就一直打印
+                while (strLength > printLenght) {
+
+                    if ((printStart + LOG_MAXLENGTH) <= strLength) {
+                        Log.v(tagName, msg.substring(printStart, printStart + LOG_MAXLENGTH));
+                        printLenght = printStart + LOG_MAXLENGTH;
+                        printStart = printStart + LOG_MAXLENGTH;
                     } else {
-                        end = end - MIDDLE_DIVIDER.length();
-                        Log.v(tagName, MIDDLE_DIVIDER + trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+                        Log.v(tagName, msg.substring(printStart, strLength));
+                        printLenght = strLength;
                     }
                 }
-                Log.v(tagName, trueMsg.substring(start, strLength));
-                Log.v(tagName, " \n" + BOTTOM_DIVIDER);
+
             } else {
                 Log.v(tagName, msg);
             }
@@ -63,32 +65,39 @@ public class LogUtils {
 
     public static void d(String tagName, String msg) {
         if (isEnableLog) {
+            //如果是null
             if (msg == null) {
                 Log.d(tagName, "null");
                 return;
             }
+
+            //如果是空的话
+            if (TextUtils.isEmpty(msg)) {
+                Log.d(tagName, "\"\"");
+                return;
+            }
+
+
             int strLength = msg.length();
-            int start = 0;
-            int end = LOG_MAXLENGTH;
-            if (strLength > end) {
-                StringBuffer sbf = new StringBuffer();
-                sbf.append(" \n" + TOP_DIVIDER).append(msg);
-                String trueMsg = sbf.toString();
-                strLength = trueMsg.length();
-                while (strLength > end) {
-                    if (start == 0) {
-                        Log.d(tagName, trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+            if (strLength > LOG_MAXLENGTH) {
+                //如果打印长度大于，限制的最大长度后，我们就需要分段打印
+                //已经打印的长度
+                int printLenght = 0;
+                //初始化一个开始打印的index
+                int printStart = 0;
+                //总长度大于已打印的长度，那么就一直打印
+                while (strLength > printLenght) {
+
+                    if ((printStart + LOG_MAXLENGTH) <= strLength) {
+                        Log.d(tagName, msg.substring(printStart, printStart + LOG_MAXLENGTH));
+                        printLenght = printStart + LOG_MAXLENGTH;
+                        printStart = printStart + LOG_MAXLENGTH;
                     } else {
-                        end = end - MIDDLE_DIVIDER.length();
-                        Log.d(tagName, MIDDLE_DIVIDER + trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+                        Log.d(tagName, msg.substring(printStart, strLength));
+                        printLenght = strLength;
                     }
                 }
-                Log.d(tagName, trueMsg.substring(start, strLength));
-                Log.d(tagName, " \n" + BOTTOM_DIVIDER);
+
             } else {
                 Log.d(tagName, msg);
             }
@@ -102,32 +111,39 @@ public class LogUtils {
 
     public static void i(String tagName, String msg) {
         if (isEnableLog) {
+            //如果是null
             if (msg == null) {
                 Log.i(tagName, "null");
                 return;
             }
+
+            //如果是空的话
+            if (TextUtils.isEmpty(msg)) {
+                Log.i(tagName, "\"\"");
+                return;
+            }
+
+
             int strLength = msg.length();
-            int start = 0;
-            int end = LOG_MAXLENGTH;
-            if (strLength > end) {
-                StringBuffer sbf = new StringBuffer();
-                sbf.append(" \n" + TOP_DIVIDER).append(msg);
-                String trueMsg = sbf.toString();
-                strLength = trueMsg.length();
-                while (strLength > end) {
-                    if (start == 0) {
-                        Log.i(tagName, trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+            if (strLength > LOG_MAXLENGTH) {
+                //如果打印长度大于，限制的最大长度后，我们就需要分段打印
+                //已经打印的长度
+                int printLenght = 0;
+                //初始化一个开始打印的index
+                int printStart = 0;
+                //总长度大于已打印的长度，那么就一直打印
+                while (strLength > printLenght) {
+
+                    if ((printStart + LOG_MAXLENGTH) <= strLength) {
+                        Log.i(tagName, msg.substring(printStart, printStart + LOG_MAXLENGTH));
+                        printLenght = printStart + LOG_MAXLENGTH;
+                        printStart = printStart + LOG_MAXLENGTH;
                     } else {
-                        end = end - MIDDLE_DIVIDER.length();
-                        Log.i(tagName, MIDDLE_DIVIDER + trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+                        Log.i(tagName, msg.substring(printStart, strLength));
+                        printLenght = strLength;
                     }
                 }
-                Log.i(tagName, trueMsg.substring(start, strLength));
-                Log.i(tagName, " \n" + BOTTOM_DIVIDER);
+
             } else {
                 Log.i(tagName, msg);
             }
@@ -140,32 +156,39 @@ public class LogUtils {
 
     public static void w(String tagName, String msg) {
         if (isEnableLog) {
+            //如果是null
             if (msg == null) {
                 Log.w(tagName, "null");
                 return;
             }
+
+            //如果是空的话
+            if (TextUtils.isEmpty(msg)) {
+                Log.w(tagName, "\"\"");
+                return;
+            }
+
+
             int strLength = msg.length();
-            int start = 0;
-            int end = LOG_MAXLENGTH;
-            if (strLength > end) {
-                StringBuffer sbf = new StringBuffer();
-                sbf.append(" \n" + TOP_DIVIDER).append(msg);
-                String trueMsg = sbf.toString();
-                strLength = trueMsg.length();
-                while (strLength > end) {
-                    if (start == 0) {
-                        Log.w(tagName, trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+            if (strLength > LOG_MAXLENGTH) {
+                //如果打印长度大于，限制的最大长度后，我们就需要分段打印
+                //已经打印的长度
+                int printLenght = 0;
+                //初始化一个开始打印的index
+                int printStart = 0;
+                //总长度大于已打印的长度，那么就一直打印
+                while (strLength > printLenght) {
+
+                    if ((printStart + LOG_MAXLENGTH) <= strLength) {
+                        Log.w(tagName, msg.substring(printStart, printStart + LOG_MAXLENGTH));
+                        printLenght = printStart + LOG_MAXLENGTH;
+                        printStart = printStart + LOG_MAXLENGTH;
                     } else {
-                        end = end - MIDDLE_DIVIDER.length();
-                        Log.w(tagName, MIDDLE_DIVIDER + trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+                        Log.w(tagName, msg.substring(printStart, strLength));
+                        printLenght = strLength;
                     }
                 }
-                Log.w(tagName, trueMsg.substring(start, strLength));
-                Log.w(tagName, " \n" + BOTTOM_DIVIDER);
+
             } else {
                 Log.w(tagName, msg);
             }
@@ -178,32 +201,39 @@ public class LogUtils {
 
     public static void e(String tagName, String msg) {
         if (isEnableLog) {
+            //如果是null
             if (msg == null) {
                 Log.e(tagName, "null");
                 return;
             }
+
+            //如果是空的话
+            if (TextUtils.isEmpty(msg)) {
+                Log.e(tagName, "\"\"");
+                return;
+            }
+
+
             int strLength = msg.length();
-            int start = 0;
-            int end = LOG_MAXLENGTH;
-            if (strLength > end) {
-                StringBuffer sbf = new StringBuffer();
-                sbf.append(" \n" + TOP_DIVIDER).append(msg);
-                String trueMsg = sbf.toString();
-                strLength = trueMsg.length();
-                while (strLength > end) {
-                    if (start == 0) {
-                        Log.e(tagName, trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+            if (strLength > LOG_MAXLENGTH) {
+                //如果打印长度大于，限制的最大长度后，我们就需要分段打印
+                //已经打印的长度
+                int printLenght = 0;
+                //初始化一个开始打印的index
+                int printStart = 0;
+                //总长度大于已打印的长度，那么就一直打印
+                while (strLength > printLenght) {
+
+                    if ((printStart + LOG_MAXLENGTH) <= strLength) {
+                        Log.e(tagName, msg.substring(printStart, printStart + LOG_MAXLENGTH));
+                        printLenght = printStart + LOG_MAXLENGTH;
+                        printStart = printStart + LOG_MAXLENGTH;
                     } else {
-                        end = end - MIDDLE_DIVIDER.length();
-                        Log.e(tagName, MIDDLE_DIVIDER + trueMsg.substring(start, end));
-                        start = end;
-                        end = end + LOG_MAXLENGTH;
+                        Log.e(tagName, msg.substring(printStart, strLength));
+                        printLenght = strLength;
                     }
                 }
-                Log.e(tagName, trueMsg.substring(start, strLength));
-                Log.e(tagName, " \n" + BOTTOM_DIVIDER);
+
             } else {
                 Log.e(tagName, msg);
             }
