@@ -2,7 +2,8 @@ package com.lihang.selfmvvm.common;
 
 
 
-import com.lihang.selfmvvm.utils.GsonUtil;
+
+import com.leo.utilspro.utils.GsonUtil;
 
 import java.util.HashMap;
 

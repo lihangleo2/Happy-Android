@@ -1,9 +1,8 @@
 package com.lihang.selfmvvm.retrofitwithrxjava.Interceptor;
 
 
+import com.leo.utilspro.utils.networks.NetWorkUtils;
 import com.lihang.selfmvvm.MyApplication;
-import com.lihang.selfmvvm.utils.LogUtils;
-import com.lihang.selfmvvm.utils.networks.NetWorkUtils;
 
 import java.io.IOException;
 

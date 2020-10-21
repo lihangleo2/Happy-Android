@@ -5,15 +5,24 @@ import android.os.Environment;
 import com.franmontiel.persistentcookiejar.PersistentCookieJar;
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
+import com.leo.utilspro.utils.abase.LeoUtils;
 import com.lihang.selfmvvm.BuildConfig;
 import com.lihang.selfmvvm.common.SystemConst;
+import com.lihang.selfmvvm.launchstater.utils.Utils;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.HttpLogInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
 import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.OfflineCacheInterceptor;
-import com.lihang.selfmvvm.utils.Utils;
 
 import java.io.File;
+import java.lang.reflect.Field;
+import java.security.SecureRandom;
 import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
@@ -35,7 +44,7 @@ public class RetrofitManager {
     private RetrofitApiService retrofitApiService;
 
     private RetrofitManager() {
-        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(Utils.getApp()));
+        cookieJar = new PersistentCookieJar(new SetCookieCache(), new SharedPrefsCookiePersistor(LeoUtils.getApplication()));
         //如果后端没有提供退出登录接口，还可以通过以下主动清理
 //        cookieJar.clear();
 //        cookieJar.clearSession();

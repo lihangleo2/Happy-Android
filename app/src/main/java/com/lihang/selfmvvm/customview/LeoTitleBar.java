@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.lihang.selfmvvm.R;
-import com.lihang.selfmvvm.utils.LogUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

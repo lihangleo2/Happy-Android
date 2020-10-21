@@ -8,11 +8,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.JsonSyntaxException;
+import com.leo.utilspro.utils.ToastUtils;
+import com.leo.utilspro.utils.networks.NetWorkUtils;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.bean.basebean.Resource;
-import com.lihang.selfmvvm.utils.ToastUtils;
-import com.lihang.selfmvvm.utils.networks.NetWorkUtils;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 
 import java.lang.reflect.ParameterizedType;

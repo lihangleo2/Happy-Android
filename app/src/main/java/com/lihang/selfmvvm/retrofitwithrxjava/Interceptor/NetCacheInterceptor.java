@@ -1,11 +1,7 @@
 package com.lihang.selfmvvm.retrofitwithrxjava.Interceptor;
 
 import android.text.TextUtils;
-
-
-import com.lihang.selfmvvm.utils.LogUtils;
-import com.lihang.selfmvvm.utils.PreferenceUtil;
-
+import com.leo.utilspro.utils.PreferenceUtil;
 import java.io.IOException;
 import java.util.List;
 

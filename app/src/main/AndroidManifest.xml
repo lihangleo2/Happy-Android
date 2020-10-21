@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 往SDCard写入数据权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,24 +13,23 @@
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
 
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".MyApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
-        android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
-                >
+        android:supportsRtl="true">
+
         <activity
-            android:name=".ui.activity.WelComeActivity"
+            android:name=".ui.demo.activity.WelComeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="stateAlwaysHidden"
-            >
+            android:windowSoftInputMode="stateAlwaysHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,34 +37,36 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme"
-            android:launchMode="singleTop"
-            />
-
-        <activity
-            android:name=".ui.collect.CollectActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme"
-            android:launchMode="singleTop"
-            />
+        <!--全屏设置，必须加入-->
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
 
 
         <activity
-            android:name=".ui.home.HomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme"
+            android:name=".ui.demo.login.LoginActivity"
             android:launchMode="singleTop"
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
 
         <activity
-            android:name=".ui.activity.WebActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme"
+            android:name=".ui.demo.collect.CollectActivity"
             android:launchMode="singleTop"
-            />
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
+
+
+        <activity
+            android:name=".ui.demo.home.HomeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
+
+        <activity
+            android:name=".ui.demo.activity.WebActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/WhiteFront_AppTheme" />
 
         <!--多渠道打包需要配置-->
         <meta-data

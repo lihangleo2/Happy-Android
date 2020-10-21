@@ -1,7 +1,7 @@
 package com.lihang.selfmvvm.launchstater.mytasks;
 
+import com.leo.utilspro.utils.LogUtils;
 import com.lihang.selfmvvm.launchstater.task.Task;
-import com.lihang.selfmvvm.utils.LogUtils;
 import com.tencent.smtt.sdk.QbSdk;
 
 /**

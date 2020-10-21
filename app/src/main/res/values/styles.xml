@@ -22,6 +22,7 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">@color/black</item> <!-- 底部导航栏的颜色值 -->
     </style>
 
 
