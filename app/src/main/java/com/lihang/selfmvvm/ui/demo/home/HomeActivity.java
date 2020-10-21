@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import com.gyf.barlibrary.ImmersionBar;
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.ButtonClickUtils;
+import com.leo.utilspro.utils.DataUtils;
 import com.leo.utilspro.utils.ToastUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.MyApplication;
@@ -159,15 +160,7 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
         mViewModel.getHomeArticles(currenPage, paramsBuilder).observe(this, resource -> resource.handler(new OnCallback<HomeFatherBean>() {
             @Override
             public void onSuccess(HomeFatherBean data) {
-                if (data.getDatas().size() > 0) {
-                    if (currenPage == 0) {
-                        homeBeans.clear();
-                    }
-                    homeBeans.addAll(data.getDatas());
-                    adapter.notifyItemRangeChanged(homeBeans.size() - data.getDatas().size(), data.getDatas().size());
-                } else {
-                    binding.smartRefreshLayout.finishLoadMoreWithNoMoreData();
-                }
+                DataUtils.initData(currenPage,homeBeans,data.getDatas(),adapter,binding.smartRefreshLayout);
             }
         }, binding.smartRefreshLayout));
     }

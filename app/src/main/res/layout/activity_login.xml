@@ -132,15 +132,15 @@
             android:layout_height="@dimen/dp_48"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/dp_58"
-            app:cannotclickBg="#bcb6b6"
+            app:background_cannotClick="#bcb6b6"
             app:cornerRaius="@dimen/dp_5"
-            app:errorBg="#EC5757"
-            app:errorStr="登陆失败"
-            app:normalBg="#4B8FF8"
-            app:scrollSpeed="500"
-            app:textColor="#fff"
-            app:textSize="@dimen/dp_20"
-            app:textStr="登录"
+            app:background_error="#EC5757"
+            app:errorMsg="登陆失败"
+            app:background_normal="#4B8FF8"
+            app:speed="500"
+            android:textColor="#fff"
+            android:textSize="@dimen/dp_20"
+            android:text="登录"
             />
 
         <TextView

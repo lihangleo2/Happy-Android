@@ -17,17 +17,29 @@ public class DataUtils {
     private DataUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
-    //
 
 
     //不带翻页的设置数据
-    public static <T extends Object> void initDataNoPager(List<?> arrayList, List<T> dataList, BaseAdapter adapter, View view) {
+    public static <T extends Object> void initDataNoPager(List<?> arrayList, List<T> dataList, BaseAdapter adapter) {
         if (dataList != null && dataList.size() > 0) {
             ((List<T>) arrayList).addAll(dataList);
         }
         adapter.notifyDataSetChanged();
-        if (view != null) {
-            isShowEmpty((ArrayList<?>) arrayList, view);
+    }
+
+
+    public static <T extends Object> void initDataNoPager(List<?> arrayList, List<T> dataList, BaseAdapter adapter, View emptyView) {
+        initDataNoPager(arrayList, dataList, adapter);
+        if (emptyView != null) {
+            isShowEmpty((ArrayList<?>) arrayList, emptyView);
+        }
+    }
+
+
+    public static <T extends Object> void initData(int pageNumber, List<?> arrayList, List<T> dataList, BaseAdapter adapter, SmartRefreshLayout smartRefreshLayout, View emptyView) {
+        initData(pageNumber, arrayList, dataList, adapter, smartRefreshLayout);
+        if (emptyView != null) {
+            isShowEmpty((ArrayList<?>) arrayList, emptyView);
         }
     }
 
@@ -60,6 +72,21 @@ public class DataUtils {
             smartRefreshLayout.finishRefresh();
             smartRefreshLayout.finishLoadMore();
         }
+    }
+
+
+    public static void notifyItemRemoved(int removePosition, BaseAdapter adapter, ArrayList<?> arrayList, View emptyView) {
+        notifyItemRemoved(removePosition, adapter, arrayList);
+        if (emptyView != null) {
+            isShowEmpty(arrayList, emptyView);
+        }
+    }
+
+
+    public static void notifyItemRemoved(int removePosition, BaseAdapter adapter, ArrayList<?> arrayList) {
+        adapter.notifyItemRemoved(removePosition);
+        adapter.notifyItemRangeChanged(removePosition, adapter.getItemCount());
+        arrayList.remove(removePosition);
     }
 
 

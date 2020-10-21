@@ -43,9 +43,9 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                 <include
-                    android:id="@+id/empty"
-                    android:visibility="gone"
-                    layout="@layout/layout_empty" />
+                    android:id="@+id/include_empty"
+                    layout="@layout/include_empty"
+                    />
             </RelativeLayout>
 
 

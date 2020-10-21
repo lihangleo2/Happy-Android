@@ -27,8 +27,14 @@ import com.lihang.selfmvvm.bean.basebean.EventBusBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.common.PARAMS;
 import com.lihang.selfmvvm.databinding.ActivityLoginBinding;
+import com.lihang.smartloadview.SmartLoadingView;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 
 import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
 
@@ -52,59 +58,7 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
             }
             switch (msg.what) {
                 case 11:
-                    KeyBoardUtils.openKeybord(binding.editPhone);
-                    break;
-
-                case 12:
-                    String text_phone = getStringByUI(binding.editPhone);
-                    String text_password = getStringByUI(binding.editPassworld);
-                    mViewModel.login(PARAMS.login(text_phone, text_password), ParamsBuilder.build().isShowDialog(false))
-                            .observe(LoginActivity.this, resource -> {
-                                resource.handler(new OnCallback<User>() {
-                                    @Override
-                                    public void onSuccess(User data) {
-                                        MyApplication.updateUser(data);
-                                        PreferenceUtil.put("userName", getStringByUI(binding.editPhone));
-                                        //联网成功：通过设置监听AnimatorListener即是启动 小圆扩散全屏动画。在此动画全部完成后拿到回调onAnimtionEnd
-                                        binding.smartLoadingView.loginSuccess(new Animator.AnimatorListener() {
-                                            @Override
-                                            public void onAnimationStart(Animator animation) {
-
-                                            }
-
-                                            @Override
-                                            public void onAnimationEnd(Animator animation) {
-                                                ActivitysBuilder.finishWithAnim(LoginActivity.this, R.anim.scale_test_home, R.anim.scale_test2);
-                                                EventBus.getDefault().post(new EventBusBean(1));
-                                            }
-
-                                            @Override
-                                            public void onAnimationCancel(Animator animation) {
-
-                                            }
-
-                                            @Override
-                                            public void onAnimationRepeat(Animator animation) {
-
-                                            }
-                                        });
-                                    }
-
-                                    @Override
-                                    public void onFailure(String msg) {
-                                        binding.smartLoadingView.netFaile(msg);
-                                    }
-
-                                    @Override
-                                    public void onCompleted() {
-                                        super.onCompleted();
-                                        binding.editPhone.setFocusable(true);
-                                        binding.editPhone.setFocusableInTouchMode(true);
-                                        binding.editPassworld.setFocusable(true);
-                                        binding.editPassworld.setFocusableInTouchMode(true);
-                                    }
-                                });
-                            });
+                    KeyBoardUtils.openKeybord(binding.editPassworld);
                     break;
             }
         }
@@ -112,7 +66,7 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
 
     @Override
     protected void processLogic() {
-        binding.smartLoadingView.cannotClick();
+        binding.smartLoadingView.setSmartClickable(false);
         initXiey();
         openKeyBord();
     }
@@ -132,7 +86,7 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
 
     @Override
     protected void setListener() {
-        binding.smartLoadingView.setLoginClickListener(() -> {
+        binding.smartLoadingView.setOnClickListener(v -> {
             if (TextUtils.isEmpty(getStringByUI(binding.editPhone))) {
                 ToastUtils.showToast("账号不能为空~");
                 return;
@@ -144,12 +98,57 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
             }
             binding.editPhone.setFocusable(false);
             binding.editPassworld.setFocusable(false);
-            mHandler.sendEmptyMessageDelayed(12, 600);
+
+            binding.smartLoadingView.start();
+            Observable.timer(2000, TimeUnit.MILLISECONDS)
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(along -> {
+                login();
+            });
         });
+
         binding.editPhone.addTextChangedListener(this);
         binding.editPassworld.addTextChangedListener(this);
         binding.leoTitleBar.bar_left_btn.setOnClickListener(this);
     }
+
+
+    public void login() {
+        String text_phone = getStringByUI(binding.editPhone);
+        String text_password = getStringByUI(binding.editPassworld);
+        mViewModel.login(PARAMS.login(text_phone, text_password), ParamsBuilder.build().isShowDialog(false))
+                .observe(LoginActivity.this, resource -> {
+                    resource.handler(new OnCallback<User>() {
+                        @Override
+                        public void onSuccess(User data) {
+                            MyApplication.updateUser(data);
+                            PreferenceUtil.put("userName", getStringByUI(binding.editPhone));
+                            //联网成功：通过设置监听AnimatorListener即是启动 小圆扩散全屏动画。在此动画全部完成后拿到回调onAnimtionEnd
+                            binding.smartLoadingView.onSuccess(new SmartLoadingView.AnimationFullScreenListener() {
+                                @Override
+                                public void animationFullScreenFinish() {
+                                    ActivitysBuilder.finishWithAnim(LoginActivity.this, R.anim.scale_test_home, R.anim.scale_test2);
+                                    EventBus.getDefault().post(new EventBusBean(1));
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onFailure(String msg) {
+                            binding.smartLoadingView.netFaile(msg);
+                        }
+
+                        @Override
+                        public void onCompleted() {
+                            super.onCompleted();
+                            binding.editPhone.setFocusable(true);
+                            binding.editPhone.setFocusableInTouchMode(true);
+                            binding.editPassworld.setFocusable(true);
+                            binding.editPassworld.setFocusableInTouchMode(true);
+                        }
+                    });
+                });
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -215,7 +214,7 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
         if (!TextUtils.isEmpty(getStringByUI(binding.editPhone)) && !TextUtils.isEmpty(getStringByUI(binding.editPassworld))) {
             binding.smartLoadingView.reset();
         } else {
-            binding.smartLoadingView.cannotClick();
+            binding.smartLoadingView.setSmartClickable(false);
         }
     }
 }

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <variable
+            name="textEmpty"
+            type="String" />
+
+        <variable
+            name="imageEmpty"
+            type="Integer" />
+    </data>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/relative_null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_80"
+        android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/image_empty"
+            android:layout_width="@dimen/dp_190"
+            android:layout_height="@dimen/dp_140"
+            android:layout_centerHorizontal="true"
+            app:imageSrc="@{imageEmpty}" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:id="@+id/txt_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/image_empty"
+            android:layout_centerHorizontal="true"
+            android:text="@{textEmpty}"
+            android:textColor="#bebebe"
+            android:textSize="@dimen/sp_14" />
+    </RelativeLayout>
+</layout>

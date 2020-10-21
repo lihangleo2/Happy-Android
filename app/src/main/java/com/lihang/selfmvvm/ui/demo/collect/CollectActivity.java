@@ -36,6 +36,9 @@ public class CollectActivity extends BaseActivity<CollectViewModel, ActivityColl
 
     @Override
     protected void processLogic() {
+        binding.includeEmpty.setTextEmpty("瞅啥，没有你的收藏~");
+        binding.includeEmpty.setImageEmpty(R.mipmap.no_data);
+
         getCollects(curPage, null);
         adapter = new CollectAdapter(this);
         adapter.setOnItemClickListener(this);
@@ -48,16 +51,7 @@ public class CollectActivity extends BaseActivity<CollectViewModel, ActivityColl
             stringResource.handler(new OnCallback<HomeFatherBean>() {
                 @Override
                 public void onSuccess(HomeFatherBean data) {
-                    if (data.getDatas().size() > 0) {
-                        if (curPage == 0) {
-                            homeBeans.clear();
-                        }
-                        homeBeans.addAll(data.getDatas());
-                        adapter.notifyItemRangeChanged(homeBeans.size() - data.getDatas().size(), data.getDatas().size());
-                    } else {
-                        binding.smartRefreshLayout.finishLoadMoreWithNoMoreData();
-                    }
-                    DataUtils.isShowEmpty(homeBeans, binding.empty);
+                    DataUtils.initData(curPage,homeBeans,data.getDatas(),adapter,binding.smartRefreshLayout,binding.includeEmpty.relativeNull);
                 }
             }, binding.smartRefreshLayout);
         });
@@ -90,11 +84,8 @@ public class CollectActivity extends BaseActivity<CollectViewModel, ActivityColl
                     resource.handler(new OnCallback<String>() {
                         @Override
                         public void onSuccess(String data) {
-                            adapter.notifyItemRemoved(position);
-                            adapter.notifyItemRangeChanged(position, adapter.getItemCount());
-                            homeBeans.remove(homeBean);
+                            DataUtils.notifyItemRemoved(position,adapter,homeBeans,binding.includeEmpty.relativeNull);
                             EventBus.getDefault().post(new EventBusBean(2, homeBean.getChapterId()));
-                            DataUtils.isShowEmpty(homeBeans, binding.empty);
                         }
                     });
                 });

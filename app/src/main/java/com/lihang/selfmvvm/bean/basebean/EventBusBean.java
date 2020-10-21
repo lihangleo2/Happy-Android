@@ -8,7 +8,8 @@ import java.io.Serializable;
  * EventBus传递类，统一管理
  */
 public class EventBusBean implements Serializable {
-    //1:刷新首页
+    //  1、刷新首页
+    //  2、收藏页，取消收藏的通知首页刷新
     private int type;
     private Object value;
 
