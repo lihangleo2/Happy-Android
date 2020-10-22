@@ -33,7 +33,6 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, ActivityWelco
 
     @Override
     protected void processLogic() {
-        isRelease();
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_welcome);
         binding.txt.startAnimation(animation);
 
@@ -50,19 +49,6 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, ActivityWelco
 
     }
 
-    private void isRelease() {
-        if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            if (SystemConst.DEFAULT_SERVER_DEBUG.equals("http://192.168.5.102:9088/")) {
-                SystemConst.HTML_ARTDETAIL = SystemConst.HTML_ARTDETAIL_TEST;
-                SystemConst.HTML_GAME = SystemConst.HTML_GAME_TEST;
-            }
-        } else {
-            SystemConst.HTML_ARTDETAIL = SystemConst.HTML_ARTDETAIL_RELEASE;
-            SystemConst.HTML_GAME = SystemConst.HTML_GAME_RELEASE;
-            //线上版本不让打印
-            LogUtils.isEnableLog = false;
-        }
-    }
 
     @Override
     protected void setListener() {
