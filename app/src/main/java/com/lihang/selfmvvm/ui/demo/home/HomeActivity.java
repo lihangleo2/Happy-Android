@@ -4,11 +4,13 @@ import android.graphics.drawable.AnimationDrawable;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.gyf.barlibrary.ImmersionBar;
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.ButtonClickUtils;
 import com.leo.utilspro.utils.DataUtils;
+import com.leo.utilspro.utils.LogUtils;
 import com.leo.utilspro.utils.ToastUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.MyApplication;
@@ -21,10 +23,12 @@ import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
 import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
 import com.lihang.selfmvvm.customview.iosdialog.DialogUtil;
 import com.lihang.selfmvvm.databinding.ActivityHomeTestBinding;
+import com.lihang.selfmvvm.ui.MainActivity;
 import com.lihang.selfmvvm.ui.demo.activity.WebActivity;
 import com.lihang.selfmvvm.ui.demo.collect.CollectActivity;
 import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
 import com.lihang.selfmvvm.ui.home.adapter.HomeAdapter;
+import com.lihang.selfmvvm.utils.AppUtils;
 import com.lihang.selfmvvm.utils.GlideImagesLoader;
 import com.youth.banner.BannerConfig;
 
@@ -195,23 +199,20 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
         }
         switch (v.getId()) {
             case R.id.image_zan:
-                if (MyApplication.getLoginUser() != null) {
+                if (AppUtils.isLogin(this)){
                     followBog(v);
-                } else {
-                    ActivitysBuilder.build(this, LoginActivity.class).startActivity();
                 }
                 break;
             case R.id.bar_left_btn:
 
-                if (MyApplication.getLoginUser() != null) {
+                if (AppUtils.isLogin(this)){
                     openMymessage();
-                } else {
-                    ActivitysBuilder.build(this, LoginActivity.class).startActivity();
                 }
                 break;
 
             case R.id.bar_right_btn:
-                ToastUtils.showToast("该功能还在路上");
+                ActivitysBuilder.build(this, MainActivity.class)
+                        .startActivity();
                 break;
 
             case R.id.txt_loginOut:

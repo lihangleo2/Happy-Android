@@ -79,5 +79,18 @@
     </style>
 
 
+    <style name="imageStyle_tab">
+        <item name="android:layout_height">@dimen/dp_20</item>
+        <item name="android:layout_width">@dimen/dp_20</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="textStyle_tab">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/sp_10</item>
+        <item name="android:textColor">@color/color_main_tab</item>
+    </style>
 
 </resources>

@@ -1,5 +1,10 @@
 package com.leo.utilspro;
 
+import android.graphics.Color;
+import android.view.View;
+
+import com.leo.utilspro.utils.SpannableStringBuilder;
+import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.bitmap.PictureUtil;
 import com.leo.utilspro.utils.crash.CrashHandler;
 import com.leo.utilspro.utils.networks.NetStateChangeReceiver;
@@ -209,6 +214,50 @@ public class Explain {
     * */
 
 
+
+//──────────────────────────────────────────────────────────────────────────────
+
+
+
+    /**
+     * SpannableString的工具类
+     * */
+
+    /*
+    * 事例：
+    1、color：给字体加颜色
+    2、backgroundColor：给字体背景加颜色
+    3、underline：给字体加下划线
+    4、deleteline：给字体加删除线
+    5、textSize：改变字体大小
+    6、bold：加粗字体
+    7、image：插入图片
+    8、clickSpan：给每一段字体添加点击事件
+
+    SpannableStringBuilder.build("我是李航大大哥哥哦，阿拉蕾奥巴马，《服务协议》~")
+        .color(Color.parseColor("#00ff00"), "李航")
+            .color(Color.parseColor("#00ff00"), "哥哥")
+            .backgroundColor(Color.parseColor("#FFFF00"), "哥哥")
+            .underline("大大")
+                .underline("哥哥")
+                .deleteline("我是")
+                .deleteline("哥哥")
+                .textSize(R.dimen.sp_22, 2, 4)
+                .textSize(R.dimen.sp_12, "大")
+                .textSize(0.5f, "阿拉蕾")
+                .textSize(1.2f, "奥巴马")
+                .bold("哦")
+                .image("我是李航大大哥哥哦，阿拉蕾奥巴马~".length() - 1, "我是李航大大哥哥哦，阿拉蕾奥巴马~".length(), R.mipmap.ic_launcher, R.dimen.dp_40, R.dimen.dp_40)
+            .clickSpan("《服务协议》", Color.parseColor("#FF0000"), false, new ClickableSpanListener() {
+        @Override
+        public void onClick(View view) {
+            ToastUtils.showToast("我真的被点击了！~");
+        }
+    })
+            .into(binding.txt);
+
+
+    * */
 
 
 }

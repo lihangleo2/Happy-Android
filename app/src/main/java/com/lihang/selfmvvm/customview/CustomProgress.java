@@ -67,7 +67,7 @@ public class CustomProgress extends Dialog {
     public static CustomProgress show(Context context, CharSequence message, boolean cancelable, DialogInterface.OnCancelListener cancelListener) {
         dialog = new CustomProgress(context, R.style.Custom_Progress);
         dialog.setTitle("");
-        dialog.setContentView(R.layout.progress_leo);
+        dialog.setContentView(R.layout.dialog_loading);
         if (message == null || message.length() == 0) {
             dialog.findViewById(R.id.message).setVisibility(View.GONE);
         } else {

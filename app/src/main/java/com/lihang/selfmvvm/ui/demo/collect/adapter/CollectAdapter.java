@@ -9,7 +9,7 @@ import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseViewHolder;
 import com.lihang.selfmvvm.bean.HomeBean;
-import com.lihang.selfmvvm.databinding.HomeItemBinding;
+import com.lihang.selfmvvm.databinding.ItemHomeBinding;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,14 +27,14 @@ public class CollectAdapter extends BaseAdapter<HomeBean> {
 
     @Override
     public RecyclerView.ViewHolder getViewHolder(ViewGroup viewGroup, int viewType) {
-        HomeItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.home_item, viewGroup, false);
+        ItemHomeBinding binding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.getContext()), R.layout.item_home, viewGroup, false);
         return new BaseViewHolder(binding);
     }
 
     @Override
     public void onBindMyViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
         BaseViewHolder baseViewHolder = (BaseViewHolder) viewHolder;
-        HomeItemBinding binding = (HomeItemBinding) baseViewHolder.binding;
+        ItemHomeBinding binding = (ItemHomeBinding) baseViewHolder.binding;
         HomeBean itemBean = dataList.get(i);
         binding.txtTitle.setText(itemBean.getTitle());
         if (TextUtils.isEmpty(itemBean.getSuperChapterName())) {

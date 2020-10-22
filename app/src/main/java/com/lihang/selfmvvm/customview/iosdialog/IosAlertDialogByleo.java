@@ -31,7 +31,7 @@ public class IosAlertDialogByleo {
 	public IosAlertDialogByleo builder() {
 		// 获取Dialog布局
 		View view = LayoutInflater.from(context).inflate(
-		        R.layout.view_alertdialogbyleo, null);
+		        R.layout.dialog_like_ios, null);
 		txt_msg = view.findViewById(R.id.txt_msg);
 		btn_cancle = view.findViewById(R.id.btn_cancle);
 		btn_confirm = view.findViewById(R.id.btn_confirm);

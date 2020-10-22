@@ -10,6 +10,7 @@ import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.databinding.ActivityWelcomBinding;
+import com.lihang.selfmvvm.ui.MainActivity;
 import com.lihang.selfmvvm.ui.demo.home.HomeActivity;
 
 import java.util.concurrent.TimeUnit;
@@ -37,7 +38,7 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, ActivityWelco
         binding.imgSvg.start();
 
         Observable.timer(2500, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
-            ActivitysBuilder.build(WelComeActivity.this,HomeActivity.class)
+            ActivitysBuilder.build(WelComeActivity.this, HomeActivity.class)
                     .withAnimal(0, com.leo.utilspro.R.anim.anim_translate_hide)
                     .startActivity();
         });

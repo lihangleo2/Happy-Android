@@ -24,9 +24,6 @@ public class ToastUtils {
      * @param message
      */
     public static void showToast(String message) {
-        if (ButtonClickUtils.isFastClick()){
-            return;
-        }
         if (toast == null) {
             toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
             toast.show();

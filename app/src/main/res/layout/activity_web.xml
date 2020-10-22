@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:hl_background="@color/status_background"
             app:hl_textTitle=""
-            app:hl_textTitleColor="#fff" />
+            app:hl_textTitleColor="#fff"/>
 
 
         <com.lihang.selfmvvm.customview.x5webview.X5WebView

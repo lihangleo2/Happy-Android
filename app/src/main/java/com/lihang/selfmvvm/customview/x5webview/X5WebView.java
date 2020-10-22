@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lihang.selfmvvm.R;
+import com.lihang.selfmvvm.customview.LeoTitleBar;
 import com.tencent.smtt.export.external.interfaces.SslError;
 import com.tencent.smtt.export.external.interfaces.SslErrorHandler;
 import com.tencent.smtt.sdk.WebChromeClient;
@@ -35,10 +36,10 @@ import com.tencent.smtt.sdk.WebViewClient;
 //这样写完后，之后和正常的webView一个用法，只不过走的是x5内核
 public class X5WebView extends WebView {
     private ProgressBar mProgressBar;
-    private TextView textView;
+    private LeoTitleBar leoTitleBar;
 
-    public void setTextView(TextView textView) {
-        this.textView = textView;
+    public void setTitleBar(LeoTitleBar leoTitleBar) {
+        this.leoTitleBar = leoTitleBar;
     }
 
     private WebViewClient client = new WebViewClient() {
@@ -107,8 +108,8 @@ public class X5WebView extends WebView {
         @Override
         public void onReceivedTitle(WebView webView, String s) {
             super.onReceivedTitle(webView, s);
-            if (textView != null && !TextUtils.isEmpty(s)) {
-                textView.setText(s);
+            if (leoTitleBar != null && !TextUtils.isEmpty(s)) {
+                leoTitleBar.setTitle(s);
             }
         }
     };

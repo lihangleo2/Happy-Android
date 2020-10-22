@@ -1,18 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/framLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linear_bottom"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/linear_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_45"
+            android:layout_alignParentBottom="true"
+            android:background="#f9f9f9"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/relative_tab_1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{onClickListener}"
+                android:tag="0">
+
+
+                <ImageView
+                    android:id="@+id/icon_0"
+                    style="@style/imageStyle_tab"
+                    android:src="@drawable/tab_one" />
+
+                <TextView
+                    style="@style/textStyle_tab"
+                    android:layout_below="@+id/icon_0"
+                    android:text="首页" />
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/relative_tab_2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{onClickListener}"
+                android:tag="1">
+
+
+                <ImageView
+                    android:id="@+id/icon_5"
+                    style="@style/imageStyle_tab"
+                    android:src="@drawable/tab_two" />
+
+                <TextView
+                    style="@style/textStyle_tab"
+                    android:layout_below="@+id/icon_5"
+                    android:text="检测" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/relative_tab_3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:onClick="@{onClickListener}"
+                android:tag="2">
+
+
+                <ImageView
+                    android:id="@+id/icon_3"
+                    style="@style/imageStyle_tab"
+                    android:src="@drawable/tab_three" />
+
+                <TextView
+                    style="@style/textStyle_tab"
+                    android:layout_below="@+id/icon_3"
+                    android:text="我的" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</layout>
