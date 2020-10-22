@@ -55,7 +55,7 @@ public class HttpLogInterceptor implements Interceptor {
     }
 
     @Override
-    public okhttp3.Response intercept(Chain chain) throws IOException {
+    public synchronized okhttp3.Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
 
         long startTime = SystemClock.elapsedRealtime();
