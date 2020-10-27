@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.gyf.barlibrary.ImmersionBar;
+import com.gyf.immersionbar.ImmersionBar;
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.ButtonClickUtils;
 import com.leo.utilspro.utils.DataUtils;

@@ -14,6 +14,7 @@
         android:layout_marginTop="@dimen/dp_3"
         android:layout_marginRight="@dimen/dp_10"
         android:layout_marginBottom="@dimen/dp_3"
+        app:hl_shadowLimit="@dimen/dp_5"
         app:hl_cornerRadius="@dimen/dp_10"
         app:hl_shadowColor="#4D1EB0F1">
 

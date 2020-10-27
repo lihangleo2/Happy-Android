@@ -112,14 +112,14 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.lihangleo2:MoreAboutRecyclerView:1.0.1'
-    implementation 'com.github.lihangleo2:ShadowLayout:2.1.4'
+    implementation 'com.github.lihangleo2:ShadowLayout:3.1.0'
     implementation 'com.github.lihangleo2:SmartLoadingView:2.0.2'
 
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     //svg
     implementation 'com.jaredrummler:animated-svg-view:1.0.5'
     //沉浸式状态栏
-    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
     //管理cookieJar的
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     //eventbus
