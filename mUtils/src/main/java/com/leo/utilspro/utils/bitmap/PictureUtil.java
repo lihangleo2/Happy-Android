@@ -31,7 +31,7 @@ public class PictureUtil {
             bm = rotateBitmap(bm, degree);
         }
 
-        File imageFile = new File(LeoUtils.getApplication().getFilesDir().getAbsolutePath().toString() + "/" + TimeUtils.getLongToStr(System.currentTimeMillis(),"yyyy.MM.dd_HH:mm:ss") + "_atmancarm.jpg");
+        File imageFile = new File(LeoUtils.getApplication().getFilesDir().getAbsolutePath().toString() + "/" + TimeUtils.getLongToStr(System.currentTimeMillis(),"yyyy.MM.dd_HH:mm:ss:SSS") + "_atmancarm.jpg");
 
         try {
             imageFile.createNewFile();
