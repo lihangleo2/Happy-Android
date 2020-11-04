@@ -10,6 +10,8 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import androidx.fragment.app.Fragment;
+
 /**
  * Created by leo
  * on 2020/10/14.
@@ -21,6 +23,7 @@ public class ActivitysBuilder {
     private int enterAnim = -10000;
     private int exitAnim = -10000;
     private boolean finish;
+    private Fragment fragment;
 
     public ActivitysBuilder(Context context, Class<? extends Activity> clz) {
         this.context = context;
@@ -28,9 +31,23 @@ public class ActivitysBuilder {
         intent = new Intent(context, clz);
     }
 
+
+    public ActivitysBuilder(Fragment fragment, Class<? extends Activity> clz) {
+        this.context = fragment.getActivity();
+        this.clz = clz;
+        this.fragment = fragment;
+        intent = new Intent(context, clz);
+    }
+
     public static ActivitysBuilder build(Context context, Class<? extends Activity> clz) {
         return new ActivitysBuilder(context, clz);
     }
+
+
+    public static ActivitysBuilder build(Fragment fragment, Class<? extends Activity> clz) {
+        return new ActivitysBuilder(fragment, clz);
+    }
+
 
     public static void finishWithAnim(Activity activity, int enterAnim, int exitAnim) {
         activity.finish();
@@ -212,7 +229,11 @@ public class ActivitysBuilder {
     }
 
     public void startActivityForResult(int requestCode) {
-        ((Activity) context).startActivityForResult(intent, requestCode);
+        if (fragment != null) {
+            fragment.startActivityForResult(intent, requestCode);
+        } else {
+            ((Activity) context).startActivityForResult(intent, requestCode);
+        }
 
         if (finish) {
             ((Activity) context).finish();

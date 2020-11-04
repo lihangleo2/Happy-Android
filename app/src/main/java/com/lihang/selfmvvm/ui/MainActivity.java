@@ -9,6 +9,7 @@ import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.databinding.ActivityMainBinding;
 import com.lihang.selfmvvm.launchstater.utils.Utils;
 import com.lihang.selfmvvm.ui.demo.fragment.DemoFragment;
+import com.lihang.selfmvvm.ui.demo.fragment.ExampleFragment;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBind
     private static final int FRAGMENT_THREE = 2;
     private int index;
     private int currentTabIndex = 0;
-    DemoFragment fragment_one;
+    ExampleFragment fragment_one;
     DemoFragment fragment_two;
     DemoFragment fragment_three;
 
@@ -52,7 +53,7 @@ public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBind
         mTabs[2] = binding.relativeTab3;
 
 
-        fragment_one = DemoFragment.newFragment(1);
+        fragment_one = ExampleFragment.newFragment(1);
         fragment_two = DemoFragment.newFragment(2);
         fragment_three = DemoFragment.newFragment(3);
 

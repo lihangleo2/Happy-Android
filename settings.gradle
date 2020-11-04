@@ -1,3 +1,6 @@
+include ':ucrop'
+include ':diooto'
+include ':imagepicker'
 include ':mUtils'
 include ':app'
 rootProject.name='SelfMVVM'

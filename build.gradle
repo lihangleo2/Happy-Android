@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
-
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -24,4 +24,35 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+
+
+ext {
+    //图片剪裁ucrop加上
+    androidx_appcompat_version = "1.1.0"
+    androidx_core_version = "1.1.0"
+    androidx_exifinterface_version = "1.1.0-beta01"
+    androidx_transition_version = "1.2.0-rc01"
+    constraintlayout_version = "1.1.3"
+
+    //使用高仿微信加上
+    androidBuildToolsVersion = "28.0.2"
+    androidMinSdkVersion = 19
+    androidTargetSdkVersion = 28
+    androidCompileSdkVersion = 28
+    supportLibraryVersion = '28.0.2'
+
+    glide = '4.9.0'
+
+    androidDependencies = [
+            appcompat_v7: "com.android.support:appcompat-v7:${supportLibraryVersion}",
+            design      : "com.android.support:design:${supportLibraryVersion}",
+            cardview    : "com.android.support:cardview-v7:${supportLibraryVersion}",
+    ]
+
+    imageDependencies = [
+            glide: "com.github.bumptech.glide:glide:${glide}",
+    ]
 }

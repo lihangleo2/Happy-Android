@@ -80,6 +80,8 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation project(path: ':mUtils')
+    implementation project(path: ':imagepicker')
+    implementation project(path: ':ucrop')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -124,4 +126,13 @@ dependencies {
     implementation 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
     //eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    implementation project(path: ':diooto')
+    implementation 'org.salient.artvideoplayer:artplayer-java:0.6.0'
+    implementation 'org.salient.artvideoplayer:artplayer-ui:0.6.0'
+//    implementation 'org.salient.artvideoplayer:artplayer-ijk:0.6.0'
+//    implementation "org.salient.artvideoplayer:artplayer-armv7a:0.6.0"
+    implementation 'me.panpf:sketch-gif:2.6.2-b1'
+    implementation 'me.panpf:sketch:2.6.2-b1'
 }
