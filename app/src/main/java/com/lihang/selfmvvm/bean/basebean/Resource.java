@@ -74,6 +74,16 @@ public class Resource<T> {
     }
 
     public void handler(OnHandleCallback<T> callback) {
+        handlerUnCloseDialog(callback);
+        if (state != LOADING) {
+            callback.onCompleted();
+        }
+    }
+
+
+
+    //网络加载完成后不消失dialog;(场景：连续请求2个网络。第二个网络要等第一个网络返回的参数，才请求。第一个网络不该关闭dialog)
+    public void handlerUnCloseDialog(OnHandleCallback<T> callback) {
         switch (state) {
             case LOADING:
                 callback.onLoading(errorMsg);
@@ -91,14 +101,18 @@ public class Resource<T> {
                 callback.onProgress(precent,total);
                 break;
         }
+    }
 
+
+    public void handler(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
+        handlerUnCloseDialog(callback,smartRefreshLayout);
         if (state != LOADING) {
             callback.onCompleted();
         }
     }
 
 
-    public void handler(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
+    public void handlerUnCloseDialog(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
         switch (state) {
             case LOADING:
                 callback.onLoading(errorMsg);
@@ -122,12 +136,7 @@ public class Resource<T> {
                 callback.onProgress(precent,total);
                 break;
         }
-
-        if (state != LOADING) {
-            callback.onCompleted();
-        }
     }
-
 
 
     public interface OnHandleCallback<T> {
