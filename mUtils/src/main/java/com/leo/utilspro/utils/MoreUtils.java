@@ -157,6 +157,39 @@ public class MoreUtils {
     }
 
 
+    
+    
+        //获得独一无二的Psuedo ID  这里有个兼容
+    public static String getDeviceId(Context context) {
+        if (context.getApplicationInfo().targetSdkVersion >= 29 && Build.VERSION.SDK_INT >= 29) {
+            //大于等于29使用特殊方法
+            String id = null;
+            String androidId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+            if (!TextUtils.isEmpty(androidId) && "9774d56d682e549c" != androidId) {
+                try {
+                    UUID uuid = UUID.nameUUIDFromBytes(androidId.getBytes("utf-8"));
+                    id = uuid.toString();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (TextUtils.isEmpty(id)) {
+                return UUID.randomUUID().toString();
+            } else {
+                return id;
+            }
+        } else {
+            return getDeviceId();
+        }
+
+    }
+    
+    
+    
+    
+    
+    
     //获得独一无二的Psuedo ID
     public static String getDeviceId() {
         String serial = null;
