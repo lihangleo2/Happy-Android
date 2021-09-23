@@ -41,4 +41,8 @@ public class ResponModel<T> implements Serializable {
     public boolean isSuccess(){
         return RESULT_SUCCESS == errorCode;
     }
+
+    public Boolean isOtherLogin() {
+        return errorCode == 100;
+    }
 }

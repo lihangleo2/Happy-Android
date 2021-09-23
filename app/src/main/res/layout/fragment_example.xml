@@ -30,12 +30,20 @@
 
 
         <Button
-            android:onClick="@{onClickListener}"
-            android:layout_below="@+id/button_add"
             android:id="@+id/button_crop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/button_add"
+            android:onClick="@{onClickListener}"
             android:text="剪裁图片" />
+
+        <Button
+            android:id="@+id/button_login_out"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_crop"
+            android:onClick="@{onClickListener}"
+            android:text="退出登录pop及退出登录操作" />
 
 
     </RelativeLayout>

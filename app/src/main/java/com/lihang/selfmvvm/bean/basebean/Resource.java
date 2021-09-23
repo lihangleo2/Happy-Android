@@ -14,6 +14,7 @@ public class Resource<T> {
     public static final int ERROR = 2;
     public static final int FAIL = 3;
     public static final int PROGRESS = 4;//注意只有下载文件和上传图片时才会有
+    public static final int OTHERLOGIN = 5;//单设备登录
     public int state;
 
     public String errorMsg;
@@ -54,6 +55,10 @@ public class Resource<T> {
         if (data != null) {
             if (data.isSuccess()) {
                 return new Resource<>(SUCCESS, data.getData(), null);
+            }
+
+            if (data.isOtherLogin()) {
+                return new Resource<>(OTHERLOGIN, null, data.getErrorMsg());
             }
             return new Resource<>(FAIL, null, data.getErrorMsg());
         }
@@ -100,6 +105,9 @@ public class Resource<T> {
             case PROGRESS:
                 callback.onProgress(precent,total);
                 break;
+            case OTHERLOGIN:
+                callback.onOtherLogin(errorMsg);
+                break;
         }
     }
 
@@ -135,6 +143,12 @@ public class Resource<T> {
             case PROGRESS:
                 callback.onProgress(precent,total);
                 break;
+
+            case OTHERLOGIN:
+                callback.onOtherLogin(errorMsg);
+                smartRefreshLayout.finishRefresh(false);
+                smartRefreshLayout.finishLoadMore(false);
+                break;
         }
     }
 
@@ -151,6 +165,8 @@ public class Resource<T> {
         void onCompleted();
 
         void onProgress(int precent,long total);
+
+        void onOtherLogin(String msg);
     }
 
 

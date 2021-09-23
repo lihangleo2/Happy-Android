@@ -93,4 +93,9 @@
         <item name="android:textColor">@color/color_main_tab</item>
     </style>
 
+    <style name="pop_animation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/translate_pop_in</item>
+        <item name="android:windowExitAnimation">@anim/translate_pop_out</item>
+    </style>
+
 </resources>

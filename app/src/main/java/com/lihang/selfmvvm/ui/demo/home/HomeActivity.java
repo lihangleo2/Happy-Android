@@ -1,5 +1,6 @@
 package com.lihang.selfmvvm.ui.demo.home;
 
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -68,6 +69,14 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
         } else {
             binding.drawerLayout.openDrawer(binding.txtTest);
         }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ActivitysBuilder.build(this, LoginActivity.class)
+                .finish(true)
+                .startActivity();
     }
 
     @Override
@@ -164,7 +173,7 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
         mViewModel.getHomeArticles(currenPage, paramsBuilder).observe(this, resource -> resource.handler(new OnCallback<HomeFatherBean>() {
             @Override
             public void onSuccess(HomeFatherBean data) {
-                DataUtils.initData(currenPage,homeBeans,data.getDatas(),adapter,binding.smartRefreshLayout);
+                DataUtils.initData(currenPage, homeBeans, data.getDatas(), adapter, binding.smartRefreshLayout);
             }
         }, binding.smartRefreshLayout));
     }
@@ -199,13 +208,13 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
         }
         switch (v.getId()) {
             case R.id.image_zan:
-                if (AppUtils.isLogin(this)){
+                if (AppUtils.isLogin(this)) {
                     followBog(v);
                 }
                 break;
             case R.id.bar_left_btn:
 
-                if (AppUtils.isLogin(this)){
+                if (AppUtils.isLogin(this)) {
                     openMymessage();
                 }
                 break;
@@ -230,7 +239,7 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
                 });
                 break;
             case R.id.txt_collect:
-                ActivitysBuilder.build(this,CollectActivity.class).startActivity();
+                ActivitysBuilder.build(this, CollectActivity.class).startActivity();
                 break;
         }
     }
@@ -291,8 +300,8 @@ public class HomeActivity extends BaseActivity<com.lihang.selfmvvm.ui.home.HomeV
 
     @Override
     public void onItemClick(HomeBean item, int position) {
-        ActivitysBuilder.build(this,WebActivity.class)
-                .putExtra("url",item.getLink())
+        ActivitysBuilder.build(this, WebActivity.class)
+                .putExtra("url", item.getLink())
                 .startActivity();
     }
 

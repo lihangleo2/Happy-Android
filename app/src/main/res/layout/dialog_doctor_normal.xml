@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:layout_width="@dimen/dp_300"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_remind"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_40"
+            android:gravity="center"
+            android:text="提示"
+            android:textColor="@color/black1b"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/grey_f2" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/txt_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="头像的背景请尽量用白色，头像的着装需穿着工作服。"
+            android:textColor="@color/black1b"
+            android:padding="@dimen/dp_15"
+            android:textSize="@dimen/sp_15" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/dp_15"
+            android:gravity="center_horizontal"
+            >
+
+
+            <com.lihang.ShadowLayout
+                android:layout_marginRight="@dimen/dp_40"
+                android:id="@+id/shadowLayout_cancle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:hl_cornerRadius="@dimen/dp_5"
+                app:hl_shadowHidden="true"
+                app:hl_layoutBackground="#C5CDCD"
+                app:hl_layoutBackground_true="#89C5CDCD">
+
+                <TextView
+                    android:id="@+id/btn_cancle"
+                    android:minWidth="@dimen/dp_90"
+                    android:maxWidth="@dimen/dp_120"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_30"
+                    android:gravity="center"
+                    android:text="取消"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16" />
+
+            </com.lihang.ShadowLayout>
+
+
+            <com.lihang.ShadowLayout
+                android:id="@+id/shadowLayout_confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                app:hl_cornerRadius="@dimen/dp_5"
+                app:hl_shadowHidden="true"
+                app:hl_layoutBackground="#5B94FF"
+                app:hl_layoutBackground_true="#895B94FF">
+
+                <TextView
+                    android:id="@+id/btn_confirm"
+                    android:minWidth="@dimen/dp_90"
+                    android:maxWidth="@dimen/dp_120"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp_30"
+                    android:gravity="center"
+                    android:text="知道了"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_16" />
+
+            </com.lihang.ShadowLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

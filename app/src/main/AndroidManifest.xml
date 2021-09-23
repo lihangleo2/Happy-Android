@@ -64,7 +64,7 @@
 
         <activity
             android:name=".ui.demo.home.HomeActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme" />
 

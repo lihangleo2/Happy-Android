@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
@@ -15,11 +17,16 @@ import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.LogUtils;
 import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.UIUtils;
+import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseFragment;
 import com.lihang.selfmvvm.base.NormalViewModel;
+import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentDemoBinding;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
+import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.home.HomeActivity;
+import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -51,6 +58,9 @@ public class ExampleFragment extends BaseFragment<NormalViewModel, FragmentExamp
     private String imagePath;
     int index;
 
+    //退出登录pop
+    private CommonPopupWindow popupWindow_share;
+
     //到时候这里用来传值
     public static ExampleFragment newFragment(int index) {
         ExampleFragment fragment = new ExampleFragment();
@@ -66,6 +76,7 @@ public class ExampleFragment extends BaseFragment<NormalViewModel, FragmentExamp
     @Override
     protected void processLogic(Bundle savedInstanceState) {
         rxPermissions = new RxPermissions(this);
+        initPop();
     }
 
     @Override
@@ -139,6 +150,24 @@ public class ExampleFragment extends BaseFragment<NormalViewModel, FragmentExamp
                         })
                         .start();
                 break;
+
+            case R.id.button_login_out:
+                //退出登录
+                popupWindow_share.showBottom(binding.getRoot(), 0.5f);
+                break;
+
+            case R.id.txt_pop_cancle:
+//                点击取消pop
+                popupWindow_share.dismiss();
+                break;
+
+            case R.id.txt_confirm_logout:
+                //确认退出登录
+                popupWindow_share.dismiss();
+                MyApplication.logOut();
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                getActivity().startActivity(intent);
+                break;
         }
     }
 
@@ -173,5 +202,18 @@ public class ExampleFragment extends BaseFragment<NormalViewModel, FragmentExamp
                 }
             }
         }
+    }
+
+
+    public void initPop() {
+        View viewShare = LayoutInflater.from(getContext()).inflate(R.layout.pop_login_out, null);
+        viewShare.findViewById(R.id.txt_confirm_logout).setOnClickListener(this);
+        viewShare.findViewById(R.id.txt_pop_cancle).setOnClickListener(this);
+        popupWindow_share = new CommonPopupWindow.Builder(getContext())
+                .setView(viewShare)
+                .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setOutsideTouchable(true)//在外不可用手指取消
+                .setAnimationStyle(R.style.pop_animation)//设置popWindow的出场动画
+                .create();
     }
 }

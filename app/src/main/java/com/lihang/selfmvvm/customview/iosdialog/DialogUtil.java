@@ -18,6 +18,30 @@ public final class DialogUtil {
     }
 
 
+    //单设备登录
+    public static void alertDoctorDialog(Activity act,String title, String content, String confirmMessage, final DialogAlertListener listener) {
+        DoctorDialog dialog = new DoctorDialog(act).builder();
+        dialog.setContent(content);
+        dialog.setTitle(title);
+        dialog.setConfirmMsg(confirmMessage);
+        dialog.setCancaleGone();
+        dialog.setCancelable(false);
+        dialog.setConfirmButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.yes();
+            }
+        });
+
+        if (act != null && !act.isFinishing()) {
+            dialog.show();
+        }
+    }
+
+
+
+
+
     /*
     * 仿ios dialog
     * */

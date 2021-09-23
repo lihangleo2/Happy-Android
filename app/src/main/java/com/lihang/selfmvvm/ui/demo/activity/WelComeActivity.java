@@ -43,6 +43,7 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, ActivityWelco
         Observable.timer(2500, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
             ActivitysBuilder.build(WelComeActivity.this, HomeActivity.class)
                     .withAnimal(0, com.leo.utilspro.R.anim.anim_translate_hide)
+                    .finish(true)
                     .startActivity();
         });
 

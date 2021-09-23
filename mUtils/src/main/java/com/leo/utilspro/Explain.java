@@ -1,8 +1,15 @@
 package com.leo.utilspro;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 
+import com.leo.utilspro.utils.ActivitysBuilder;
+import com.leo.utilspro.utils.KeyBoardUtils;
 import com.leo.utilspro.utils.SpannableStringBuilder;
 import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.bitmap.PictureUtil;
@@ -11,6 +18,8 @@ import com.leo.utilspro.utils.networks.NetStateChangeReceiver;
 import com.leo.utilspro.utils.threadpool.ThreadManager;
 
 import androidx.recyclerview.widget.SimpleItemAnimator;
+
+import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
 
 /**
  * Created by leo
@@ -260,4 +269,112 @@ public class Explain {
     * */
 
 
+
+    //──────────────────────────────────────────────────────────────────────────────
+//    pop的使用
+//    private CommonPopupWindow popupWindow_share;
+
+
+//    初始化
+//    public void initPop() {
+//        View viewShare = LayoutInflater.from(getContext()).inflate(R.layout.pop_login_out, null);
+//        viewShare.findViewById(R.id.txt_confirm_logout).setOnClickListener(this);
+//        viewShare.findViewById(R.id.txt_pop_cancle).setOnClickListener(this);
+//        popupWindow_share = new CommonPopupWindow.Builder(getContext())
+//                .setView(viewShare)
+//                .setWidthAndHeight(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+//                .setOutsideTouchable(true)//在外不可用手指取消
+//                .setAnimationStyle(R.style.pop_animation)//设置popWindow的出场动画
+//                .create();
+//    }
+
+//    从底部弹出
+//     popupWindow_share.showBottom(binding.getRoot(), 0.5f);
+
+//    取消pop的显示
+//     popupWindow_share.dismiss();
+
+
+
+    //──────────────────────────────────────────────────────────────────────────────
+// 点击返回不会退出后台
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+//            //点击返回键，不退出应用程序。直接返回后台
+//            ActivitysBuilder.startHome(HomeActivity.this);
+//            return true;
+//        }
+//        return super.onKeyDown(keyCode, event);
+//    }
+
+    //──────────────────────────────────────────────────────────────────────────────
+    //退出登录操作
+    // 启动模式：
+    //singleTop: 如果存在栈顶，则复用实例，不存在栈顶，新建一个实例放在栈顶
+    //singleTask：如果存在栈内，将他以上的实例关闭，回到实例。如果不存在，新建，放入栈内
+    //比如，退出登录回到我们的主页页面，主页面HomeActivity要设置启动模式：singleTask
+
+    //退出登录页面只需要调用：
+//    Intent intent = new Intent(getActivity(), HomeActivity.class);
+//    getActivity().startActivity(intent);
+
+    //调用以上方法会触发HomeActivity的onNewIntent()方法，此时如果需要关闭去登录页，那么我们就调用
+//            ActivitysBuilder.build(this, LoginActivity.class)
+//            .finish(true)
+//                .startActivity();
+
+    //之前加了intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);   这样看来好像没有多大用处了
+
+
+
+    //──────────────────────────────────────────────────────────────────────────────
+
+    //点击页面其他地方关掉软键盘
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+//            View v = getCurrentFocus();
+//            if (isShouldHideInput(v, ev)) {
+//                KeyBoardUtils.closeKeybord(binding.editPhone);
+//                binding.editPhone.clearFocus();
+//            }
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+    //点击页面其他地方关掉软键盘：这里比如点击一个小x(binding.imgDelete)的按钮也不关掉就是
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+//            View v = getCurrentFocus();
+//            int[] leftTop = {0, 0};
+//            binding.imgDelete.getLocationInWindow(leftTop);
+//            int left = leftTop[0], top = leftTop[1], bottom = top + binding.imgDelete.getHeight(), right = left
+//                    + binding.imgDelete.getWidth();
+//            if (ev.getX() > left && ev.getX() < right
+//                    && ev.getY() > top && ev.getY() < bottom) {
+//            } else {
+//                if (KeyBoardUtils.isShouldHideInput(v, ev)) {
+//                    KeyBoardUtils.closeKeybord(EditorNameActivity.this);
+//                    binding.editName.clearFocus();
+//                }
+//            }
+//
+//        }
+//        return super.dispatchTouchEvent(ev);
+//    }
+
+
+
+    //──────────────────────────────────────────────────────────────────────────────
+
+    //edittext
+    //取消edittext焦点，在xml加上如下：
+//    android:focusable="true"
+//    android:focusableInTouchMode="true"
+
+
+
 }
+

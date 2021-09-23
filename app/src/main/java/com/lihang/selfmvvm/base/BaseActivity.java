@@ -10,9 +10,11 @@ import android.widget.TextView;
 import com.google.gson.JsonSyntaxException;
 import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.networks.NetWorkUtils;
+import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.bean.basebean.Resource;
+import com.lihang.selfmvvm.customview.iosdialog.DialogUtil;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 
 import java.lang.reflect.ParameterizedType;
@@ -127,6 +129,16 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         @Override
         public void onProgress(int precent, long total) {
 
+        }
+
+        @Override
+        public void onOtherLogin(String msg) {
+            DialogUtil.alertDoctorDialog(BaseActivity.this, "提示", msg, "确定", new DialogUtil.DialogAlertListener() {
+                @Override
+                public void yes() {
+                    MyApplication.logOut();
+                }
+            });
         }
     }
 

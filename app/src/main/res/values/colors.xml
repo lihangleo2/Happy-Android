@@ -17,4 +17,7 @@
     <color name="test_2">#f2faff</color>
     <color name="blackdb">#dbdbdb</color>
     <color name="homeyellow">#F4AA4E</color>
+    <color name="grey_f2">#f2f2f2</color>
+    <color name="grey_99">#999999</color>
+    <color name="black1b">#1b1b1b</color>
 </resources>

@@ -4,12 +4,15 @@ import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 
+import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.PreferenceUtil;
 import com.leo.utilspro.utils.abase.LeoUtils;
 import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.launchstater.TaskDispatcher;
 import com.lihang.selfmvvm.launchstater.mytasks.SmartRefreshLayoutTask;
 import com.lihang.selfmvvm.launchstater.mytasks.X5WebTask;
+import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
 
 /**
  * Created by leo

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_pop_top2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_confirm_logout"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:text="退出登录"
+            android:textColor="#ff0000"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_5"
+            android:background="@color/grey_f2" />
+<!--        android:background="#F5F5F6"-->
+        <TextView
+            android:id="@+id/txt_pop_cancle"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_60"
+            android:text="取消"
+            android:textColor="@color/black1b"
+            android:textSize="@dimen/sp_14" />
+
+
+    </LinearLayout>
+
+</layout>
