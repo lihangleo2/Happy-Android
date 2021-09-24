@@ -44,7 +44,7 @@
 
         <activity
             android:name=".ui.MainActivity"
-            android:launchMode="singleTop"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/BlackFront_AppTheme" />
 

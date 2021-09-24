@@ -165,7 +165,7 @@ public class ExampleFragment extends BaseFragment<NormalViewModel, FragmentExamp
                 //确认退出登录
                 popupWindow_share.dismiss();
                 MyApplication.logOut();
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(intent);
                 break;
         }
