@@ -2,12 +2,12 @@ package com.lihang.selfmvvm.base;
 
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.User;
-import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
-import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
-import com.lihang.selfmvvm.bean.basebean.Resource;
+import com.lihang.selfmvvm.bean.HomeFatherBean;
+import com.lihang.selfmvvm.base.bean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.Resource;
 import com.lihang.selfmvvm.common.PARAMS;
 import com.lihang.selfmvvm.common.SystemConst;
-import com.lihang.selfmvvm.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
 
 import java.io.File;
 import java.util.HashMap;

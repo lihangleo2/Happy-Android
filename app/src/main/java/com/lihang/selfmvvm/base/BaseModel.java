@@ -2,14 +2,14 @@ package com.lihang.selfmvvm.base;
 
 import android.text.TextUtils;
 
-import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
-import com.lihang.selfmvvm.bean.basebean.ResponModel;
-import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
-import com.lihang.selfmvvm.retrofitwithrxjava.Interceptor.OfflineCacheInterceptor;
-import com.lihang.selfmvvm.retrofitwithrxjava.RetrofitApiService;
-import com.lihang.selfmvvm.retrofitwithrxjava.RetrofitManager;
-import com.lihang.selfmvvm.bean.basebean.Resource;
-import com.lihang.selfmvvm.retrofitwithrxjava.downloadutils.DownFileUtils;
+import com.lihang.selfmvvm.base.bean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.ResponModel;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.Interceptor.OfflineCacheInterceptor;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.RetrofitApiService;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.RetrofitManager;
+import com.lihang.selfmvvm.base.bean.Resource;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.downloadutils.DownFileUtils;
 import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.ArrayList;

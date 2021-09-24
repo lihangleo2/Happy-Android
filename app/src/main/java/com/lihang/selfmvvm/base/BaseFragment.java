@@ -13,7 +13,7 @@ import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.networks.NetWorkUtils;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
-import com.lihang.selfmvvm.bean.basebean.Resource;
+import com.lihang.selfmvvm.base.bean.Resource;
 import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.customview.iosdialog.DialogUtil;
 import com.trello.rxlifecycle2.components.support.RxFragment;

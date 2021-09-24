@@ -7,7 +7,6 @@ import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.databinding.ActivityMainBinding;
-import com.lihang.selfmvvm.launchstater.utils.Utils;
 import com.lihang.selfmvvm.ui.demo.fragment.DemoFragment;
 import com.lihang.selfmvvm.ui.demo.fragment.ExampleFragment;
 

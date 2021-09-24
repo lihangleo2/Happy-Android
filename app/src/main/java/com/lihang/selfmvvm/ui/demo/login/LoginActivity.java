@@ -1,6 +1,5 @@
 package com.lihang.selfmvvm.ui.demo.login;
 
-import android.animation.Animator;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
@@ -23,8 +22,8 @@ import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.bean.User;
-import com.lihang.selfmvvm.bean.basebean.EventBusBean;
-import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.EventBusBean;
+import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.common.PARAMS;
 import com.lihang.selfmvvm.databinding.ActivityLoginBinding;
 import com.lihang.smartloadview.SmartLoadingView;

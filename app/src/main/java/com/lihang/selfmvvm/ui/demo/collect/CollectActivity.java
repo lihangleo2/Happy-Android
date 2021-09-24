@@ -4,14 +4,13 @@ import android.view.View;
 
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.DataUtils;
-import com.leo.utilspro.utils.abase.LeoUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.bean.HomeBean;
-import com.lihang.selfmvvm.bean.basebean.EventBusBean;
-import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
-import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.EventBusBean;
+import com.lihang.selfmvvm.bean.HomeFatherBean;
+import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.databinding.ActivityCollectBinding;
 import com.lihang.selfmvvm.ui.collect.adapter.CollectAdapter;
 import com.lihang.selfmvvm.ui.demo.activity.WebActivity;

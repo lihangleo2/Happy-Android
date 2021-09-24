@@ -30,3 +30,15 @@
 [Android从零开始搭建MVVM架构（6）————使用玩Android API带你搭建MVVM框架（初级篇）](https://juejin.im/post/5da6c0acf265da5bbb1e4df7)  
 [Android从零开始搭建MVVM架构（7） ———— 使用玩Android API带你搭建MVVM框架（终极篇）](https://juejin.im/post/5da90c54f265da5b932e7960)
 
+
+项目说明：
+* lis下的tbs和jniLibs下的libtbs.so是腾讯X5WbeView不要的so库，使WebView加载更快捷
+* 【base】里除了launchstater(启动器外)，EventBusBean(有利于EventBus的判断)外其他都是MVVM封装的代码
+* 【bean】放项目的bean解析对象
+* 【ui】代码等存放包
+* 【utils】项目本地用的utils
+
+* diooto 第三方，仿微信小图到大图转场动画支持手势操作(部分被作者修改)
+* imagepicker 第三图片选择器，已被作者修改适配全面屏等(内部带简单剪裁)
+* ucrop 第三方剪裁控件，更高级的剪裁。被作者修改适配全面屏等
+*【项目适配】使用的是screenMatch插件，原理是最小宽度限定符

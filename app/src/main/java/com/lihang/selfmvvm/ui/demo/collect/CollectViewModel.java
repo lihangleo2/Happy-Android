@@ -4,9 +4,9 @@ import android.app.Application;
 
 import com.lihang.selfmvvm.base.BaseViewModel;
 import com.lihang.selfmvvm.base.RepositoryImpl;
-import com.lihang.selfmvvm.bean.basebean.HomeFatherBean;
-import com.lihang.selfmvvm.bean.basebean.ParamsBuilder;
-import com.lihang.selfmvvm.bean.basebean.Resource;
+import com.lihang.selfmvvm.bean.HomeFatherBean;
+import com.lihang.selfmvvm.base.bean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.Resource;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
