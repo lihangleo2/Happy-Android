@@ -1,26 +1,5 @@
 package com.leo.utilspro;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.leo.utilspro.utils.ActivitysBuilder;
-import com.leo.utilspro.utils.KeyBoardUtils;
-import com.leo.utilspro.utils.SpannableStringBuilder;
-import com.leo.utilspro.utils.ToastUtils;
-import com.leo.utilspro.utils.bitmap.PictureUtil;
-import com.leo.utilspro.utils.crash.CrashHandler;
-import com.leo.utilspro.utils.networks.NetStateChangeReceiver;
-import com.leo.utilspro.utils.threadpool.ThreadManager;
-
-import androidx.recyclerview.widget.SimpleItemAnimator;
-
-import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
-
 /**
  * Created by leo
  * on 2020/9/22.

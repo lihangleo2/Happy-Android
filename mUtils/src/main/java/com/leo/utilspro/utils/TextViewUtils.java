@@ -95,7 +95,14 @@ public class TextViewUtils {
                 textView.setText(originText);
             }
         }
-
     }
+
+
+
+    //字体带下阴影的办法
+//    android:shadowColor="#ff009473"
+//    android:shadowDx="0"
+//    android:shadowDy="8"
+//    android:shadowRadius="3.0"
 
 }

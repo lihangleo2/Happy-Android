@@ -19,6 +19,7 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationManagerCompat;
 
 /**
@@ -326,5 +327,12 @@ public class MoreUtils {
             hex.append(Integer.toHexString(b & 0xFF));
         }
         return hex.toString();
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static String base64(String content){
+        String encodeResult = java.util.Base64.getEncoder().encodeToString(content.getBytes());
+        return encodeResult;
     }
 }

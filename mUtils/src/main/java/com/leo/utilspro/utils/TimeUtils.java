@@ -17,7 +17,7 @@ public class TimeUtils {
      * @param formatStr 要转换的时间格式;如："yyyy.MM.dd  HH:mm"    "yyyy-MM-dd"
      * @return
      */
-    public static String getLongToStr(long timeMillis,String formatStr) {
+    public static String getStrByLong(long timeMillis, String formatStr) {
         Date date = new Date(timeMillis);
         SimpleDateFormat format = new SimpleDateFormat(formatStr);
         return format.format(date);
@@ -31,7 +31,7 @@ public class TimeUtils {
      * @param formatStr  时间对应格式  例如: yyyy-MM-dd
      * @return
      */
-    public static long getTimeStamp(String timeStr, String formatStr) {
+    public static long getLongByStr(String timeStr, String formatStr) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatStr);
         Date date = null;
         try {
@@ -48,7 +48,7 @@ public class TimeUtils {
     /**
      * 发布时间距离现在多久。要展示的文案
      */
-    public static String getFromNow(long milSecond) {
+    public static String getTimeFromNow(long milSecond) {
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nowStr = format.format(new Date());

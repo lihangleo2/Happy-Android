@@ -37,7 +37,11 @@ import java.util.Map;
 
 /**
  * Created by lihang on 2017/7/13.
- * 要打开存储权限
+ * 要打开存储权限.（加入后，一旦程序崩溃，崩溃日志会自动保存在手机内部存储里）
+ *
+ * 捕获崩溃日志，位置在外部存储的LianSou
+ * CrashHandler crashHandler = CrashHandler.getInstance();
+ * crashHandler.init(getApplicationContext());
  */
 
 public class CrashHandler implements Thread.UncaughtExceptionHandler {

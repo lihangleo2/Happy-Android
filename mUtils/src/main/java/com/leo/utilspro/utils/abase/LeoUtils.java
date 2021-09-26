@@ -5,6 +5,9 @@ import android.content.Context;
 /**
  * Created by leo
  * on 2020/9/22.
+ * Leo工具类，必须实现注册下。目的是方便其他工具不需要获取Context。
+ *
+ * LeoUtils.initContext(this);
  */
 public class LeoUtils {
     private static Context mContext;

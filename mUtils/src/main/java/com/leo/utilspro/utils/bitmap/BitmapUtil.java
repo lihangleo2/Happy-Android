@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 
-import com.leo.utilspro.utils.LogUtils;
 import com.leo.utilspro.utils.TimeUtils;
 import com.leo.utilspro.utils.abase.LeoUtils;
 
@@ -19,43 +18,65 @@ import java.io.IOException;
  * Created by siberiawolf on 17/3/22.
  */
 
-public class PictureUtil {
+public class BitmapUtil {
+    /**
+     * 按图片的质量压缩
+     *
+     * @param filePath 需要压缩的图片路径
+     * @param quality  压缩的质量 0 - 100
+     * @return
+     */
 
-    //1、需要压缩的图片路径
-    //2、压缩的质量 0 - 100
-    public static String compressImage(String filePath, int quality) {
-//        LogUtils.i("图片压缩", "压缩前大小 == " + new File(filePath).length());
-        Bitmap bm = getSmallBitmap(filePath);//获取一定尺寸的图片
+    public static String compressBitmapByQuality(String filePath, int quality) {
+        Bitmap bm = BitmapFactory.decodeFile(filePath);
         int degree = readPictureDegree(filePath);//获取相片拍摄角度
         if (degree != 0) {//旋转照片角度，防止头像横着显示
             bm = rotateBitmap(bm, degree);
         }
-
-        File imageFile = new File(LeoUtils.getApplication().getFilesDir().getAbsolutePath().toString() + "/" + TimeUtils.getLongToStr(System.currentTimeMillis(),"yyyy.MM.dd_HH:mm:ss:SSS") + "_atmancarm.jpg");
-
+        File imageFile = new File(LeoUtils.getApplication().getFilesDir().getAbsolutePath().toString() + "/" + TimeUtils.getStrByLong(System.currentTimeMillis(), "yyyy.MM.dd_HH:mm:ss:SSS") + "_atmancarm.jpg");
         try {
             imageFile.createNewFile();
             FileOutputStream out = new FileOutputStream(imageFile);
             bm.compress(Bitmap.CompressFormat.JPEG, quality, out);
         } catch (Exception e) {
+
         }
 
         String imgpath = imageFile.getPath();
-//        LogUtils.i("图片压缩", "压缩后大小 == " + new File(imgpath).length());
-
 
         return imgpath;
     }
 
     /**
-     * 根据路径获得图片信息并按比例压缩，返回bitmap
+     * 按图片长宽压缩
+     * 按传入的长宽后，计算出合适的压缩比如，压缩图片，此处指的是图片长宽大小的压缩
      */
-    public static Bitmap getSmallBitmap(String filePath) {
+    public static Bitmap compressBitmapBySize(String filePath, int requireWidth, int requireHeight) {
         final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;//只解析图片边沿，获取宽高
+        //设置整个属性后，不会加载bitmap，只会获取图片属性，比如宽高
+        options.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(filePath, options);
-        // 计算缩放比
-        options.inSampleSize = calculateInSampleSize(options, 480, 800);
+        // 计算缩放比()
+        options.inSampleSize = calculateInSampleSize(options, requireWidth, requireHeight);
+        // 完整解析图片返回bitmap
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    //与原图片比，长宽压缩多少倍数。 multiple  几倍数
+    public static Bitmap compressBitmapBySourceSize(String filePath, double multiple) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        //设置整个属性后，不会加载bitmap，只会获取图片属性，比如宽高
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+
+        int sourceHeight = options.outHeight;
+        int sourceWidth = options.outWidth;
+        int requireWidth = (int) (sourceWidth / multiple);
+        int requireHeight = (int) (sourceHeight / multiple);
+
+        // 计算缩放比()
+        options.inSampleSize = calculateInSampleSize(options, requireWidth, requireHeight);
         // 完整解析图片返回bitmap
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeFile(filePath, options);
@@ -64,10 +85,12 @@ public class PictureUtil {
 
     /**
      * 获取照片角度
+     * 一般是拍摄照片的时候才会用到
      *
      * @param path
      * @return
      */
+
     public static int readPictureDegree(String path) {
         int degree = 0;
         try {
@@ -94,6 +117,7 @@ public class PictureUtil {
 
     /**
      * 旋转照片
+     * 一般是拍摄照片的时候才会用到
      *
      * @param bitmap
      * @param degress
@@ -110,8 +134,9 @@ public class PictureUtil {
         return bitmap;
     }
 
-    public static int calculateInSampleSize(BitmapFactory.Options options,
-                                            int reqWidth, int reqHeight) {
+
+    // 计算缩放比()
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -124,8 +149,8 @@ public class PictureUtil {
     }
 
 
-    //压缩到指定大小
-    public static Bitmap getsmallBit(Bitmap bitmap) {
+    //压缩图片到 指定大小
+    public static Bitmap compressTargetBitmap(Bitmap bitmap) {
         double maxSize = 500.00;//KB
         //将bitmap放至数组中，意在bitmap的大小（与实际读取的原文件要大）
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -138,15 +163,15 @@ public class PictureUtil {
             //获取bitmap大小 是允许最大大小的多少倍
             double i = mid / maxSize;
             //开始压缩  此处用到平方根 将宽带和高度压缩掉对应的平方根倍 （1.保持刻度和高度和原bitmap比率一致，压缩后也达到了最大大小占用空间的大小）
-            bitmap = zoomImage(bitmap, bitmap.getWidth() / Math.sqrt(i),
+            bitmap = zoomBitmap(bitmap, bitmap.getWidth() / Math.sqrt(i),
                     bitmap.getHeight() / Math.sqrt(i));
         }
         return bitmap;
     }
 
 
-    public static Bitmap zoomImage(Bitmap bgimage, double newWidth,
-                                   double newHeight) {
+    public static Bitmap zoomBitmap(Bitmap bgimage, double newWidth,
+                                    double newHeight) {
         // 获取这个图片的宽和高
         float width = bgimage.getWidth();
         float height = bgimage.getHeight();

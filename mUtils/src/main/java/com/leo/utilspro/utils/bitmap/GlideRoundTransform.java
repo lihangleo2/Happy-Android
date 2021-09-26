@@ -148,6 +148,7 @@ public class GlideRoundTransform implements Transformation<Bitmap> {
 
     @Override
     public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+
     }
 }
 
