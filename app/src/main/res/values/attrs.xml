@@ -10,7 +10,7 @@
         <attr name="hl_showRightText" format="string" />
         <attr name="hl_rightBtnDrawable" format="reference" />
         <attr name="hl_divideColor" format="color" />
-
+        <attr name="hl_divideWidth" format="dimension" />
 
 
 

@@ -84,6 +84,7 @@ public interface RetrofitApiService {
     @FormUrlEncoded
     Observable<ResponseBody> postAddGank(@FieldMap HashMap<String, String> map);
 
+
     //单张图片上传
     @POST("upload/pic")
     @Multipart

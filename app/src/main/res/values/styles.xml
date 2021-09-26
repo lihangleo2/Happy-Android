@@ -43,11 +43,26 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowContentTransitions">true</item>
         <item name="colorPrimary">@color/black</item> <!-- 系统toolbar上的字体颜色值 -->
-        <item name="colorPrimaryDark">@color/status_background</item>   <!-- 状态栏背景颜色 -->
+        <item name="colorPrimaryDark">@color/white</item>   <!-- 状态栏背景颜色 -->
         <item name="colorAccent">@color/colorPrimary</item>  <!-- 指的是手指按下，系统控件的颜色值 -->
         <item name="android:windowBackground">@color/white</item> <!-- 设置app背景颜色的默认值 -->
 <!--        <item name="android:navigationBarColor">@color/red</item> &lt;!&ndash; 底部导航栏的颜色值 &ndash;&gt;-->
     </style>
+
+
+    <!-- 状态栏字体白色，背景颜色随意更改 -->
+    <style name="WhiteFront_AppTheme_blue" parent="Theme.AppCompat.Light">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="colorPrimary">@color/black</item> <!-- 系统toolbar上的字体颜色值 -->
+        <item name="colorPrimaryDark">@color/status_background</item>   <!-- 状态栏背景颜色 -->
+        <item name="colorAccent">@color/colorPrimary</item>  <!-- 指的是手指按下，系统控件的颜色值 -->
+        <item name="android:windowBackground">@color/white</item> <!-- 设置app背景颜色的默认值 -->
+        <!--        <item name="android:navigationBarColor">@color/red</item> &lt;!&ndash; 底部导航栏的颜色值 &ndash;&gt;-->
+    </style>
+
+
 
     <!-- 状态栏字体颜色为黑色 -->
     <style name="BlackFront_AppTheme" parent="WhiteFront_AppTheme">

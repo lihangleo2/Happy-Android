@@ -25,13 +25,10 @@ import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.base.bean.EventBusBean;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.common.PARAMS;
-import com.lihang.selfmvvm.databinding.ActivityLoginBinding;
+import com.lihang.selfmvvm.databinding.LoginActivityBinding;
 import com.lihang.smartloadview.SmartLoadingView;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -42,10 +39,10 @@ import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
  * Created by leo
  * on 2019/11/13.
  */
-public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.LoginViewModel, ActivityLoginBinding> implements TextWatcher {
+public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.LoginViewModel, LoginActivityBinding> implements TextWatcher {
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_login;
+        return R.layout.login_activity;
     }
 
     private Handler mHandler = new Handler() {

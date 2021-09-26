@@ -5,16 +5,16 @@ import android.view.View;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
-import com.lihang.selfmvvm.databinding.ActivityWebBinding;
+import com.lihang.selfmvvm.databinding.WebActivityBinding;
 
 /**
  * Created by leo
  * on 2019/11/12.
  */
-public class WebActivity extends BaseActivity<NormalViewModel, ActivityWebBinding> {
+public class WebActivity extends BaseActivity<NormalViewModel, WebActivityBinding> {
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_web;
+        return R.layout.web_activity;
     }
 
     @Override

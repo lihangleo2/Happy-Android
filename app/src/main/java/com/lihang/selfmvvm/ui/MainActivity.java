@@ -1,14 +1,20 @@
 package com.lihang.selfmvvm.ui;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.gyf.immersionbar.ImmersionBar;
+import com.leo.utilspro.utils.ActivitysBuilder;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
-import com.lihang.selfmvvm.databinding.ActivityMainBinding;
+import com.lihang.selfmvvm.databinding.MainActivityBinding;
 import com.lihang.selfmvvm.ui.demo.fragment.DemoFragment;
-import com.lihang.selfmvvm.ui.demo.fragment.ExampleFragment;
+import com.lihang.selfmvvm.ui.demo.fragment.detection.ExamplewhtaFragment;
+import com.lihang.selfmvvm.ui.demo.fragment.home.HomeFragment;
+import com.lihang.selfmvvm.ui.demo.fragment.mine.MineFragment;
+import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
 
 import java.util.ArrayList;
 
@@ -20,15 +26,15 @@ import androidx.fragment.app.FragmentTransaction;
  * Created by leo
  * on 2020/10/21.
  */
-public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBinding> {
+public class MainActivity extends BaseActivity<NormalViewModel, MainActivityBinding> {
     private static final int FRAGMENT_ONE = 0;
     private static final int FRAGMENT_TWO = 1;
     private static final int FRAGMENT_THREE = 2;
     private int index;
     private int currentTabIndex = 0;
-    ExampleFragment fragment_one;
-    DemoFragment fragment_two;
-    DemoFragment fragment_three;
+    HomeFragment homeFragment;
+    ExamplewhtaFragment fragment_one;
+    MineFragment mineFragment;
 
     private RelativeLayout[] mTabs;
     private FragmentManager manager;
@@ -36,11 +42,28 @@ public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBind
 
     @Override
     protected int getContentViewId() {
-        return R.layout.activity_main;
+        return R.layout.main_activity;
     }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        ActivitysBuilder.build(this, LoginActivity.class)
+                .finish(true)
+                .startActivity();
+    }
+
+
 
     @Override
     protected void processLogic() {
+        //        mImmersionBar = ImmersionBar.with(this)
+//                .statusBarColor(R.color.yellow)
+//                .keyboardEnable(true)
+//                .keyboardMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+//                .fitsSystemWindows(true);
+//                mImmersionBar.init();
         initFragment();
     }
 
@@ -51,14 +74,13 @@ public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBind
         mTabs[1] = binding.relativeTab2;
         mTabs[2] = binding.relativeTab3;
 
+        homeFragment = new HomeFragment();
+        fragment_one = ExamplewhtaFragment.newFragment(1);
+        mineFragment = new MineFragment();
 
-        fragment_one = ExampleFragment.newFragment(1);
-        fragment_two = DemoFragment.newFragment(2);
-        fragment_three = DemoFragment.newFragment(3);
-
+        list_fragment.add(homeFragment);
         list_fragment.add(fragment_one);
-        list_fragment.add(fragment_two);
-        list_fragment.add(fragment_three);
+        list_fragment.add(mineFragment);
         switchFragment(R.id.relative_tab_1);
     }
 
@@ -72,15 +94,30 @@ public class MainActivity extends BaseActivity<NormalViewModel, ActivityMainBind
         switch (v.getId()) {
             case R.id.relative_tab_1:
                 switchFragment(R.id.relative_tab_1);
+                setStatusBackColor(R.color.white,true);
                 break;
             case R.id.relative_tab_2:
                 switchFragment(R.id.relative_tab_2);
+                setStatusBackColor(R.color.white,true);
                 break;
             case R.id.relative_tab_3:
                 switchFragment(R.id.relative_tab_3);
+                setStatusBackColor(R.color.green93,false);
                 break;
 
         }
+    }
+
+
+    public void setStatusBackColor(int colorId,boolean isDarkFont){
+        ImmersionBar.with(this)
+                //状态栏字体是否黑色
+                .statusBarDarkFont(isDarkFont)
+                //状态栏的背景色
+                .statusBarColor(colorId)
+                //状态栏是否沉浸，true则占据位置
+                .fitsSystemWindows(true)
+                .init();
     }
 
 

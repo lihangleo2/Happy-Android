@@ -63,16 +63,10 @@
 
 
         <activity
-            android:name=".ui.demo.home.HomeActivity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
-
-        <activity
             android:name=".ui.demo.activity.WebActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
+            android:theme="@style/WhiteFront_AppTheme_blue" />
 
         <!--多渠道打包需要配置-->
         <meta-data

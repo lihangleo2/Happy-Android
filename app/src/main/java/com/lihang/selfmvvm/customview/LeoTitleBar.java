@@ -4,14 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -51,7 +47,7 @@ public class LeoTitleBar extends FrameLayout {
     public LeoTitleBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         LayoutInflater inflater = LayoutInflater.from(context);
-        inflater.inflate(R.layout.layout_m_toolbar, this);
+        inflater.inflate(R.layout.myview_layout_toolbar, this);
         leoBar = findViewById(R.id.leoBar);
         txt_title = findViewById(R.id.txt_title);
         bar_left_btn = findViewById(R.id.bar_left_btn);
@@ -202,8 +198,13 @@ public class LeoTitleBar extends FrameLayout {
         }
 
         //分割线颜色，如果bar背景颜色和window背景颜色一致，需要分割线
-        int divide_color = typedArray.getColor(R.styleable.LeoTitleBar_hl_divideColor, Color.TRANSPARENT);
+        int divide_color = typedArray.getColor(R.styleable.LeoTitleBar_hl_divideColor, getContext().getResources().getColor(R.color.grey_f2));
+        int divide_width = (int) typedArray.getDimension(R.styleable.LeoTitleBar_hl_divideWidth, getContext().getResources().getDimension(R.dimen.px_2));
         line.setBackgroundColor(divide_color);
+
+        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) line.getLayoutParams();
+        layoutParams.height = divide_width;
+        line.setLayoutParams(layoutParams);
 
     }
 
