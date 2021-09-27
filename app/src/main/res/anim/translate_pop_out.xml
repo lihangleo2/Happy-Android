@@ -4,11 +4,11 @@
     <translate
         android:duration="500"
         android:fromYDelta="0"
-        android:toYDelta="50%p" />
+        android:toYDelta="100%" />
 
-    <alpha
-        android:duration="500"
-        android:fromAlpha="1.0"
-        android:toAlpha="0.0" />
+<!--    <alpha-->
+<!--        android:duration="500"-->
+<!--        android:fromAlpha="1.0"-->
+<!--        android:toAlpha="0.0" />-->
 
 </set>

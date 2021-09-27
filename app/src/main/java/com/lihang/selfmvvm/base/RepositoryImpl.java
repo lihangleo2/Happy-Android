@@ -1,5 +1,7 @@
 package com.lihang.selfmvvm.base;
 
+import com.leo.utilspro.utils.GsonUtil;
+import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
@@ -25,6 +27,8 @@ import okhttp3.RequestBody;
  */
 public class RepositoryImpl extends BaseModel {
 
+    /*** For Exmaple - - - - - - - - - - - - - -- - - -- -- - - -- - - ---------------------------*/
+
     //获取 banner列表
     public MutableLiveData<Resource<List<BannerBean>>> getBannerList() {
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
@@ -33,83 +37,58 @@ public class RepositoryImpl extends BaseModel {
 
     //获取首页文章
     public MutableLiveData<Resource<HomeFatherBean>> getHomeArticles(int curPage, ParamsBuilder paramsBuilder) {
-
         MutableLiveData<Resource<HomeFatherBean>> liveData = new MutableLiveData<>();
         return observeGo(getApiService().getHomeArticles(curPage), liveData, paramsBuilder);
     }
 
-    //获取收藏列表
-    public MutableLiveData<Resource<HomeFatherBean>> getCollectArticles(int curPage, ParamsBuilder paramsBuilder) {
-        MutableLiveData<Resource<HomeFatherBean>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().getCollectArticles(curPage), liveData, paramsBuilder);
+
+
+    /**
+     * 一、GET请求所有实例都在
+     * */
+    public MutableLiveData<Resource<List<BannerBean>>> getTaskList(int curPage, int flag, HashMap<String, Object> map,ParamsBuilder paramsBuilder) {
+        //一般authorization是登录者token，在登录的时候会存起来，只要获取就好了
+        String authorization = MyApplication.getLoginUser().getToken();
+        MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
+        return observeGo(getApiService().getTaskList(curPage,flag,map,authorization), liveData, paramsBuilder);
     }
 
-    //站内收藏文章
-    public MutableLiveData<Resource<String>> collectArticle(int id) {
+    /**
+     * 二、POST请求
+     * 2.1、json请求
+     * */
+    public MutableLiveData<Resource<List<BannerBean>>> addPatient(String json, ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
+        return observeGo(getApiService().addPatient(RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), json)), liveData, paramsBuilder);
+    }
+
+
+    /**
+     * 二、POST请求
+     * 2.2、键值对请求
+     * */
+    public MutableLiveData<Resource<List<BannerBean>>> addOther(String title,HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
+        return observeGo(getApiService().addOther(title,map), liveData, paramsBuilder);
+    }
+
+    /**
+     * 三、单个图片上传(文件上传)
+     * */
+    public MutableLiveData<Resource<String>> upLoadFile(String key, File file, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().collectArticle(id), liveData, ParamsBuilder.build().isShowDialog(false));//不显示加载logo
-    }
-
-    //站外收藏文章
-    public MutableLiveData<Resource<String>> collectOutArticle(String title, String author, String link) {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().collectOutArticle(title, author, link), liveData, ParamsBuilder.build().isShowDialog(false));
-    }
-
-    //取消收藏 -- 首页列表
-    public MutableLiveData<Resource<String>> unCollectByHome(int id) {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().unCollectByHome(id), liveData, ParamsBuilder.build().isShowDialog(false));
-    }
-
-
-    public MutableLiveData<Resource<String>> unCollectByMe(int id, int originId) {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().unCollectByMe(id, originId), liveData, null);
-    }
-
-
-    //退出登录
-    public MutableLiveData<Resource<String>> LoginOut() {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().loginOut(), liveData);
-    }
-
-
-    //登录
-    public MutableLiveData<Resource<User>> login(HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
-        MutableLiveData<Resource<User>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().login(map), liveData, paramsBuilder);
-    }
-
-
-    //正常下载，
-    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName) {
-        MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
-        return downLoadFile(getApiService().downloadFile(SystemConst.QQ_APK), liveData, destDir, fileName);
-    }
-
-    //断点下载
-    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName, long currentLength) {
-        String range = "bytes=" + currentLength + "-";
-        MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
-        return downLoadFile(getApiService().downloadFile(SystemConst.QQ_APK, range), liveData, destDir, fileName, currentLength);
-    }
-
-    //上传文件(进度监听)
-    public MutableLiveData<Resource<String>> upLoadPic(String type, String key, File file) {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
-
+        //这里是监听上传进度的辅助类UploadFileRequestBody
         UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(file, liveData);
-        //"file"  是key
-        MultipartBody.Part body = MultipartBody.Part.createFormData("file", file.getName(), uploadFileRequestBody);
-        return upLoadFile(getApiService().uploadPic(PARAMS.changeToRquestBody(type), body), liveData);
+        MultipartBody.Part body = MultipartBody.Part.createFormData(key, file.getName(), uploadFileRequestBody);
+        return observeGo(getApiService().upLoadFile(body), liveData, paramsBuilder);
     }
 
-
+    /**
+     * 四、多个图片上传(多个文件上传)
+     * */
     //上传多张图片(进度监听)  多张图片进度监听，图片一张一张上传 所以用到了PictureProgressUtil工具类。用之前init初始数据，setProgress即可
-    public MutableLiveData<Resource<String>> upLoadPicss(String type, HashMap<String, File> files) {
-        MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
+    public MutableLiveData<Resource<List<String>>> upLoadMoreFiles(String type, HashMap<String, File> files,ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<List<String>>> liveData = new MutableLiveData<>();
 
         Map<String, RequestBody> bodyMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
@@ -117,11 +96,41 @@ public class RepositoryImpl extends BaseModel {
             UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(file, liveData);
             bodyMap.put("files" + "\"; filename=\"" + file.getName(), uploadFileRequestBody);
         }
-
         //如果是传统的不带进度监听 只需要
 //        bodyMap=PARAMS.manyFileToPartBody(files);
-        return upLoadFile(getApiService().uploadPicss(PARAMS.changeToRquestBody(type), bodyMap), liveData);
+        return upLoadFile(getApiService().upLoadMoreFiles(PARAMS.changeToRquestBody(type), bodyMap), liveData,paramsBuilder);
     }
+
+
+
+
+
+
+
+
+
+    /**
+     * 七、文件下载
+     * 7.1、正常下载
+     * */
+    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName,String targetUrl) {
+        MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
+        return downLoadFile(getApiService().downloadFile(targetUrl), liveData, destDir, fileName);
+    }
+
+    /**
+     * 七、文件下载
+     * 7.2、断点下载
+     * */
+    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName, long currentLength,String targetUrl) {
+        String range = "bytes=" + currentLength + "-";
+        MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
+        return downLoadFile(getApiService().downloadFile(targetUrl, range), liveData, destDir, fileName, currentLength);
+    }
+
+
+
+
 
 
 }

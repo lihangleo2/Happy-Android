@@ -55,18 +55,40 @@
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme" />
 
-        <activity
-            android:name=".ui.demo.collect.CollectActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
-
 
         <activity
             android:name=".ui.demo.activity.WebActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/WhiteFront_AppTheme_blue" />
+
+
+        <activity
+            android:name=".ui.demo.set.SetActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+        <activity
+            android:name=".ui.demo.set.aboutus.AboutUsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
+        <activity
+            android:name=".ui.demo.set.editor.EditorMessageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+        <activity
+            android:name=".ui.demo.funexplain.network.NetWorkExplainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
 
         <!--多渠道打包需要配置-->
         <meta-data

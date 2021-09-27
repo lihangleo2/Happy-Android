@@ -11,6 +11,7 @@ import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.base.bean.Resource;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -37,46 +38,5 @@ public class HomeViewModel extends BaseViewModel<RepositoryImpl> {
     public LiveData<Resource<HomeFatherBean>> getHomeArticles(int curPage, ParamsBuilder paramsBuilder) {
         return getRepository().getHomeArticles(curPage, paramsBuilder);
     }
-
-    //收藏文章
-    public LiveData<Resource<String>> collectArticle(HomeBean data) {
-        int id = data.getId();
-        //收藏站内文章
-        if (id > 0) {
-            return collectArticle(id);
-        }
-        //收藏站外文章
-        return getRepository().collectOutArticle(data.getTitle(), data.getAuthor(), data.getLink());
-    }
-
-    public LiveData<Resource<String>> unCollectByHome(int id) {
-        return getRepository().unCollectByHome(id);
-    }
-
-
-    //收藏站内文章
-    public LiveData<Resource<String>> collectArticle(int id) {
-        return getRepository().collectArticle(id);
-    }
-
-    //收藏站外文章
-    public LiveData<Resource<String>> collectOutArticle(String title, String author, String link) {
-        return getRepository().collectOutArticle(title, author, link);
-    }
-
-
-    //退出登录
-    public LiveData<Resource<String>> loginOut() {
-        return getRepository().LoginOut();
-    }
-
-    public LiveData<Resource<File>> downFile(String destDir, String fileName) {
-        return getRepository().downFile(destDir, fileName);
-    }
-
-    public LiveData<Resource<String>> upLoadPic(String type, String key, File file) {
-        return getRepository().upLoadPic(type, key, file);
-    }
-
 
 }

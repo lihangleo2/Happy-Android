@@ -14,7 +14,7 @@ import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.base.bean.Resource;
-import com.lihang.selfmvvm.customview.iosdialog.DialogUtil;
+import com.lihang.selfmvvm.customview.dialog.DialogUtil;
 import com.trello.rxlifecycle2.components.support.RxFragmentActivity;
 
 import java.lang.reflect.ParameterizedType;

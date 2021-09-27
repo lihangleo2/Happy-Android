@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:hl_textTitle="玩安卓"
+            app:hl_showLeftBtn="false"
             app:hl_textTitleColor="#000" />
 
 

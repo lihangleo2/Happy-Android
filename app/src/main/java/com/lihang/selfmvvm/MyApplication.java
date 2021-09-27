@@ -6,9 +6,9 @@ import android.content.Context;
 import com.leo.utilspro.utils.PreferenceUtil;
 import com.leo.utilspro.utils.abase.LeoUtils;
 import com.lihang.selfmvvm.bean.User;
-import com.lihang.selfmvvm.base.launchstater.TaskDispatcher;
-import com.lihang.selfmvvm.base.launchstater.mytasks.SmartRefreshLayoutTask;
-import com.lihang.selfmvvm.base.launchstater.mytasks.X5WebTask;
+import com.lihang.selfmvvm.morefunction.launchstater.TaskDispatcher;
+import com.lihang.selfmvvm.morefunction.launchstater.mytasks.SmartRefreshLayoutTask;
+import com.lihang.selfmvvm.morefunction.launchstater.mytasks.X5WebTask;
 
 /**
  * Created by leo

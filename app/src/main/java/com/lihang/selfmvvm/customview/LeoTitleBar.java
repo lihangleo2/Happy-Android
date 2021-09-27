@@ -1,5 +1,6 @@
 package com.lihang.selfmvvm.customview;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -58,8 +59,25 @@ public class LeoTitleBar extends FrameLayout {
         line = findViewById(R.id.line);
         init(attrs);
         LogUtils.i("运行哪边先的呢", "11111");
-
+        setFinishActivity();
     }
+
+
+    public void setFinishActivity() {
+        bar_left_btn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = bar_left_btn.getContext();
+                if (context instanceof Activity){
+                    ((Activity) context).finish();
+                }
+//                activity.finish();
+            }
+        });
+    }
+
+
+
 
     @Override
     protected void onFinishInflate() {

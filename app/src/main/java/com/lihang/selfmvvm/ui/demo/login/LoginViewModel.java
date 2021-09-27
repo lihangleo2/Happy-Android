@@ -23,7 +23,7 @@ public class LoginViewModel extends BaseViewModel<RepositoryImpl> {
         super(application);
     }
 
-    public LiveData<Resource<User>> login(HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
-        return getRepository().login(map, paramsBuilder);
-    }
+//    public LiveData<Resource<User>> login(HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
+//        return getRepository().login(map, paramsBuilder);
+//    }
 }

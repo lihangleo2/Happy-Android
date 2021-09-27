@@ -1,5 +1,6 @@
 package com.lihang.selfmvvm.customview.popup;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Gravity;
@@ -92,13 +93,35 @@ public class CommonPopupWindow extends PopupWindow {
 
     public void setBackgroundAlpha(Activity activity, float bgAlpha) {
         WindowManager.LayoutParams lp = activity.getWindow().getAttributes();
-        lp.alpha = bgAlpha;
-        if (bgAlpha == 1) {
-            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
-        } else {
-            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
-        }
-        activity.getWindow().setAttributes(lp);
+//        lp.alpha = bgAlpha;
+//        if (bgAlpha == 1) {
+//            activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+//        } else {
+//            activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+//        }
+//        activity.getWindow().setAttributes(lp);
+
+        //一下代码是加了动画，使弹出pop的时候更加丝滑
+        float current_alpha = lp.alpha;
+        ValueAnimator animator_alpha = ValueAnimator.ofFloat(current_alpha, bgAlpha);
+        animator_alpha.setDuration(500);
+        animator_alpha.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float current_alpha = (float) animation.getAnimatedValue();
+                lp.alpha = current_alpha;
+                if (current_alpha == 1) {
+                    activity.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//不移除该Flag的话,在有视频的页面上的视频会出现黑屏的bug
+                } else {
+                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);//此行代码主要是解决在华为手机上半透明效果无效的bug
+                }
+                activity.getWindow().setAttributes(lp);
+
+            }
+        });
+        animator_alpha.start();
+
+
     }
 
 
@@ -199,7 +222,7 @@ public class CommonPopupWindow extends PopupWindow {
         view.measure(widthMeasureSpec, heightMeasureSpec);
     }
 
-    public void showAsDropDownLeo(View anchor, int xoff, int yoff,float alpha) {
+    public void showAsDropDownLeo(View anchor, int xoff, int yoff, float alpha) {
         this.showAsDropDown(anchor, xoff, yoff);
         setBackgroundAlpha((Activity) controller.context, alpha);
     }

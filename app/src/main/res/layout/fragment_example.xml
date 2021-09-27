@@ -1,50 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="onClickListener"
             type="android.view.View.OnClickListener" />
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageView
-            android:onClick="@{onClickListener}"
-            android:id="@+id/image"
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:adjustViewBounds="true"
-            />
+            app:hl_showLeftBtn="false"
+            app:hl_textTitle="功能展示"
+            app:hl_textTitleColor="#000" />
 
 
-        <Button
-            android:onClick="@{onClickListener}"
-            android:id="@+id/button_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="添加图片" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never"
+            android:scrollbars="none">
 
 
-        <Button
-            android:id="@+id/button_crop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_add"
-            android:onClick="@{onClickListener}"
-            android:text="剪裁图片" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <Button
-            android:id="@+id/button_login_out"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_crop"
-            android:onClick="@{onClickListener}"
-            android:text="退出登录pop及退出登录操作" />
+                <com.lihang.ShadowLayout
+                    android:onClick="@{onClickListener}"
+                    android:id="@+id/shadowLayout_network"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="@color/green93"
+                    app:hl_layoutBackground_true="#8009BB93"
+                    app:hl_shapeMode="pressed"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="Retrofit网络请求介绍"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
 
 
-    </RelativeLayout>
+                </com.lihang.ShadowLayout>
+
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:adjustViewBounds="true"
+                    android:onClick="@{onClickListener}" />
+
+
+                <Button
+                    android:id="@+id/button_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{onClickListener}"
+                    android:text="添加图片" />
+
+
+                <Button
+                    android:id="@+id/button_crop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button_add"
+                    android:onClick="@{onClickListener}"
+                    android:text="剪裁图片" />
+
+                <Button
+                    android:id="@+id/button_login_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/button_crop"
+                    android:onClick="@{onClickListener}"
+                    android:text="退出登录pop及退出登录操作" />
+
+            </LinearLayout>
+
+
+        </ScrollView>
+
+
+    </LinearLayout>
 </layout>

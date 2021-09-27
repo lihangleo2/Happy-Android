@@ -21,6 +21,7 @@ import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -80,6 +81,11 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.shadowLayout_network:
+                ActivitysBuilder.build(this, NetWorkExplainActivity.class)
+                        .startActivity();
+                break;
+
             case R.id.button_add:
                 rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
                     if (aBoolean) {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_leftBtnDrawable="@mipmap/back_icon_black"
+            app:hl_textTitle="网络请求说明" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_marginRight="@dimen/dp_15"
+            android:text="所有代码都在这里。"
+            android:textColor="@color/black1b"
+            android:textSize="@dimen/sp_14" />
+
+        <com.lihang.ShadowLayout
+            android:id="@+id/shadowLayout_download_file"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_20"
+            android:onClick="@{onClickListener}"
+            app:hl_cornerRadius="@dimen/dp_30"
+            app:hl_layoutBackground="@color/green93"
+            app:hl_layoutBackground_true="#8009BB93"
+            app:hl_shapeMode="pressed">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/dp_17"
+                android:paddingTop="@dimen/dp_7"
+                android:paddingRight="@dimen/dp_17"
+                android:paddingBottom="@dimen/dp_7"
+                android:text="文件下载事例"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+
+
+        </com.lihang.ShadowLayout>
+
+
+    </LinearLayout>
+</layout>

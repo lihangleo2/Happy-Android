@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FAFAFA">
+
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_background="@color/white"
+            app:hl_divideColor="@color/grey_f2"
+            app:hl_leftBtnDrawable="@mipmap/back_icon_black"
+            app:hl_textTitle="个人资料"
+            app:hl_textTitleColor="@color/black" />
+
+        <com.lihang.ShadowLayout
+            android:id="@+id/ShadowLayoutHead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leoTitleBar"
+            android:layout_gravity="center_horizontal"
+            app:hl_shadowColor="#1F000000"
+            app:hl_shadowHiddenLeft="true"
+            app:hl_shadowHiddenRight="true"
+            app:hl_shadowHiddenTop="true"
+            app:hl_shadowLimit="@dimen/dp_10">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relative_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:onClick="@{onClickListener}">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_f2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="头像"
+                        android:textColor="@color/black1b"
+                        android:textSize="@dimen/sp_14" />
+
+                    <ImageView
+                        android:id="@+id/image_mine"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_30"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_toLeftOf="@+id/image_arror"
+                        android:background="@drawable/shape_image_stroke"
+                        android:padding="1px"
+                        android:src="@mipmap/default_head" />
+
+                    <ImageView
+                        android:id="@+id/image_arror"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:src="@mipmap/arrow_right_gray" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:onClick="@{onClickListener}">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_f2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="昵称"
+                        android:textColor="@color/black1b"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:id="@+id/txt_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_toLeftOf="@+id/image_arror_name"
+                        android:text="昵称"
+                        android:textColor="@color/black1b"
+                        android:textSize="@dimen/sp_14" />
+
+
+                    <ImageView
+                        android:id="@+id/image_arror_name"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:src="@mipmap/arrow_right_gray" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/relative_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:onClick="@{onClickListener}">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/grey_f2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:text="手机号码"
+                        android:textColor="@color/black1b"
+                        android:textSize="@dimen/sp_14" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/dp_20"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:layout_toLeftOf="@+id/image_arror_phone"
+                        android:text="已验证"
+                        android:textColor="#B3B3B3"
+                        android:textSize="@dimen/sp_14" />
+
+
+                    <ImageView
+                        android:id="@+id/image_arror_phone"
+                        android:layout_width="@dimen/dp_12"
+                        android:layout_height="@dimen/dp_12"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp_20"
+                        android:src="@mipmap/arrow_right_gray" />
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </com.lihang.ShadowLayout>
+
+    </RelativeLayout>
+</layout>

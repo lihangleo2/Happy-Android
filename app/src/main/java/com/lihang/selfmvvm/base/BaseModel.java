@@ -14,6 +14,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
 import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

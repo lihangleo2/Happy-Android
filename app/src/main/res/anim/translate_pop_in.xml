@@ -2,10 +2,12 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <translate android:duration="500" android:fromYDelta="50%p"
+<!--    100%是相对于控件自身-->
+<!--    100%p是相对于手机屏幕比-->
+    <translate android:duration="500" android:fromYDelta="100%"
         android:toYDelta="0" />
 
-    <alpha android:duration="500" android:fromAlpha="0.0"
-        android:toAlpha="1.0" />
+<!--    <alpha android:duration="500" android:fromAlpha="0.0"-->
+<!--        android:toAlpha="1.0" />-->
 
 </set>

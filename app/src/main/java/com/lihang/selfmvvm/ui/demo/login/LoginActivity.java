@@ -109,40 +109,40 @@ public class LoginActivity extends BaseActivity<com.lihang.selfmvvm.ui.login.Log
 
 
     public void login() {
-        String text_phone = getStringByUI(binding.editPhone);
-        String text_password = getStringByUI(binding.editPassworld);
-        mViewModel.login(PARAMS.login(text_phone, text_password), ParamsBuilder.build().isShowDialog(false))
-                .observe(LoginActivity.this, resource -> {
-                    resource.handler(new OnCallback<User>() {
-                        @Override
-                        public void onSuccess(User data) {
-                            MyApplication.updateUser(data);
-                            PreferenceUtil.put("userName", getStringByUI(binding.editPhone));
-                            //联网成功：通过设置监听AnimatorListener即是启动 小圆扩散全屏动画。在此动画全部完成后拿到回调onAnimtionEnd
-                            binding.smartLoadingView.onSuccess(new SmartLoadingView.AnimationFullScreenListener() {
-                                @Override
-                                public void animationFullScreenFinish() {
-                                    ActivitysBuilder.finishWithAnim(LoginActivity.this, R.anim.scale_test_home, R.anim.scale_test2);
-                                    EventBus.getDefault().post(new EventBusBean(1));
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onFailure(String msg) {
-                            binding.smartLoadingView.netFaile(msg);
-                        }
-
-                        @Override
-                        public void onCompleted() {
-                            super.onCompleted();
-                            binding.editPhone.setFocusable(true);
-                            binding.editPhone.setFocusableInTouchMode(true);
-                            binding.editPassworld.setFocusable(true);
-                            binding.editPassworld.setFocusableInTouchMode(true);
-                        }
-                    });
-                });
+//        String text_phone = getStringByUI(binding.editPhone);
+//        String text_password = getStringByUI(binding.editPassworld);
+//        mViewModel.login(PARAMS.login(text_phone, text_password), ParamsBuilder.build().isShowDialog(false))
+//                .observe(LoginActivity.this, resource -> {
+//                    resource.handler(new OnCallback<User>() {
+//                        @Override
+//                        public void onSuccess(User data) {
+//                            MyApplication.updateUser(data);
+//                            PreferenceUtil.put("userName", getStringByUI(binding.editPhone));
+//                            //联网成功：通过设置监听AnimatorListener即是启动 小圆扩散全屏动画。在此动画全部完成后拿到回调onAnimtionEnd
+//                            binding.smartLoadingView.onSuccess(new SmartLoadingView.AnimationFullScreenListener() {
+//                                @Override
+//                                public void animationFullScreenFinish() {
+//                                    ActivitysBuilder.finishWithAnim(LoginActivity.this, R.anim.scale_test_home, R.anim.scale_test2);
+//                                    EventBus.getDefault().post(new EventBusBean(1));
+//                                }
+//                            });
+//                        }
+//
+//                        @Override
+//                        public void onFailure(String msg) {
+//                            binding.smartLoadingView.netFaile(msg);
+//                        }
+//
+//                        @Override
+//                        public void onCompleted() {
+//                            super.onCompleted();
+//                            binding.editPhone.setFocusable(true);
+//                            binding.editPhone.setFocusableInTouchMode(true);
+//                            binding.editPassworld.setFocusable(true);
+//                            binding.editPassworld.setFocusableInTouchMode(true);
+//                        }
+//                    });
+//                });
     }
 
 
