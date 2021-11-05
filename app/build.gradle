@@ -133,7 +133,7 @@ dependencies {
     // MoreAboutRecyclerView 关于RecyclerView基本所有的知识点都在这里了
     implementation 'com.github.lihangleo2:MoreAboutRecyclerView:1.0.1'
     //阴影组件(不止于阴影)，自带shape及selector功能
-    implementation 'com.github.lihangleo2:ShadowLayout:3.2.2'
+    implementation 'com.github.lihangleo2:ShadowLayout:3.2.4'
     //一个很聪明的loadingView
     implementation 'com.github.lihangleo2:SmartLoadingView:2.0.2'
 

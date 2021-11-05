@@ -15,6 +15,7 @@ import com.lihang.selfmvvm.ui.demo.fragment.detection.ExamplewhtaFragment;
 import com.lihang.selfmvvm.ui.demo.fragment.home.HomeFragment;
 import com.lihang.selfmvvm.ui.demo.fragment.mine.MineFragment;
 import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
+import com.lihang.selfmvvm.utils.AppUtils;
 
 import java.util.ArrayList;
 
@@ -49,6 +50,7 @@ public class MainActivity extends BaseActivity<NormalViewModel, MainActivityBind
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        //这里是退出登录去登录页
         ActivitysBuilder.build(this, LoginActivity.class)
                 .finish(true)
                 .startActivity();

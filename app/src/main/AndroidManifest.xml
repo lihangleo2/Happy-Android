@@ -53,7 +53,7 @@
             android:name=".ui.demo.login.LoginActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-            android:theme="@style/WhiteFront_AppTheme" />
+            android:theme="@style/BlackFront_AppTheme" />
 
 
         <activity
@@ -83,6 +83,12 @@
             android:theme="@style/BlackFront_AppTheme" />
 
         <activity
+            android:name=".ui.demo.login.RegistCodeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+        <activity
             android:name=".ui.demo.funexplain.network.NetWorkExplainActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -94,6 +100,10 @@
         <meta-data
             android:name="ATMAN_CHANNEL"
             android:value="${ATMAN_CHANNEL_VALUE}" />
+
+
+        <!--其他的配置项-->
+        <service android:name=".morefunction.apkupdate.DownLoadService" />
 
     </application>
 

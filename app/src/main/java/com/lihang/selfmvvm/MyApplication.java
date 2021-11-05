@@ -47,6 +47,16 @@ public class MyApplication extends Application {
         return loginUser;
     }
 
+
+    public static String getUserToken() {
+        if (loginUser == null) {
+            return "";
+        } else {
+            return loginUser.getToken();
+        }
+    }
+
+
     public static void updateUser(User user) {
         PreferenceUtil.putByClass("user", user);
         loginUser = user;

@@ -10,6 +10,8 @@ import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.databinding.WelcomActivityBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.login.LoginActivity;
+import com.lihang.selfmvvm.utils.AppUtils;
 
 import java.util.concurrent.TimeUnit;
 
@@ -35,12 +37,20 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, WelcomActivit
         binding.imgSvg.setTraceColor(getResources().getColor(R.color.white));
         binding.imgSvg.start();
 
-        
+
         Observable.timer(2500, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
-            ActivitysBuilder.build(WelComeActivity.this, MainActivity.class)//HomeActivity
+
+            Class goClass;
+            if (AppUtils.isLogin()) {
+                goClass = MainActivity.class;
+            } else {
+                goClass = LoginActivity.class;
+            }
+            ActivitysBuilder.build(WelComeActivity.this, goClass)//HomeActivity
                     .withAnimal(0, com.leo.utilspro.R.anim.anim_translate_hide)
                     .finish(true)
                     .startActivity();
+
         });
 
 

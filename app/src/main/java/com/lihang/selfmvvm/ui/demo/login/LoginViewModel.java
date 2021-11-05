@@ -1,4 +1,4 @@
-package com.lihang.selfmvvm.ui.login;
+package com.lihang.selfmvvm.ui.demo.login;
 
 import android.app.Application;
 

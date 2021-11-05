@@ -42,21 +42,19 @@ public class RepositoryImpl extends BaseModel {
     }
 
 
-
     /**
      * 一、GET请求所有实例都在
-     * */
-    public MutableLiveData<Resource<List<BannerBean>>> getTaskList(int curPage, int flag, HashMap<String, Object> map,ParamsBuilder paramsBuilder) {
+     */
+    public MutableLiveData<Resource<List<BannerBean>>> getTaskList(int curPage, int flag, HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
         //一般authorization是登录者token，在登录的时候会存起来，只要获取就好了
-        String authorization = MyApplication.getLoginUser().getToken();
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().getTaskList(curPage,flag,map,authorization), liveData, paramsBuilder);
+        return observeGo(getApiService().getTaskList(curPage, flag, map, MyApplication.getUserToken()), liveData, paramsBuilder);
     }
 
     /**
      * 二、POST请求
      * 2.1、json请求
-     * */
+     */
     public MutableLiveData<Resource<List<BannerBean>>> addPatient(String json, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
         return observeGo(getApiService().addPatient(RequestBody.create(okhttp3.MediaType.parse("application/json;charset=UTF-8"), json)), liveData, paramsBuilder);
@@ -66,15 +64,15 @@ public class RepositoryImpl extends BaseModel {
     /**
      * 二、POST请求
      * 2.2、键值对请求
-     * */
-    public MutableLiveData<Resource<List<BannerBean>>> addOther(String title,HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
+     */
+    public MutableLiveData<Resource<List<BannerBean>>> addOther(String title, HashMap<String, Object> map, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<List<BannerBean>>> liveData = new MutableLiveData<>();
-        return observeGo(getApiService().addOther(title,map), liveData, paramsBuilder);
+        return observeGo(getApiService().addOther(title, map), liveData, paramsBuilder);
     }
 
     /**
      * 三、单个图片上传(文件上传)
-     * */
+     */
     public MutableLiveData<Resource<String>> upLoadFile(String key, File file, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<String>> liveData = new MutableLiveData<>();
         //这里是监听上传进度的辅助类UploadFileRequestBody
@@ -85,9 +83,9 @@ public class RepositoryImpl extends BaseModel {
 
     /**
      * 四、多个图片上传(多个文件上传)
-     * */
+     */
     //上传多张图片(进度监听)  多张图片进度监听，图片一张一张上传 所以用到了PictureProgressUtil工具类。用之前init初始数据，setProgress即可
-    public MutableLiveData<Resource<List<String>>> upLoadMoreFiles(String type, HashMap<String, File> files,ParamsBuilder paramsBuilder) {
+    public MutableLiveData<Resource<List<String>>> upLoadMoreFiles(String type, HashMap<String, File> files, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<List<String>>> liveData = new MutableLiveData<>();
 
         Map<String, RequestBody> bodyMap = new HashMap<>();
@@ -98,22 +96,15 @@ public class RepositoryImpl extends BaseModel {
         }
         //如果是传统的不带进度监听 只需要
 //        bodyMap=PARAMS.manyFileToPartBody(files);
-        return upLoadFile(getApiService().upLoadMoreFiles(PARAMS.changeToRquestBody(type), bodyMap), liveData,paramsBuilder);
+        return upLoadFile(getApiService().upLoadMoreFiles(PARAMS.changeToRquestBody(type), bodyMap), liveData, paramsBuilder);
     }
-
-
-
-
-
-
-
 
 
     /**
      * 七、文件下载
      * 7.1、正常下载
-     * */
-    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName,String targetUrl) {
+     */
+    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName, String targetUrl) {
         MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
         return downLoadFile(getApiService().downloadFile(targetUrl), liveData, destDir, fileName);
     }
@@ -121,16 +112,12 @@ public class RepositoryImpl extends BaseModel {
     /**
      * 七、文件下载
      * 7.2、断点下载
-     * */
-    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName, long currentLength,String targetUrl) {
+     */
+    public MutableLiveData<Resource<File>> downFile(String destDir, String fileName, long currentLength, String targetUrl) {
         String range = "bytes=" + currentLength + "-";
         MutableLiveData<Resource<File>> liveData = new MutableLiveData<>();
         return downLoadFile(getApiService().downloadFile(targetUrl, range), liveData, destDir, fileName, currentLength);
     }
-
-
-
-
 
 
 }

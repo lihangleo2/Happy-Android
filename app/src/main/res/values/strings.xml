@@ -5,7 +5,7 @@
     <string name="result_server_timeout">服务器连接超时，请稍后再试</string>
     <string name="result_empty_error">系统繁忙，请稍后再试</string>
     <string name="edit_digit">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
-    <string name="login_xieyi">注册即代表您同意用户服务协议、隐私协议</string>
+    <string name="login_xieyi">登录/注册并视为同意《用户服务协议》</string>
     <string name="myCollect">我的收藏</string>
     <string name="logOut">退出登录</string>
 
