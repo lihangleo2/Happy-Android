@@ -42,10 +42,10 @@ public class ImageFragment extends Fragment {
     boolean shouldShowAnimation = false;
     boolean hasCache;
     private boolean isLikeWx = true;
-
     public DragDiootoView getDragDiootoView() {
         return dragDiootoView;
     }
+
 
     public static ImageFragment newInstance(String url, int position, int type, boolean shouldShowAnimation, ContentViewOriginModel contentViewOriginModel, boolean isLikeWx) {
         Bundle args = new Bundle();
@@ -59,6 +59,7 @@ public class ImageFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
 
     @Nullable
     @Override
@@ -102,6 +103,7 @@ public class ImageFragment extends Fragment {
             dragDiootoView.addContentChildView(sketchImageView);
             sketchImageView.getZoomer().getBlockDisplayer().setPause(!isVisibleToUser());
         }
+
         return view;
     }
 
@@ -171,6 +173,7 @@ public class ImageFragment extends Fragment {
                 }
             }
         });
+
         dragDiootoView.setOnReleaseListener(new DragDiootoView.OnReleaseListener() {
             @Override
             public void onRelease(boolean isToMax, boolean isToMin) {

@@ -1,7 +1,10 @@
 package com.lihang.selfmvvm.ui.demo.set.editor;
 
+import android.text.Editable;
 import android.text.InputFilter;
 import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -35,7 +38,6 @@ public class EditorNameActivity extends BaseActivity<NormalViewModel, Editorname
         binding.setOnClickListener(this);
 
         InputFilter inputFilter = new InputFilter() {
-
             Pattern pattern = Pattern.compile("[^a-zA-Z0-9\\u4E00-\\u9FA5_]");
 
             @Override
@@ -47,19 +49,45 @@ public class EditorNameActivity extends BaseActivity<NormalViewModel, Editorname
                     ToastUtils.showToast("只能输入汉字,英文，数字");
                     return "";
                 }
-
             }
         };
         binding.editName.setFilters(new InputFilter[]{inputFilter, new InputFilter.LengthFilter(20)});
+
+
+        binding.editName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s.toString())) {
+                    binding.imgDelete.setVisibility(View.GONE);
+                } else {
+                    binding.imgDelete.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.img_delete:
+                binding.editName.setText("");
+                break;
+        }
     }
 
 
-    //这里是收起软键盘的操作
+    //这里是收起软键盘的操作(这里额外加了判断，点击x,清楚内容的时候，不收起。Explain.java里也有说明)
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {
@@ -76,7 +104,6 @@ public class EditorNameActivity extends BaseActivity<NormalViewModel, Editorname
                     KeyBoardUtils.closeKeybord(EditorNameActivity.this);
                 }
             }
-
         }
         return super.dispatchTouchEvent(ev);
     }

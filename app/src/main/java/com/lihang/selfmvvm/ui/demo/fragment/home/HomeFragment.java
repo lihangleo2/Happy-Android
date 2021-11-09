@@ -14,8 +14,10 @@ import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
 import com.lihang.selfmvvm.databinding.HomeFragmentBinding;
 import com.lihang.selfmvvm.ui.demo.activity.WebActivity;
-import com.lihang.selfmvvm.utils.GlideImagesLoader;
-import com.youth.banner.BannerConfig;
+import com.lihang.selfmvvm.ui.demo.funexplain.bannerintro.ImageAdapter;
+import com.youth.banner.indicator.CircleIndicator;
+import com.youth.banner.listener.OnBannerListener;
+import com.youth.banner.transformer.AlphaPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,6 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-        initBanner();
 
         adapter = new com.lihang.selfmvvm.ui.home.adapter.HomeAdapter(this);
         adapter.setOnItemClickListener(this);
@@ -50,12 +51,6 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
 
     @Override
     protected void setListener() {
-        binding.banner.setOnBannerListener(position -> {
-            ActivitysBuilder.build(this, WebActivity.class)
-                    .putExtra("url", bannerBeans.get(position).getUrl())
-                    .startActivity();
-        });
-
         binding.smartRefreshLayout.setOnRefreshListener(refreshLayout -> {
             curPage = 0;
             getHomeArticles(curPage, ParamsBuilder.build().isShowDialog(false));
@@ -72,10 +67,6 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
 
     }
 
-    private void initBanner() {
-        binding.banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE);
-        binding.banner.setImageLoader(new GlideImagesLoader());
-    }
 
     private void getBanner() {
         mViewModel.getBanner().observe(this, resource -> resource.handler(new OnCallback<List<BannerBean>>() {
@@ -92,15 +83,24 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
         if (data == null || data.size() <= 0) {
             return;
         }
-        List<String> urls = new ArrayList<>();
-        List<String> titles = new ArrayList<>();
-        for (int i = 0; i < data.size(); i++) {
-            urls.add(data.get(i).getImagePath());
-            titles.add(data.get(i).getTitle());
-        }
-        binding.banner.setBannerTitles(titles);
-        binding.banner.setImages(urls);
-        binding.banner.start();
+
+        /**
+         * 画廊效果
+         */
+        binding.banner.setAdapter(new ImageAdapter(data))
+                .addBannerLifecycleObserver(this)
+                .setIndicator(new CircleIndicator(getActivity()))
+                .setBannerGalleryEffect(12, 6)
+                .addPageTransformer(new AlphaPageTransformer(0.8f));
+
+        binding.banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(Object data, int position) {
+                ActivitysBuilder.build(HomeFragment.this, WebActivity.class)
+                        .putExtra("url", ((BannerBean) data).getUrl())
+                        .startActivity();
+            }
+        });
     }
 
 

@@ -122,6 +122,26 @@
             android:theme="@style/BlackFront_AppTheme" />
 
 
+        <activity
+            android:name=".ui.demo.funexplain.bannerintro.BannerActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
+        <activity
+            android:name=".ui.demo.funexplain.pickviewintro.PickerViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+        <activity
+            android:name=".ui.demo.funexplain.edittext.EditTextViewActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
         <!--多渠道打包需要配置-->
         <meta-data
             android:name="ATMAN_CHANNEL"

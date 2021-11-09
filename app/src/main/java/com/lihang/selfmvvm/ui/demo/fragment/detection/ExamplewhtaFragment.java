@@ -21,8 +21,11 @@ import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.bannerintro.BannerActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.edittext.EditTextViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.glide.GlideUserActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.pickviewintro.PickerViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
 import com.lzy.imagepicker.ImagePicker;
@@ -102,9 +105,27 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                         .startActivity();
                 break;
 
+            case R.id.shadowLayout_banner:
+                //【图片轮播banner】文档和用法
+                ActivitysBuilder.build(this, BannerActivity.class)
+                        .startActivity();
+                break;
+
+            case R.id.shadowLayout_pickerView:
+                //【pickerView三级联动】文档和使用
+                ActivitysBuilder.build(this, PickerViewActivity.class)
+                        .startActivity();
+                break;
+
+            case R.id.shadowLayout_edittext:
+                //【editTextView的疑难杂症】文档和使用
+                ActivitysBuilder.build(this, EditTextViewActivity.class)
+                        .startActivity();
+                break;
+
 
             case R.id.shadowLayout_loginOut:
-                //退出登录
+                //【退出登录的使用方法】
                 popupWindow_share.showBottom(binding.getRoot(), 0.5f);
                 break;
 

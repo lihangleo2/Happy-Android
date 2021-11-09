@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_leftBtnDrawable="@mipmap/back_icon_black"
+            app:hl_textTitle="EditTextView的一些知识" />
+
+        <LinearLayout
+            android:layout_below="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <com.lihang.ShadowLayout
+                android:id="@+id/mShadowLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/dp_7"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginRight="@dimen/dp_7"
+                app:hl_cornerRadius="@dimen/dp_10"
+                app:hl_shadowColor="#1F000000"
+                app:hl_shadowLimit="@dimen/dp_8">
+
+                <RelativeLayout
+                    android:id="@+id/relative_in"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50">
+
+                    <EditText
+                        android:id="@+id/edit_one"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:layout_marginRight="@dimen/dp_10"
+                        android:background="@null"
+                        android:hint="发送按钮监听及软键盘删除监听"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textColor="#314F7B"
+                        android:textColorHint="#91ABCF"
+                        android:textSize="@dimen/sp_14"
+                        android:imeOptions="actionSend"
+                        />
+
+
+                </RelativeLayout>
+
+            </com.lihang.ShadowLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

@@ -115,7 +115,8 @@ public class LikeWxImageEffectActivity extends BaseActivity<NormalViewModel, Lie
                                     }
                                 });
                             }
-                        }).start();
+                        })
+                        .start();
                 break;
         }
     }

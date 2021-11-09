@@ -28,14 +28,18 @@
             >
 
             <com.google.android.material.appbar.AppBarLayout
+                android:background="@color/transparent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                app:elevation="0dp"
+                >
 
                 <com.youth.banner.Banner
                     android:id="@+id/banner"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/dp_180"
-                    android:background="@color/line"
+                    app:banner_indicator_normal_color="#999999"
+                    app:banner_indicator_selected_color="#5CB85C"
                     app:layout_scrollFlags="scroll|snap" />
 
             </com.google.android.material.appbar.AppBarLayout>

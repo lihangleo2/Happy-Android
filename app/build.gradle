@@ -123,7 +123,8 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //广告banner
-    implementation 'com.youth.banner:banner:1.4.10'
+//    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'io.github.youth5201314:banner:2.2.2'
 
     //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
@@ -150,6 +151,10 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     //rxpermissions 权限申请
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    //banner用到的是viewPager2
+    implementation 'androidx.viewpager2:viewpager2:1.1.0-alpha01'
 
+    //三级联动
+    implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
 }
