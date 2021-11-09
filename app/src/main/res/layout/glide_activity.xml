@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_leftBtnDrawable="@mipmap/back_icon_black"
+            app:hl_textTitle="glide图片加载" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/leoTitleBar"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="加载特殊角度: " />
+
+            <ImageView
+                android:id="@+id/image_1"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_100"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="加载正常的圆角图片: " />
+
+            <ImageView
+                android:id="@+id/image_2"
+                android:layout_width="@dimen/dp_200"
+                android:layout_height="@dimen/dp_100"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_15" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:text="加载圆形头像" />
+
+            <ImageView
+                android:id="@+id/image_head"
+                android:layout_width="@dimen/dp_50"
+                android:layout_height="@dimen/dp_50"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/dp_15" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_15"
+                android:text="关于glide的更多用法在我的csdn上有。如高斯模糊，黑白图片等" />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>

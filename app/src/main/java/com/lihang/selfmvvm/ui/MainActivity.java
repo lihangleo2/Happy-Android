@@ -1,6 +1,7 @@
 package com.lihang.selfmvvm.ui;
 
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -163,5 +164,16 @@ public class MainActivity extends BaseActivity<NormalViewModel, MainActivityBind
         // 把当前tab设为选中状态
         mTabs[index].setSelected(true);
         currentTabIndex = index;
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            //点击返回键，不退出应用程序。直接返回后台
+            ActivitysBuilder.startHome(MainActivity.this);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

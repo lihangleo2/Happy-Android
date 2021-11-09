@@ -83,6 +83,13 @@
             android:theme="@style/BlackFront_AppTheme" />
 
         <activity
+            android:name=".ui.demo.set.editor.EditorNameActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
+        <activity
             android:name=".ui.demo.login.RegistCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
@@ -94,6 +101,25 @@
             android:screenOrientation="portrait"
             android:theme="@style/BlackFront_AppTheme" />
 
+        <activity
+            android:name=".ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
+        <activity
+            android:name=".ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
+
+
+        <activity
+            android:name=".ui.demo.funexplain.glide.GlideUserActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme" />
 
 
         <!--多渠道打包需要配置-->

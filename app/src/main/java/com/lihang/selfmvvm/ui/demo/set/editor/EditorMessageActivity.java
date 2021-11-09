@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.PictureProgressUtil;
 import com.leo.utilspro.utils.ToastUtils;
 import com.lihang.selfmvvm.MyApplication;
@@ -66,6 +67,11 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
             case R.id.relative_head:
                 //弹出更换头像的窗口
                 popupWindow_share.showBottom(binding.getRoot(), 0.5f);
+                break;
+
+            case R.id.relative_name:
+                ActivitysBuilder.build(this,EditorNameActivity.class)
+                        .startActivity();
                 break;
 
 

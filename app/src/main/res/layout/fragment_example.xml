@@ -36,18 +36,25 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_15"
+                    android:text="还有一些用法在项目中Explain.java文件中" />
+
                 <com.lihang.ShadowLayout
-                    android:onClick="@{onClickListener}"
                     android:id="@+id/shadowLayout_network"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_15"
                     android:layout_marginTop="@dimen/dp_20"
+                    android:onClick="@{onClickListener}"
                     app:hl_cornerRadius="@dimen/dp_30"
                     app:hl_layoutBackground="@color/green93"
                     app:hl_layoutBackground_true="#8009BB93"
-                    app:hl_shapeMode="pressed"
-                    >
+                    app:hl_shapeMode="pressed">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -63,39 +70,108 @@
 
                 </com.lihang.ShadowLayout>
 
-
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:adjustViewBounds="true"
-                    android:onClick="@{onClickListener}" />
-
-
-                <Button
-                    android:id="@+id/button_add"
+                <com.lihang.ShadowLayout
+                    android:id="@+id/shadowLayout_image"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:onClick="@{onClickListener}"
-                    android:text="添加图片" />
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="@color/green93"
+                    app:hl_layoutBackground_true="#8009BB93"
+                    app:hl_shapeMode="pressed">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="选择图片和剪裁图片"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+
+                </com.lihang.ShadowLayout>
 
 
-                <Button
-                    android:id="@+id/button_crop"
+                <com.lihang.ShadowLayout
+                    android:id="@+id/shadowLayout_likewx"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/button_add"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:onClick="@{onClickListener}"
-                    android:text="剪裁图片" />
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="@color/green93"
+                    app:hl_layoutBackground_true="#8009BB93"
+                    app:hl_shapeMode="pressed">
 
-                <Button
-                    android:id="@+id/button_login_out"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="仿微信小图到大图，拖拽退出"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+
+                </com.lihang.ShadowLayout>
+
+                <com.lihang.ShadowLayout
+                    android:id="@+id/shadowLayout_glide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/button_crop"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
                     android:onClick="@{onClickListener}"
-                    android:text="退出登录pop及退出登录操作" />
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="@color/green93"
+                    app:hl_layoutBackground_true="#8009BB93"
+                    app:hl_shapeMode="pressed">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="Glide的用法大全"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+
+                </com.lihang.ShadowLayout>
+
+
+                <com.lihang.ShadowLayout
+                    android:id="@+id/shadowLayout_loginOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:onClick="@{onClickListener}"
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="#FCB141"
+                    app:hl_layoutBackground_true="#80FCB141"
+                    app:hl_shapeMode="pressed">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="退出登录pop及退出登录"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+
+                </com.lihang.ShadowLayout>
+
 
             </LinearLayout>
 

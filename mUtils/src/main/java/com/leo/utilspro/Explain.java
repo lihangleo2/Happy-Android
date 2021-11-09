@@ -1,5 +1,13 @@
 package com.leo.utilspro;
 
+import android.text.InputFilter;
+import android.text.Spanned;
+
+import com.leo.utilspro.utils.ToastUtils;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by leo
  * on 2020/9/22.
@@ -190,6 +198,9 @@ public class Explain {
     不满一屏时，允许上拉加载，下拉刷新。
     app:srlEnableLoadMoreWhenContentNotFull="true"
 
+    纯滚动效果
+    app:srlEnablePureScrollMode="true"
+
 
     是否启动仿ios越界回弹
     app:srlEnableOverScrollDrag="true"
@@ -352,6 +363,27 @@ public class Explain {
     //取消edittext焦点，在xml加上如下：
 //    android:focusable="true"
 //    android:focusableInTouchMode="true"
+
+
+    //只允许输入汉字、字母和数字
+//    InputFilter inputFilter = new InputFilter() {
+//
+//        Pattern pattern = Pattern.compile("[^a-zA-Z0-9\\u4E00-\\u9FA5_]");
+//
+//        @Override
+//        public CharSequence filter(CharSequence charSequence, int i, int i1, Spanned spanned, int i2, int i3) {
+//            Matcher matcher = pattern.matcher(charSequence);
+//            if (!matcher.find()) {
+//                return null;
+//            } else {
+//                ToastUtils.showToast("只能输入汉字,英文，数字");
+//                return "";
+//            }
+//
+//        }
+//    };
+//
+//    binding.editName.setFilters(new InputFilter[]{inputFilter, new InputFilter.LengthFilter(20)});
 
 
 

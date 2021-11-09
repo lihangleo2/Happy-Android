@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.lihang.selfmvvm.customview.LeoTitleBar
+            android:id="@+id/leoTitleBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hl_background="@color/white"
+            app:hl_divideColor="@color/grey_f2"
+            app:hl_leftBtnDrawable="@mipmap/back_icon_black"
+            app:hl_textTitle="请输入昵称"
+            app:hl_textTitleColor="@color/black" />
+
+
+        <com.lihang.ShadowLayout
+            android:id="@+id/mShadowLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/leoTitleBar"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/dp_7"
+            android:layout_marginTop="@dimen/dp_12"
+            android:layout_marginRight="@dimen/dp_7"
+            app:hl_cornerRadius="@dimen/dp_10"
+            app:hl_shadowColor="#1F000000"
+            app:hl_shadowLimit="@dimen/dp_8">
+
+            <RelativeLayout
+                android:id="@+id/relative_in"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50">
+
+                <EditText
+                    android:id="@+id/edit_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_marginRight="@dimen/dp_10"
+                    android:layout_toLeftOf="@+id/img_delete"
+                    android:background="@null"
+                    android:hint="请输入昵称"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:textColor="#314F7B"
+                    android:textColorHint="#91ABCF"
+                    android:textSize="@dimen/sp_14" />
+
+                <ImageView
+                    android:id="@+id/img_delete"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp_7"
+                    android:onClick="@{onClickListener}"
+                    android:padding="@dimen/dp_8"
+                    android:src="@mipmap/icon_close"
+                    android:visibility="invisible" />
+
+            </RelativeLayout>
+
+        </com.lihang.ShadowLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mShadowLayout"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:text="只允许中文、英文字母、数字，长度最少2，最大20"
+            android:textColor="#91ABCF"
+            android:textSize="@dimen/sp_14" />
+
+    </RelativeLayout>
+</layout>

@@ -21,7 +21,10 @@ import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.glide.GlideUserActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -42,14 +45,8 @@ import static com.yalantis.ucrop.UCrop.EXTRA_OUTPUT_URI;
 /**
  * Created by leo
  * on 2020/10/21.
- * 1、选择图片，剪裁图片；
- * 2、点击图片，小图到大图，拖拽退出。仿微信功能，
- * 都在这个页面展示
  */
 public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentExampleBinding> {
-    private RxPermissions rxPermissions;
-    private ArrayList<ImageItem> Selects = new ArrayList<>();
-    private String imagePath;
     int index;
 
     //退出登录pop
@@ -69,7 +66,6 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
 
     @Override
     protected void processLogic(Bundle savedInstanceState) {
-        rxPermissions = new RxPermissions(this);
         initPop();
     }
 
@@ -81,76 +77,33 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+
             case R.id.shadowLayout_network:
+                //【网络请求】相关文档和用法
                 ActivitysBuilder.build(this, NetWorkExplainActivity.class)
                         .startActivity();
                 break;
 
-            case R.id.button_add:
-                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                            ImagePicker imagePicker = ImagePicker.getInstance();
-                            imagePicker.setCrop(false);
-                            imagePicker.setMultiMode(false);
-                            imagePicker.setShowCamera(false);
-                            imagePicker.setSelectLimit(3);
-                            Intent intent = new Intent(getActivity(), ImageGridActivity.class);
-                            intent.putExtra(ImageGridActivity.EXTRAS_IMAGES, Selects);
-                            startActivityForResult(intent, 100);
-                        }
-                    } else {
-                        ToastUtils.showToast("相册需要此权限");
-                    }
-                });
+            case R.id.shadowLayout_image:
+                //【选择图片和剪裁图片】文档和用法
+                ActivitysBuilder.build(this, SelectAndClipImageActivity.class)
+                        .startActivity();
                 break;
 
-            case R.id.button_crop:
-                if (Selects.size() <= 0) {
-                    ToastUtils.showToast("请先添加图片~");
-                    return;
-                }
-
-                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
-                    if (aBoolean) {
-                        if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-                            ActivitysBuilder.build(ExamplewhtaFragment.this, UCropActivity.class)
-                                    .putExtra("filePath", Selects.get(0).path)
-                                    .startActivityForResult(11);
-
-                        }
-                    } else {
-                        ToastUtils.showToast("相册需要此权限");
-                    }
-                });
-
-
+            case R.id.shadowLayout_likewx:
+                //【仿微信小图到大图，拖拽退出】文档和用法
+                ActivitysBuilder.build(this, LikeWxImageEffectActivity.class)
+                        .startActivity();
                 break;
 
-            case R.id.image:
-                ArrayList<String> arrayList = new ArrayList<>();
-                arrayList.add(imagePath);
-                int position = 0;
-                View[] views = new View[]{v};
-                String[] arrUrls = (String[]) arrayList.toArray(new String[arrayList.size()]);
-                Diooto diootoOrder = new Diooto(getActivity())
-                        .indicatorVisibility(View.VISIBLE)
-                        .urls(arrUrls)
-                        .type(DiootoConfig.PHOTO)
-                        .immersive(true)
-                        .position(position, 0)
-                        .views(views)
-                        .loadPhotoBeforeShowBigImage(new Diooto.OnLoadPhotoBeforeShowBigImageListener() {
-                            @Override
-                            public void loadView(SketchImageView sketchImageView, int position) {
-                                sketchImageView.displayImage(arrUrls[position]);
-                            }
-                        })
-                        .start();
+            case R.id.shadowLayout_glide:
+                //【Glide加载图片】文档和用法
+                ActivitysBuilder.build(this, GlideUserActivity.class)
+                        .startActivity();
                 break;
 
-            case R.id.button_login_out:
+
+            case R.id.shadowLayout_loginOut:
                 //退出登录
                 popupWindow_share.showBottom(binding.getRoot(), 0.5f);
                 break;
@@ -161,45 +114,14 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                 break;
 
             case R.id.txt_confirm_logout:
-                //确认退出登录
+                //确认退出登录。
+                // 1、首先设置MainActivity的启动模式launchMode="singleTask"
+                // 2、运行以下代码，会关闭MainActivity之后所有栈内的实例，并触发onNewIntent(Intent intent)方法
                 popupWindow_share.dismiss();
                 MyApplication.logOut();
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(intent);
                 break;
-        }
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == ImagePicker.RESULT_CODE_ITEMS) {
-            Selects.clear();
-            ArrayList<ImageItem> selects = (ArrayList<ImageItem>) data.getSerializableExtra(ImagePicker.EXTRA_RESULT_ITEMS);
-            Selects.addAll(selects);
-            imagePath = selects.get(0).path;
-            Glide.with(binding.image).
-                    load(imagePath).
-                    placeholder(R.mipmap.ic_launcher).
-                    error(R.mipmap.ic_launcher).
-//                    transform(new CenterCrop(), new RoundedCorners(UIUtils.dp2px(10))).
-        transform(new FitCenter()).
-                    into(binding.image);
-        } else if (resultCode == -1) {
-            if (requestCode == 11) {
-                String outPath = data.getStringExtra(EXTRA_OUTPUT_URI);
-                imagePath = outPath;
-                LogUtils.i("我没有成功返回吗", outPath);
-                if (!TextUtils.isEmpty(outPath)) {
-                    Glide.with(binding.image).
-                            load(imagePath).
-                            placeholder(R.mipmap.ic_launcher).
-                            error(R.mipmap.ic_launcher).
-                            transform(new FitCenter()).
-                            into(binding.image);
-                }
-            }
         }
     }
 
