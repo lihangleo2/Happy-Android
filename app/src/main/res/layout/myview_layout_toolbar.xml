@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -27,12 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp_35"
+                android:layout_marginRight="@dimen/dp_35"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:maxLines="1"
-                tools:text="标题"
                 android:textColor="@color/white"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp_18"
+                tools:text="标题" />
 
             <ImageView
                 android:id="@+id/bar_left_btn"
@@ -51,8 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_toLeftOf="@+id/linear_"
-                android:gravity="center_vertical"
-                />
+                android:gravity="center_vertical" />
 
             <LinearLayout
                 android:id="@+id/linear_"
@@ -72,7 +72,6 @@
                     android:clickable="true"
                     android:padding="@dimen/dp_5"
                     android:src="@mipmap/back_icon_white" />
-
 
 
                 <TextView

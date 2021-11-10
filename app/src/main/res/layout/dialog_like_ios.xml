@@ -7,67 +7,74 @@
     <!--android:background="@drawable/alertdialog_bgleo"-->
 
     <RelativeLayout
-        android:layout_width="250dp"
-        android:layout_height="120dp">
+        android:layout_width="@dimen/dp_250"
+        android:layout_height="wrap_content">
 
         <RelativeLayout
+            android:id="@+id/relative_"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/text_line"
-            android:background="@drawable/shape_dialog_style">
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_dialog_style"
+            android:minHeight="@dimen/dp_80">
 
             <TextView
                 android:id="@+id/txt_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15"
+                android:paddingBottom="@dimen/dp_15"
                 android:text="这里是内容信息~"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textColor="#1b1b1b"
+                android:textSize="@dimen/sp_16" />
 
         </RelativeLayout>
 
         <View
-            android:layout_above="@+id/linearBottom"
+            android:layout_below="@+id/relative_"
             android:id="@+id/text_line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="#c6c6c6"
-            />
+            android:background="#eeeeee" />
+
+        <!--        -->
         <LinearLayout
+            android:layout_below="@+id/text_line"
             android:id="@+id/linearBottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/btn_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:id="@+id/btn_cancle"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_40"
                 android:layout_weight="1"
                 android:background="@drawable/alertdialog_left_btn_selectbyleo"
                 android:gravity="center"
-                android:text="确定"
-                android:textColor="#037BFF"
-                android:textSize="16sp" />
+                android:text="取消"
+                android:textColor="#1296E9"
+                android:textSize="@dimen/sp_16" />
+
 
             <View
                 android:layout_width="0.5dp"
-                android:layout_height="40dp"
-                android:background="#c6c6c6"
-                />
+                android:layout_height="@dimen/dp_40"
+                android:background="#eeeeee" />
 
             <TextView
-                android:id="@+id/btn_cancle"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:id="@+id/btn_confirm"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp_40"
                 android:layout_weight="1"
                 android:background="@drawable/alertdialog_right_btn_selectleo"
                 android:gravity="center"
-                android:text="取消"
-                android:textColor="#037BFF"
-                android:textSize="16sp" />
+                android:text="确定"
+                android:textColor="#1296E9"
+                android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
     </RelativeLayout>

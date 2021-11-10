@@ -45,7 +45,7 @@ public class DataUtils {
 
     //带翻页的设置数据
     public static <T extends Object> void initData(int pageNumber, List<?> arrayList, List<T> dataList, BaseAdapter adapter, SmartRefreshLayout smartRefreshLayout) {
-        if (pageNumber == 0) {
+        if (pageNumber == 1) {
             arrayList.clear();
         }
 
@@ -57,7 +57,7 @@ public class DataUtils {
             }
         }
 
-        if (pageNumber == 0) {
+        if (pageNumber == 1) {
             adapter.notifyDataSetChanged();
         } else {
             if (arrayList.size() == 0) {

@@ -27,6 +27,7 @@ import com.lihang.selfmvvm.ui.demo.funexplain.glide.GlideUserActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.pickviewintro.PickerViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.smartrefresh.SmartRefreshActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
@@ -114,6 +115,12 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
             case R.id.shadowLayout_pickerView:
                 //【pickerView三级联动】文档和使用
                 ActivitysBuilder.build(this, PickerViewActivity.class)
+                        .startActivity();
+                break;
+
+            case R.id.shadowLayout_smartRefresh:
+                //【SmartRefreshLayout】文档和使用
+                ActivitysBuilder.build(this, SmartRefreshActivity.class)
                         .startActivity();
                 break;
 

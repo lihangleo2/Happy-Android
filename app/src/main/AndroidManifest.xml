@@ -142,6 +142,24 @@
             android:theme="@style/BlackFront_AppTheme" />
 
 
+        <activity
+            android:name=".ui.demo.funexplain.edittext.CommentsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            android:windowSoftInputMode="adjustPan"
+            />
+
+
+        <activity
+            android:name=".ui.demo.funexplain.smartrefresh.SmartRefreshActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            />
+
+
+
         <!--多渠道打包需要配置-->
         <meta-data
             android:name="ATMAN_CHANNEL"
