@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.leo.utilspro.utils.LogUtils;
+import com.leo.utilspro.utils.UIUtils;
 import com.lihang.selfmvvm.R;
 import com.lihang.smartloadview.UIUtil;
 
@@ -36,6 +38,7 @@ public class LeoTitleBar extends FrameLayout {
     public RelativeLayout view_container;
     public TextView line;
     public LinearLayout linear_;
+    private TextView txt_status;//这是用来沉浸时，距离statusbar的距离
 
     public LeoTitleBar(@NonNull Context context) {
         this(context, null);
@@ -57,6 +60,7 @@ public class LeoTitleBar extends FrameLayout {
         view_container = findViewById(R.id.view_container);
         linear_ = findViewById(R.id.linear_);
         line = findViewById(R.id.line);
+        txt_status = findViewById(R.id.txt_status);
         init(attrs);
         LogUtils.i("运行哪边先的呢", "11111");
         setFinishActivity();
@@ -68,15 +72,13 @@ public class LeoTitleBar extends FrameLayout {
             @Override
             public void onClick(View v) {
                 Context context = bar_left_btn.getContext();
-                if (context instanceof Activity){
+                if (context instanceof Activity) {
                     ((Activity) context).finish();
                 }
 //                activity.finish();
             }
         });
     }
-
-
 
 
     @Override
@@ -180,6 +182,35 @@ public class LeoTitleBar extends FrameLayout {
             txt_title.setText(titleStr);
         }
 
+        //展示StatusBar的高度
+        boolean showStatusHeight = typedArray.getBoolean(R.styleable.LeoTitleBar_hl_showStatusHeight, false);
+        if (showStatusHeight) {
+            LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) txt_status.getLayoutParams();
+            layoutParams.height = UIUtils.getStatusBarHeight();
+            txt_status.setLayoutParams(layoutParams);
+            txt_status.setVisibility(View.VISIBLE);
+            txt_status.setBackgroundColor(backColor);
+        } else {
+            txt_status.setVisibility(View.GONE);
+        }
+
+
+        //是否只展示返回键
+        boolean onlyBackBtn = typedArray.getBoolean(R.styleable.LeoTitleBar_hl_onlyBackBtn, false);
+        if (onlyBackBtn){
+            if (txt_status.getVisibility()==View.VISIBLE){
+                txt_status.setVisibility(View.INVISIBLE);
+            }
+            txt_title.setVisibility(View.INVISIBLE);
+            view_container.setVisibility(View.INVISIBLE);
+            linear_.setVisibility(View.INVISIBLE);
+            line.setVisibility(View.GONE);
+            leoBar.setBackgroundColor(Color.parseColor("#00000000"));
+        }
+
+
+
+
 
         //左边图标
         boolean isShowLeftBtn = typedArray.getBoolean(R.styleable.LeoTitleBar_hl_showLeftBtn, true);
@@ -192,6 +223,12 @@ public class LeoTitleBar extends FrameLayout {
         Drawable leftDrawable = typedArray.getDrawable(R.styleable.LeoTitleBar_hl_leftBtnDrawable);
         if (leftDrawable != null) {
             bar_left_btn.setImageDrawable(leftDrawable);
+        }
+
+        //
+        Drawable leftBackgroundDrawable = typedArray.getDrawable(R.styleable.LeoTitleBar_hl_leftBtn_background);
+        if (leftBackgroundDrawable != null) {
+            bar_left_btn.setBackground(leftBackgroundDrawable);
         }
 
         /*

@@ -157,4 +157,7 @@ dependencies {
     //三级联动
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
 
+    //标题
+    implementation 'com.github.hackware1993:MagicIndicator:1.5.0'
+
 }

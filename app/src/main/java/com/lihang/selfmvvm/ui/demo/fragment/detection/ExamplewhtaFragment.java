@@ -22,11 +22,14 @@ import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.bannerintro.BannerActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.coordinatorlayout.CoordinatorLayoutActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.edittext.EditTextViewActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.expandunfold.ExpandUnfoldActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.glide.GlideUserActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.pickviewintro.PickerViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.shareanim.ShareAnimActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.smartrefresh.SmartRefreshActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
 import com.lzy.imagepicker.ImagePicker;
@@ -42,6 +45,8 @@ import java.util.ArrayList;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
 import me.panpf.sketch.SketchImageView;
 
 import static com.yalantis.ucrop.UCrop.EXTRA_OUTPUT_URI;
@@ -130,6 +135,26 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                         .startActivity();
                 break;
 
+            case R.id.shadowLayout_coordinatorLayout:
+                //【CoordinatorLayout效果】文档和使用
+                ActivitysBuilder.build(this, CoordinatorLayoutActivity.class)
+                        .startActivity();
+                break;
+
+            case R.id.shadowLayout_share:
+                //【共享元素的使用】文档和使用
+                // 进入共享元素的页面
+                Intent intent_in = new Intent(getActivity(), ShareAnimActivity.class);
+                ActivityOptionsCompat activityOptions_in = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        getActivity(), new Pair(binding.shadowLayoutShare, "shareView"));
+                ActivityCompat.startActivity(getActivity(), intent_in, activityOptions_in.toBundle());
+                break;
+
+            case R.id.shadowLayout_expand_unfold:
+                //【属性动画实现展开和收起】文档和使用
+                ActivitysBuilder.build(this, ExpandUnfoldActivity.class)
+                        .startActivity();
+                break;
 
             case R.id.shadowLayout_loginOut:
                 //【退出登录的使用方法】

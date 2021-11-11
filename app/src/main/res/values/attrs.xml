@@ -6,7 +6,13 @@
         <attr name="hl_textTitleSize" format="integer" />
         <attr name="hl_textTitle" format="string" />
         <attr name="hl_showLeftBtn" format="boolean" />
+        <!-- 沉浸式时，展示StatusBar的高度-->
+        <attr name="hl_showStatusHeight" format="boolean" />
+        <!-- 是否只展示返回键-->
+        <attr name="hl_onlyBackBtn" format="boolean" />
         <attr name="hl_leftBtnDrawable" format="reference" />
+        <!-- 左边返回键的背景-->
+        <attr name="hl_leftBtn_background" format="reference" />
         <attr name="hl_showRightText" format="string" />
         <attr name="hl_rightBtnDrawable" format="reference" />
         <attr name="hl_divideColor" format="color" />

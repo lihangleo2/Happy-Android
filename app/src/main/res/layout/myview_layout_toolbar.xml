@@ -11,14 +11,20 @@
     <LinearLayout
         android:id="@+id/leoBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_45"
+        android:layout_height="wrap_content"
         android:background="#1EB0F1"
         android:orientation="vertical">
 
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/txt_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
+            android:layout_height="@dimen/dp_45"
+            >
 
 
             <TextView

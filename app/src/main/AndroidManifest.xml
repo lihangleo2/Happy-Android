@@ -152,7 +152,29 @@
 
 
         <activity
+            android:name=".ui.demo.funexplain.expandunfold.ExpandUnfoldActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            />
+
+
+        <activity
             android:name=".ui.demo.funexplain.smartrefresh.SmartRefreshActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            />
+
+        <activity
+            android:name=".ui.demo.funexplain.coordinatorlayout.CoordinatorLayoutActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            />
+
+        <activity
+            android:name=".ui.demo.funexplain.shareanim.ShareAnimActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
             android:theme="@style/BlackFront_AppTheme"
