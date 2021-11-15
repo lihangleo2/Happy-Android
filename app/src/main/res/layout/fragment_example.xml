@@ -346,6 +346,21 @@
                 </com.lihang.ShadowLayout>
 
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:text="虚线的使用" />
+
+                <com.lihang.selfmvvm.customview.DashView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_1"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    />
+
+
             </LinearLayout>
 
 

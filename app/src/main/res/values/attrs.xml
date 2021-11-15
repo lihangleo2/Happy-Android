@@ -19,7 +19,6 @@
         <attr name="hl_divideWidth" format="dimension" />
 
 
-
         <!--        <attr name="rightBtnDrawable" format="reference" />-->
         <!--        <attr name="backgroundDrawable" format="reference" />-->
         <!--        <attr name="leftBtnText" format="string" />-->
@@ -33,6 +32,19 @@
         <!--        <attr name="barBackground" format="reference" />-->
         <!--        <attr name="isShowRightImage" format="boolean" />-->
         <!--        <attr name="isShowClose" format="boolean" />-->
+    </declare-styleable>
+
+
+    <declare-styleable name="DashView">
+        <!-- 是否是竖直的 -->
+        <attr name="dash_isVertical" format="boolean" />
+        <!-- 虚线的实线长度 -->
+        <attr name="dash_solidWidth" format="dimension" />
+        <!-- 虚线的间隔长度 -->
+        <attr name="dash_divideWidth" format="dimension" />
+        <!-- 虚线的样色 -->
+        <attr name="dash_dashColor" format="color" />
+
     </declare-styleable>
 
 </resources>
