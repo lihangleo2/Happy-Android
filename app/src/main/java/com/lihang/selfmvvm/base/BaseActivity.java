@@ -115,7 +115,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         }
 
         @Override
-        public void onFailure(String msg) {
+        public void onFailure(int errorCode,String msg) {
             ToastUtils.showToast(msg);
         }
 
@@ -152,4 +152,5 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         }
         return "";
     }
+
 }

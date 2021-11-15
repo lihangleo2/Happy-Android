@@ -123,7 +123,7 @@ public abstract class BaseFragment<VM extends BaseViewModel, VDB extends ViewDat
         }
 
         @Override
-        public void onFailure(String msg) {
+        public void onFailure(int errorCode,String msg) {
             ToastUtils.showToast(msg);
         }
 

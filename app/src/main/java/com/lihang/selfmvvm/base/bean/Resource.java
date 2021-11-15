@@ -20,6 +20,10 @@ public class Resource<T> {
     public String errorMsg;
     public T data;
     public Throwable error;
+    //单独为fail状态下：可能需要区分错误用
+    public int errorCode;
+
+
 
     //这里和文件和进度有关了
     public int precent;//文件下载百分比
@@ -42,6 +46,13 @@ public class Resource<T> {
         this.total = total;
     }
 
+    public Resource(int state, int errorCode, String errorMsg) {
+        this.state = state;
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+
 
     public static <T> Resource<T> loading(String showMsg) {
         return new Resource<>(LOADING, null, showMsg);
@@ -60,7 +71,7 @@ public class Resource<T> {
             if (data.isOtherLogin()) {
                 return new Resource<>(OTHERLOGIN, null, data.getErrorMsg());
             }
-            return new Resource<>(FAIL, null, data.getErrorMsg());
+            return new Resource<>(FAIL, data.getErrorCode(), data.getErrorMsg());
         }
         return new Resource<>(ERROR, null, null);
     }
@@ -97,7 +108,7 @@ public class Resource<T> {
                 callback.onSuccess(data);
                 break;
             case FAIL:
-                callback.onFailure(errorMsg);
+                callback.onFailure(errorCode,errorMsg);
                 break;
             case ERROR:
                 callback.onError(error);
@@ -131,7 +142,7 @@ public class Resource<T> {
                 smartRefreshLayout.finishLoadMore();
                 break;
             case FAIL:
-                callback.onFailure(errorMsg);
+                callback.onFailure(errorCode,errorMsg);
                 smartRefreshLayout.finishRefresh(false);
                 smartRefreshLayout.finishLoadMore(false);
                 break;
@@ -158,7 +169,7 @@ public class Resource<T> {
 
         void onSuccess(T data);
 
-        void onFailure(String msg);
+        void onFailure(int errorCode,String msg);
 
         void onError(Throwable error);
 

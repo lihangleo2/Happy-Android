@@ -243,7 +243,7 @@ public class NetWorkExplainActivity extends BaseActivity<NetViewModel, NetworkAc
                 }
 
                 @Override
-                public void onFailure(String msg) {
+                public void onFailure(int errorCode,String msg) {
 
                 }
 

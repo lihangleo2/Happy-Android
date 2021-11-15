@@ -110,6 +110,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
             public void onSuccess(HomeFatherBean data) {
                 DataUtils.initData(currenPage, homeBeans, data.getDatas(), adapter, binding.smartRefreshLayout);
             }
+            
         }, binding.smartRefreshLayout));
     }
 
