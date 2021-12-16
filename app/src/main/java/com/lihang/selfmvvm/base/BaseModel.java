@@ -235,7 +235,7 @@ public abstract class BaseModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 //防止RxJava内存泄漏
                 .subscribe(o -> {
-                    liveData.postValue((T) Resource.success("成功了"));
+                    liveData.postValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
                     liveData.postValue((T) Resource.error((Throwable) throwable));
                 });
