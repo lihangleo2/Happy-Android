@@ -254,11 +254,11 @@ public class LeoTitleBar extends FrameLayout {
 
         //分割线颜色，如果bar背景颜色和window背景颜色一致，需要分割线
         int divide_color = typedArray.getColor(R.styleable.LeoTitleBar_hl_divideColor, getContext().getResources().getColor(R.color.grey_f2));
-        int divide_width = (int) typedArray.getDimension(R.styleable.LeoTitleBar_hl_divideWidth, getContext().getResources().getDimension(R.dimen.px_2));
+        int divide_height = (int) typedArray.getDimension(R.styleable.LeoTitleBar_hl_divideHeight, getContext().getResources().getDimension(R.dimen.px_2));
         line.setBackgroundColor(divide_color);
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) line.getLayoutParams();
-        layoutParams.height = divide_width;
+        layoutParams.height = divide_height;
         line.setLayoutParams(layoutParams);
 
     }

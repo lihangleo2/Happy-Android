@@ -180,6 +180,13 @@
             android:theme="@style/BlackFront_AppTheme"
             />
 
+        <activity
+            android:name=".ui.demo.funexplain.mydialog.MyDialogActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:theme="@style/BlackFront_AppTheme"
+            />
+
 
 
         <!--多渠道打包需要配置-->

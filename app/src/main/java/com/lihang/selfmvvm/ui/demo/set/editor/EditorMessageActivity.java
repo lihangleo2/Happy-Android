@@ -9,14 +9,17 @@ import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
 import com.leo.utilspro.utils.ActivitysBuilder;
+import com.leo.utilspro.utils.LogUtils;
 import com.leo.utilspro.utils.PictureProgressUtil;
 import com.leo.utilspro.utils.ToastUtils;
+import com.leo.utilspro.utils.bitmap.BitmapUtil;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.common.JSONS;
+import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.EditorActivityBinding;
 import com.lzy.imagepicker.ImagePicker;
@@ -32,6 +35,11 @@ import java.util.List;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
+import io.reactivex.Flowable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.lzy.imagepicker.ui.ImageGridActivity.EXTRAS_TAKE_PICKERS;
 
@@ -160,18 +168,17 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
         });
     }
 
-    //多个图片上传
+    //多张图片上传，监测上传进度
     private void upLoadImages() {
-        HashMap<String,File> filesMap = new HashMap<>();
+        ArrayList<File> files = new ArrayList<>();
         for (int i = 0; i <selects.size() ; i++) {
-            //假设这里的key全是file
-            filesMap.put("file",new File(selects.get(i).path));
+            files.add(new File(selects.get(i).path));
         }
 
         //PictureProgressUtil 是用于多张图片进度监听的
         PictureProgressUtil.initData(selects.size());
         //这里的type是额外的一个参数
-        mViewModel.upLoadMoreFiles("condition", filesMap, ParamsBuilder.build()).observe(EditorMessageActivity.this, resource -> {
+        mViewModel.upLoadMoreFiles("condition","files",files, ParamsBuilder.build()).observe(EditorMessageActivity.this, resource -> {
             resource.handler(new OnCallback<List<String>>() {
                 @Override
                 public void onSuccess(List<String> data) {
@@ -186,4 +193,65 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
             });
         });
     }
+
+    /**
+     * 1.多张图片上传(不监听上传进度)
+     * 2.且使用rxJava背压方式进行图片压缩
+     * */
+
+    private CustomProgress dialogLeo;
+    //多个图片上传
+    private void upLoadImagesWithNoProgress() {
+
+        if (dialogLeo == null) {
+            dialogLeo = CustomProgress.show(EditorMessageActivity.this, "", true, null);
+        }
+
+        if (!dialogLeo.isShowing()) {
+            dialogLeo.show();
+        }
+
+        //
+        ArrayList<File> arrayListCompress = new ArrayList<>();
+        Flowable.just(selects).subscribeOn(Schedulers.io())
+                .map(new Function<ArrayList<ImageItem>, ArrayList<File>>() {
+                    @Override
+                    public ArrayList<File> apply(ArrayList<ImageItem> imageItems) throws Exception {
+                        for (int i = 0; i < selects.size(); i++) {
+                            arrayListCompress.add(new File(BitmapUtil.compressBitmapByQuality(selects.get(i).path, 65)));
+                        }
+                        return arrayListCompress;
+                    }
+                }).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<ArrayList<File>>() {
+                    @Override
+                    public void accept(ArrayList<File> files) throws Exception {
+                        mViewModel.upLoadMoreFilesWithNoProgress("files", "files", files, ParamsBuilder.build().isShowDialog(false)).observe(EditorMessageActivity.this, resource -> {
+                            resource.handler(new OnCallback<List<String>>() {
+                                @Override
+                                public void onSuccess(List<String> data) {
+                                    //压缩完再去上传
+                                    //...
+                                    dialogLeo.dismiss();
+                                }
+
+                                @Override
+                                public void onFailure(int errorCode, String msg) {
+                                    super.onFailure(errorCode, msg);
+                                    LogUtils.i("到底什么鬼", "=========");
+                                    dialogLeo.dismiss();
+                                }
+
+                                @Override
+                                public void onError(Throwable throwable) {
+                                    super.onError(throwable);
+                                    dialogLeo.dismiss();
+                                }
+                            });
+                        });
+
+                    }
+                });
+    }
+
 }

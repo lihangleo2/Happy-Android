@@ -29,16 +29,20 @@ import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.base.bean.EventBusBean;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.common.PARAMS;
+import com.lihang.selfmvvm.customview.dialog.ProDialog;
+import com.lihang.selfmvvm.customview.dialog.ProwebInterface;
 import com.lihang.selfmvvm.databinding.LoginActivityBinding;
 import com.lihang.selfmvvm.ui.demo.activity.WebActivity;
 import com.lihang.selfmvvm.utils.AppUtils;
 import com.lihang.selfmvvm.utils.TimeCount;
 import com.lihang.smartloadview.SmartLoadingView;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.concurrent.TimeUnit;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -49,7 +53,9 @@ import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
  * Created by leo
  * on 2019/11/13.
  */
-public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBinding> {
+public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBinding> implements ProwebInterface {
+    private ProDialog proDialog;
+
     @Override
     protected int getContentViewId() {
         return R.layout.login_activity;
@@ -60,21 +66,27 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
 
     @Override
     protected void processLogic() {
+        proDialog = new ProDialog(this, this, this);
+        //
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         EventBus.getDefault().register(this);
         String phone = (String) PreferenceUtil.get("phone", "");
-        binding.ShadowLayoutSelect.setSelected(true);
+//        binding.ShadowLayoutSelect.setSelected(true);
 
         if (!TextUtils.isEmpty(phone)) {
             binding.editPhone.setText(phone);
-            binding.shadowLayoutNext.setClickable(true);
         } else {
-            Observable.timer(500, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
-                KeyBoardUtils.openKeybord(binding.editPhone);
-            });
-            binding.shadowLayoutNext.setClickable(false);
+            int pro = (int) PreferenceUtil.get("isPro", 0);
+            if (pro == 0) {
+                Observable.timer(1200, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
+                    proDialog.show();
+                });
+            } else {
+                Observable.timer(1200, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
+                    KeyBoardUtils.openKeybord(binding.editPhone);
+                });
+            }
         }
-
         initXiey();
     }
 
@@ -108,6 +120,10 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_cancle:
+                finish();
+                break;
+            case R.id.btn_confirm:
             case R.id.ShadowLayout_select:
                 binding.ShadowLayoutSelect.setSelected(!binding.ShadowLayoutSelect.isSelected());
                 if (binding.ShadowLayoutSelect.isSelected() && !TextUtils.isEmpty(binding.editPhone.getText().toString().trim())) {
@@ -115,6 +131,9 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
                 } else {
                     binding.shadowLayoutNext.setClickable(false);
                 }
+
+                PreferenceUtil.put("isPro", 1);
+                proDialog.dismiss();
                 break;
 
 
@@ -139,6 +158,7 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
         /**
          * 协议
          * */
+
         String message = getString(R.string.login_xieyi);
         SpannableString spanText = new SpannableString(message);
         spanText.setSpan(new ClickableSpan() {
@@ -151,13 +171,30 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
 
             @Override
             public void onClick(View view) {
-//                ToastUtils.showToast("点击了协议书了");
+                ToastUtils.showToast("点击了用户协议");
 //                ActivitysBuilder.build(LoginActivity.this, WebActivity.class)
 //                        .putExtra("url", SystemConst.HTML_YONGHU)
 //                        .startActivity();
 
             }
-        }, message.length() - 8, message.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }, 10, 16, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        spanText.setSpan(new ClickableSpan() {
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setColor(getResources().getColor(R.color.bluef7));       //设置文件颜色
+                ds.setUnderlineText(false);      //设置下划线
+            }
+
+            @Override
+            public void onClick(View view) {
+                ToastUtils.showToast("点击了隐私政策");
+
+            }
+        }, 16, 22, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
         binding.textProtrol.setHighlightColor(Color.TRANSPARENT); //设置点击后的颜色为透明，否则会一直出现高亮
         binding.textProtrol.setText(spanText);
         binding.textProtrol.setMovementMethod(LinkMovementMethod.getInstance());//开始响应点击事件
@@ -206,6 +243,7 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
             View v = getCurrentFocus();
             if (isShouldHideInput(v, ev)) {
                 KeyBoardUtils.closeKeybord(binding.editPhone);
+                binding.imgDelete.setVisibility(View.GONE);
             }
         }
         return super.dispatchTouchEvent(ev);
@@ -222,4 +260,13 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
     }
 
 
+    @Override
+    public void goweb1() {
+        ToastUtils.showToast("点击了用户协议");
+    }
+
+    @Override
+    public void goweb2() {
+        ToastUtils.showToast("点击了隐私政策");
+    }
 }

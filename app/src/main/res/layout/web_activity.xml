@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             app:hl_background="@color/status_background"
             app:hl_textTitle=""
-            app:hl_divideWidth="0dp"
+            app:hl_divideHeight="0dp"
             app:hl_textTitleColor="#fff"/>
 
 

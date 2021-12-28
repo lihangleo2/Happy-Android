@@ -102,6 +102,10 @@ public class DownLoadService extends Service {
     public void onDestroy() {
         if (receiver != null)
             unregisterReceiver(receiver);
+
+        if (mHandler != null) {
+            mHandler.removeCallbacks(progressRunnable);
+        }
         super.onDestroy();
     }
 

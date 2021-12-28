@@ -26,6 +26,7 @@ import com.lihang.selfmvvm.ui.demo.funexplain.coordinatorlayout.CoordinatorLayou
 import com.lihang.selfmvvm.ui.demo.funexplain.edittext.EditTextViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.expandunfold.ExpandUnfoldActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.glide.GlideUserActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.mydialog.MyDialogActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.network.NetWorkExplainActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.pickviewintro.PickerViewActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipImageActivity;
@@ -155,6 +156,15 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                 ActivitysBuilder.build(this, ExpandUnfoldActivity.class)
                         .startActivity();
                 break;
+
+            //【虚线的使用就在本页面】
+
+            case R.id.shadowLayout_dialog:
+                //【dialog的使用】文档和使用
+                ActivitysBuilder.build(this, MyDialogActivity.class)
+                        .startActivity();
+                break;
+
 
             case R.id.shadowLayout_loginOut:
                 //【退出登录的使用方法】

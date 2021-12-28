@@ -12,6 +12,7 @@ import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.base.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,18 +85,27 @@ public class RepositoryImpl extends BaseModel {
     /**
      * 四、多个图片上传(多个文件上传)
      */
-    //上传多张图片(进度监听)  多张图片进度监听，图片一张一张上传 所以用到了PictureProgressUtil工具类。用之前init初始数据，setProgress即可
-    public MutableLiveData<Resource<List<String>>> upLoadMoreFiles(String type, HashMap<String, File> files, ParamsBuilder paramsBuilder) {
+    //上传多张图片(进度监听)
+    //多张图片进度监听，图片一张一张上传 所以用到了PictureProgressUtil工具类。用之前init初始数据，setProgress即可
+    public MutableLiveData<Resource<List<String>>> upLoadMoreFiles(String type, String key, ArrayList<File> files, ParamsBuilder paramsBuilder) {
         MutableLiveData<Resource<List<String>>> liveData = new MutableLiveData<>();
 
         Map<String, RequestBody> bodyMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
             File file = files.get(i);
             UploadFileRequestBody uploadFileRequestBody = new UploadFileRequestBody(file, liveData);
-            bodyMap.put("files" + "\"; filename=\"" + file.getName(), uploadFileRequestBody);
+            bodyMap.put(key + "\"; filename=\"" + file.getName(), uploadFileRequestBody);
         }
-        //如果是传统的不带进度监听 只需要
-//        bodyMap=PARAMS.manyFileToPartBody(files);
+        return upLoadFile(getApiService().upLoadMoreFiles(PARAMS.changeToRquestBody(type), bodyMap), liveData, paramsBuilder);
+    }
+
+    //不监听进度的
+    public MutableLiveData<Resource<List<String>>> upLoadMoreFilesWithNoProgress(String type, String key, ArrayList<File> files, ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<List<String>>> liveData = new MutableLiveData<>();
+
+        Map<String, RequestBody> bodyMap = new HashMap<>();
+        //同一key,
+        bodyMap=PARAMS.manyFileToPartBody(key,files);
         return upLoadFile(getApiService().upLoadMoreFiles(PARAMS.changeToRquestBody(type), bodyMap), liveData, paramsBuilder);
     }
 

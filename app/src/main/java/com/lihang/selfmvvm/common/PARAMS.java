@@ -53,7 +53,8 @@ public class PARAMS {
     public static Map<String, RequestBody> manyFileToPartBody(Map<String, File> fileMap) {
         Map<String, RequestBody> requestBodyMap = new HashMap<>();
         for (String key : fileMap.keySet()) {
-            requestBodyMap.put(key, RequestBody.create(MediaType.parse("multipart/form-data"), fileMap.get(key)));
+            File file = fileMap.get(key);
+            requestBodyMap.put(key+ "\"; filename=\"" + file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
         }
         return requestBodyMap;
     }
@@ -62,7 +63,8 @@ public class PARAMS {
     public static Map<String, RequestBody> manyFileToPartBody(String key, ArrayList<File> files) {
         Map<String, RequestBody> requestBodyMap = new HashMap<>();
         for (int i = 0; i < files.size(); i++) {
-            requestBodyMap.put(key, RequestBody.create(MediaType.parse("multipart/form-data"), files.get(i)));
+            File file = files.get(i);
+            requestBodyMap.put(key + "\"; filename=\"" + file.getName(), RequestBody.create(MediaType.parse("multipart/form-data"), file));
         }
         return requestBodyMap;
     }

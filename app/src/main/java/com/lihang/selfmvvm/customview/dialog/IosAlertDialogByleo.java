@@ -3,6 +3,7 @@ package com.lihang.selfmvvm.customview.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.leo.utilspro.utils.SpannableStringBuilder;
 import com.lihang.selfmvvm.R;
 
 
@@ -20,19 +22,21 @@ public class IosAlertDialogByleo {
 	private TextView txt_msg;
 	private TextView btn_cancle;
 	private TextView btn_confirm;
+	private View line_cancle;
 
 	public IosAlertDialogByleo(Context context) {
 		this.context = context;
 		WindowManager windowManager = (WindowManager) context
-		        .getSystemService(Context.WINDOW_SERVICE);
+				.getSystemService(Context.WINDOW_SERVICE);
 		display = windowManager.getDefaultDisplay();
 	}
 
 	public IosAlertDialogByleo builder() {
 		// 获取Dialog布局
 		View view = LayoutInflater.from(context).inflate(
-		        R.layout.dialog_like_ios, null);
+				R.layout.dialog_like_ios, null);
 		txt_msg = view.findViewById(R.id.txt_msg);
+		line_cancle = view.findViewById(R.id.line_cancle);
 		btn_cancle = view.findViewById(R.id.btn_cancle);
 		btn_confirm = view.findViewById(R.id.btn_confirm);
 		btn_cancle.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +63,15 @@ public class IosAlertDialogByleo {
 	}
 
 
-
 	public IosAlertDialogByleo setMsg(String msg) {
 		if (TextUtils.isEmpty(msg)) {
 			txt_msg.setText("内容");
 		} else {
-			txt_msg.setText(msg);
+			if (msg.contains("给您反馈")){
+				SpannableStringBuilder.build(msg).color(Color.parseColor("#3E8AF7"),"1").into(txt_msg);
+			}else {
+				txt_msg.setText(msg);
+			}
 		}
 		return this;
 	}
@@ -89,6 +96,12 @@ public class IosAlertDialogByleo {
 	}
 
 
+	public IosAlertDialogByleo dismissCancleBtn() {
+		btn_cancle.setVisibility(View.GONE);
+		line_cancle.setVisibility(View.GONE);
+		btn_confirm.setBackground(btn_confirm.getContext().getResources().getDrawable(R.drawable.alertdialog_right_btn_selectleo_));
+		return this;
+	}
 
 
 	public void show() {

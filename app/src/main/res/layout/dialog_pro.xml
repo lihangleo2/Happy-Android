@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lLayout_bg"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
-    <!--android:background="@drawable/alertdialog_bgleo"-->
 
     <RelativeLayout
-        android:layout_width="@dimen/dp_250"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginRight="@dimen/dp_15"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <RelativeLayout
@@ -18,16 +21,27 @@
             android:minHeight="@dimen/dp_80">
 
             <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/dp_25"
+                android:text="用户协议和隐私政策"
+                android:textColor="@color/black"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <TextView
                 android:id="@+id/txt_msg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/txt_title"
                 android:layout_centerInParent="true"
-                android:gravity="center"
                 android:paddingLeft="@dimen/dp_15"
-                android:paddingTop="@dimen/dp_15"
+                android:paddingTop="@dimen/dp_10"
                 android:paddingRight="@dimen/dp_15"
                 android:paddingBottom="@dimen/dp_15"
-                android:text="这里是内容信息~"
+                android:text="@string/login_xieyi_qq"
                 android:textColor="#1b1b1b"
                 android:textSize="@dimen/sp_16" />
 
@@ -54,9 +68,8 @@
                 android:layout_height="@dimen/dp_40"
                 android:layout_weight="1"
                 android:background="@drawable/alertdialog_left_btn_selectbyleo"
-
                 android:gravity="center"
-                android:text="取消"
+                android:text="拒绝并退出"
                 android:textColor="#1b1b1b"
                 android:textSize="@dimen/sp_16" />
 
@@ -74,12 +87,14 @@
                 android:layout_weight="1"
                 android:background="@drawable/alertdialog_right_btn_selectleo"
                 android:gravity="center"
-                android:text="确定"
+                android:text="同意"
                 android:textColor="#1296E9"
                 android:textSize="@dimen/sp_16" />
         </LinearLayout>
 
     </RelativeLayout>
+
+
 
 
 </RelativeLayout>

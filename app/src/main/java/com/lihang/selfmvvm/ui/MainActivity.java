@@ -148,6 +148,8 @@ public class MainActivity extends BaseActivity<NormalViewModel, MainActivityBind
                 }
             }
         }
+
+
         ft.commitAllowingStateLoss();
         switch (id) {
             case R.id.relative_tab_1://首页
