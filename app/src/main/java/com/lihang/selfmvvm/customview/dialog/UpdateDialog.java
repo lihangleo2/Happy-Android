@@ -32,12 +32,12 @@ public class UpdateDialog extends Dialog {
     private TextView text_message;
     private TextView text_message_other;
     private TextView text_update;//确认升级
+    private TextView text_calcle_down;//取消升级
     private TextView progress_percent;
     private RxPermissions rxPermissions;
     private Context context;
     private String url;
 
-    private TextView text_message_loading;//正在下载
     private int max;
     private int progressValue;
     private ProgressBar progress;
@@ -47,6 +47,7 @@ public class UpdateDialog extends Dialog {
     private RelativeLayout relative_loading;
 
     private ImageView image_title;
+
 
     public UpdateDialog(Context context) {
         this(context, R.style.MyDialogStyleBottom);
@@ -76,9 +77,9 @@ public class UpdateDialog extends Dialog {
         text_message = findViewById(R.id.text_message);
         text_message_other = findViewById(R.id.text_message_other);
         text_update = findViewById(R.id.text_update);
+        text_calcle_down = findViewById(R.id.text_calcle_down);
         progress_percent = findViewById(R.id.progress_percent);
         progress = findViewById(R.id.progress);
-        text_message_loading = findViewById(R.id.text_message_loading);
         relative_showApp = findViewById(R.id.relative_showApp);
         relative_loading = findViewById(R.id.relative_loading);
         image_title = findViewById(R.id.image_title);
@@ -94,6 +95,8 @@ public class UpdateDialog extends Dialog {
                             Intent service = new Intent(context, DownLoadService.class);
                             service.putExtra("downloadurl", url);
                             context.startService(service);
+                            LogUtils.i("文件下载", "=====");
+
                         } else {
                             Toast.makeText(context, "SD卡下载权限被拒绝", Toast.LENGTH_SHORT).show();
                         }
@@ -102,6 +105,12 @@ public class UpdateDialog extends Dialog {
                 });
 
             }
+        });
+
+        text_calcle_down.setOnClickListener(v -> {
+            Intent service = new Intent(context, DownLoadService.class);
+            context.stopService(service);
+            UpdateDialog.this.dismiss();
         });
 
 
@@ -125,9 +134,7 @@ public class UpdateDialog extends Dialog {
                         if (max > 10) {
                             double dMax = (double) max / (double) (1024 * 1024);
                             String result = String.format("%.2f", dMax);
-                            text_message_loading.setText("正在下载" + " (" + result + "M)");
                         } else {
-                            text_message_loading.setText("正在下载");
                         }
                         break;
                 }
@@ -148,8 +155,10 @@ public class UpdateDialog extends Dialog {
     }
 
     public void setMessage(String newVersion, String oldVersion, String url) {
-        text_message.setText("发现新版本:  " + newVersion);
-        text_message_other.setText("当前版本:  " + oldVersion);
+//        text_message.setText("发现新版本:  " + newVersion);
+        text_message.setText("提示");
+//        text_message_other.setText("当前版本:  " + oldVersion);
+        text_message_other.setText("是否确认下载 ");
         this.url = url;
     }
 

@@ -55,15 +55,15 @@
 
 
                 <TextView
-                    android:layout_below="@+id/text_message_other"
-                    android:layout_marginTop="@dimen/dp_24"
                     android:id="@+id/text_update"
                     android:layout_width="@dimen/dp_152"
                     android:layout_height="@dimen/dp_38"
+                    android:layout_below="@+id/text_message_other"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/dp_24"
                     android:background="@drawable/shape_jianb_update"
                     android:gravity="center"
-                    android:text="确认升级"
+                    android:text="确认下载"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_14" />
 
@@ -75,30 +75,18 @@
                 android:id="@+id/relative_loading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerHorizontal="true"
-                >
-
-                <TextView
-                    android:id="@+id/text_message_loading"
-                    android:layout_marginTop="@dimen/dp_15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:text="正在下载"
-                    android:textColor="@color/black1b"
-                    android:textSize="@dimen/sp_18" />
+                android:layout_centerHorizontal="true">
 
                 <ProgressBar
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/dp_30"
-                    android:layout_below="@+id/text_message_loading"
                     android:id="@+id/progress"
                     style="?android:attr/progressBarStyleHorizontal"
                     android:layout_width="@dimen/dp_220"
                     android:layout_height="@dimen/dp_5"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="@dimen/dp_30"
                     android:max="100"
                     android:progress="0"
-                    android:layout_gravity="center_vertical"
                     android:progressDrawable="@drawable/progressbar" />
 
 
@@ -106,13 +94,25 @@
                     android:id="@+id/progress_percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/sp_16"
                     android:layout_centerHorizontal="true"
-                    android:textColor="@color/black1b"
-                    android:text="0%"
-                    android:layout_alignParentBottom="true"
                     android:layout_marginBottom="@dimen/dp_29"
-                    />
+                    android:text="0%"
+                    android:textColor="@color/black1b"
+                    android:textSize="@dimen/sp_16" />
+
+
+                <TextView
+                    android:id="@+id/text_calcle_down"
+                    android:layout_width="@dimen/dp_152"
+                    android:layout_height="@dimen/dp_38"
+                    android:layout_below="@+id/progress_percent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:background="@drawable/shape_jianb_update"
+                    android:gravity="center"
+                    android:text="取消下载"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_14" />
 
             </RelativeLayout>
 
