@@ -68,6 +68,7 @@ public class MainActivity extends BaseActivity<NormalViewModel, MainActivityBind
 //                .fitsSystemWindows(true);
 //                mImmersionBar.init();
         initFragment();
+
     }
 
     private void initFragment() {
