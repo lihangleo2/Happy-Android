@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by leo
@@ -39,7 +40,6 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, WelcomActivit
 
 
         Observable.timer(2500, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
-
             Class goClass;
             if (AppUtils.isLogin()) {
                 goClass = MainActivity.class;
@@ -50,7 +50,6 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, WelcomActivit
                     .withAnimal(0, com.leo.utilspro.R.anim.anim_translate_hide)
                     .finish(true)
                     .startActivity();
-
         });
 
 

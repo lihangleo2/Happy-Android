@@ -100,7 +100,7 @@ public abstract class BaseModel {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                //.compose(objectLifecycleTransformer)
+                .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
                     liveData.postValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
@@ -163,7 +163,7 @@ public abstract class BaseModel {
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                //.compose(objectLifecycleTransformer)
+                .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
                     liveData.postValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {

@@ -7,7 +7,7 @@ buildscript {
 
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.0'
+        classpath 'com.android.tools.build:gradle:4.1.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -38,11 +38,11 @@ ext {
     constraintlayout_version = "1.1.3"
 
     //使用高仿微信加上
-    androidBuildToolsVersion = "28.0.2"
-    androidMinSdkVersion = 19
-    androidTargetSdkVersion = 28
-    androidCompileSdkVersion = 28
-    supportLibraryVersion = '28.0.2'
+    androidBuildToolsVersion = "30.0.3"
+    androidMinSdkVersion = 22
+    androidTargetSdkVersion = 30
+    androidCompileSdkVersion = 30
+    supportLibraryVersion = '30.0.3'
 
     glide = '4.9.0'
 

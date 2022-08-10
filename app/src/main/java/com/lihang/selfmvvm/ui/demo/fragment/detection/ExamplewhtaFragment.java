@@ -1,19 +1,11 @@
 package com.lihang.selfmvvm.ui.demo.fragment.detection;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.FitCenter;
 import com.leo.utilspro.utils.ActivitysBuilder;
-import com.leo.utilspro.utils.LogUtils;
-import com.leo.utilspro.utils.ToastUtils;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseFragment;
@@ -33,24 +25,9 @@ import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipIm
 import com.lihang.selfmvvm.ui.demo.funexplain.shareanim.ShareAnimActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.smartrefresh.SmartRefreshActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
-import com.lzy.imagepicker.ImagePicker;
-import com.lzy.imagepicker.bean.ImageItem;
-import com.lzy.imagepicker.ui.ImageGridActivity;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-import com.yalantis.ucrop.UCropActivity;
-
-import net.moyokoo.diooto.Diooto;
-import net.moyokoo.diooto.config.DiootoConfig;
-
-import java.util.ArrayList;
-
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.core.util.Pair;
-import me.panpf.sketch.SketchImageView;
-
-import static com.yalantis.ucrop.UCrop.EXTRA_OUTPUT_URI;
 
 /**
  * Created by leo

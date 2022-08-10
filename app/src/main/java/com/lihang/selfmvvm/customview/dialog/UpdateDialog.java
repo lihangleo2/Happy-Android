@@ -17,8 +17,7 @@ import android.widget.Toast;
 import com.leo.utilspro.utils.LogUtils;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.morefunction.apkupdate.DownLoadService;
-import com.tbruyelle.rxpermissions2.RxPermissions;
-
+import com.lihang.selfmvvm.utils.RxPermissionsUtils;
 import androidx.fragment.app.FragmentActivity;
 import io.reactivex.functions.Consumer;
 
@@ -34,7 +33,6 @@ public class UpdateDialog extends Dialog {
     private TextView text_update;//确认升级
     private TextView text_calcle_down;//取消升级
     private TextView progress_percent;
-    private RxPermissions rxPermissions;
     private Context context;
     private String url;
 
@@ -53,7 +51,6 @@ public class UpdateDialog extends Dialog {
         this(context, R.style.MyDialogStyleBottom);
 //        setCanceledOnTouchOutside(false);
 //        setCancelable(false);
-        rxPermissions = new RxPermissions((FragmentActivity) context);
         this.context = context;
     }
 
@@ -86,7 +83,7 @@ public class UpdateDialog extends Dialog {
         text_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
+                RxPermissionsUtils.with((FragmentActivity)context).request(Manifest.permission.WRITE_EXTERNAL_STORAGE).subscribe(new Consumer<Boolean>() {
                     @Override
                     public void accept(Boolean aBoolean) throws Exception {
                         if (aBoolean) {

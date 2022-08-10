@@ -6,33 +6,26 @@ import android.content.pm.PackageManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.bumptech.glide.Glide;
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.LogUtils;
 import com.leo.utilspro.utils.PictureProgressUtil;
 import com.leo.utilspro.utils.ToastUtils;
 import com.leo.utilspro.utils.bitmap.BitmapUtil;
-import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
-import com.lihang.selfmvvm.bean.User;
-import com.lihang.selfmvvm.common.JSONS;
 import com.lihang.selfmvvm.customview.CustomProgress;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.EditorActivityBinding;
+import com.lihang.selfmvvm.utils.RxPermissionsUtils;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
 import com.lzy.imagepicker.view.CropImageView;
 import com.tbruyelle.rxpermissions2.RxPermissions;
-
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import io.reactivex.Flowable;
@@ -50,7 +43,6 @@ import static com.lzy.imagepicker.ui.ImageGridActivity.EXTRAS_TAKE_PICKERS;
 public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorActivityBinding> {
     //更换头像
     private CommonPopupWindow popupWindow_share;
-    private RxPermissions rxPermissions;
     private ArrayList<ImageItem> selects = new ArrayList<>();
 
     @Override
@@ -60,7 +52,6 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
 
     @Override
     protected void processLogic() {
-        rxPermissions = new RxPermissions(this);
         initPop();
     }
 
@@ -85,7 +76,7 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
 
             case R.id.txt_carm:
                 //点击相机
-                rxPermissions.request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
+                RxPermissionsUtils.with(this).request(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
                     if (aBoolean) {
                         if (ActivityCompat.checkSelfPermission(EditorMessageActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EditorMessageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                             ImagePicker imagePicker = ImagePicker.getInstance();
@@ -108,7 +99,7 @@ public class EditorMessageActivity extends BaseActivity<EditorViewModel, EditorA
 
             case R.id.txt_image:
                 //点击相册
-                rxPermissions.request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
+                RxPermissionsUtils.with(this).request(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE).subscribe(aBoolean -> {
                     if (aBoolean) {
                         if (ActivityCompat.checkSelfPermission(EditorMessageActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EditorMessageActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                             ImagePicker imagePicker = ImagePicker.getInstance();
