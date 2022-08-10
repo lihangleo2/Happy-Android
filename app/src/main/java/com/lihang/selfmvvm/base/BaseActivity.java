@@ -120,7 +120,7 @@ public abstract class BaseActivity<VM extends BaseViewModel, VDB extends ViewDat
         }
 
         @Override
-        public void onCompleted() {
+        public void onFinally() {
             if (dialog != null && dialog.isShowing()) {
                 dialog.dismiss();
             }

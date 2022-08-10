@@ -69,6 +69,10 @@ public abstract class BaseFragment<VM extends BaseViewModel, VDB extends ViewDat
         return mContentView;
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     public void createViewModel() {
         if (mViewModel == null) {
@@ -128,7 +132,7 @@ public abstract class BaseFragment<VM extends BaseViewModel, VDB extends ViewDat
         }
 
         @Override
-        public void onCompleted() {
+        public void onFinally() {
             if (dialog != null && dialog.isShowing()) {
                 dialog.dismiss();
             }

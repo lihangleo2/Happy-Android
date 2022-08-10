@@ -1,5 +1,6 @@
 package com.lihang.selfmvvm.base.bean;
 
+import com.leo.utilspro.utils.LogUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
 /**
@@ -15,6 +16,7 @@ public class Resource<T> {
     public static final int FAIL = 3;
     public static final int PROGRESS = 4;//注意只有下载文件和上传图片时才会有
     public static final int OTHERLOGIN = 5;//单设备登录
+    public static final int ONFINALLY = 6;//注意(解决RxJava内存泄漏的时候,Disposable被关闭的时候，并不会触发success、fail(也是success的一种)、error)
     public int state;
 
     public String errorMsg;
@@ -52,7 +54,14 @@ public class Resource<T> {
         this.errorMsg = errorMsg;
     }
 
+    //单独为Disposable解决rxJava内存泄漏被关闭时做得。
+    public Resource(int state) {
+        this.state = state;
+    }
 
+    public static <T> Resource<T> onFinaly() {
+        return new Resource<>(ONFINALLY);
+    }
 
     public static <T> Resource<T> loading(String showMsg) {
         return new Resource<>(LOADING, null, showMsg);
@@ -90,16 +99,6 @@ public class Resource<T> {
     }
 
     public void handler(OnHandleCallback<T> callback) {
-        handlerUnCloseDialog(callback);
-        if (state != LOADING) {
-            callback.onCompleted();
-        }
-    }
-
-
-
-    //网络加载完成后不消失dialog;(场景：连续请求2个网络。第二个网络要等第一个网络返回的参数，才请求。第一个网络不该关闭dialog)
-    public void handlerUnCloseDialog(OnHandleCallback<T> callback) {
         switch (state) {
             case LOADING:
                 callback.onLoading(errorMsg);
@@ -113,6 +112,9 @@ public class Resource<T> {
             case ERROR:
                 callback.onError(error);
                 break;
+            case ONFINALLY:
+                callback.onFinally();
+                break;
             case PROGRESS:
                 callback.onProgress(precent,total);
                 break;
@@ -121,47 +123,45 @@ public class Resource<T> {
                 break;
         }
     }
+
+
+
+
 
 
     public void handler(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
-        handlerUnCloseDialog(callback,smartRefreshLayout);
-        if (state != LOADING) {
-            callback.onCompleted();
-        }
-    }
-
-
-    public void handlerUnCloseDialog(OnHandleCallback<T> callback, SmartRefreshLayout smartRefreshLayout) {
         switch (state) {
             case LOADING:
                 callback.onLoading(errorMsg);
                 break;
             case SUCCESS:
                 callback.onSuccess(data);
-                smartRefreshLayout.finishRefresh();
-                smartRefreshLayout.finishLoadMore();
+
                 break;
             case FAIL:
                 callback.onFailure(errorCode,errorMsg);
-                smartRefreshLayout.finishRefresh(false);
-                smartRefreshLayout.finishLoadMore(false);
                 break;
             case ERROR:
                 callback.onError(error);
-                smartRefreshLayout.finishRefresh(false);
-                smartRefreshLayout.finishLoadMore(false);
                 break;
+
+            case ONFINALLY:
+                smartRefreshLayout.finishRefresh();
+                smartRefreshLayout.finishLoadMore();
+                callback.onFinally();
+                break;
+
             case PROGRESS:
                 callback.onProgress(precent,total);
                 break;
 
             case OTHERLOGIN:
                 callback.onOtherLogin(errorMsg);
-                smartRefreshLayout.finishRefresh(false);
-                smartRefreshLayout.finishLoadMore(false);
                 break;
         }
     }
+
+
 
 
     public interface OnHandleCallback<T> {
@@ -173,7 +173,7 @@ public class Resource<T> {
 
         void onError(Throwable error);
 
-        void onCompleted();
+        void onFinally();
 
         void onProgress(int precent,long total);
 

@@ -1,6 +1,7 @@
 package com.lihang.selfmvvm.ui.demo.fragment.home;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.leo.utilspro.utils.ActivitysBuilder;
@@ -23,6 +24,13 @@ import com.youth.banner.transformer.AlphaPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by leo
@@ -49,6 +57,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
 
         getBanner();
         getHomeArticles(curPage, null);
+
     }
 
     @Override
@@ -112,7 +121,6 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
             public void onSuccess(HomeFatherBean data) {
                 DataUtils.initData(currenPage, homeBeans, data.getDatas(), adapter, binding.smartRefreshLayout);
             }
-
         }, binding.smartRefreshLayout));
     }
 

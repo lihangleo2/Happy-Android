@@ -2,6 +2,7 @@ package com.lihang.selfmvvm.base;
 
 import android.text.TextUtils;
 
+import com.leo.utilspro.utils.LogUtils;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.base.bean.ResponModel;
 import com.lihang.selfmvvm.base.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
@@ -98,13 +99,16 @@ public abstract class BaseModel {
                     if (!TextUtils.isEmpty(oneTag)) {
                         onNetTags.remove(oneTag);
                     }
+                    liveData.postValue((T) Resource.onFinaly());
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
-                    liveData.postValue((T) Resource.response((ResponModel<Object>) o));
+                    //setValue(同步)，接收端和发送端在同一现场。
+                    //这里使用setValue是为了解决连续2次postVlaue会丢失数据，也就不触发finally
+                    liveData.setValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
-                    liveData.postValue((T) Resource.error((Throwable) throwable));
+                    liveData.setValue((T) Resource.error((Throwable) throwable));
                 });
 
         return liveData;
@@ -161,13 +165,14 @@ public abstract class BaseModel {
                     if (!TextUtils.isEmpty(oneTag)) {
                         onNetTags.remove(oneTag);
                     }
+                    liveData.postValue((T) Resource.onFinaly());
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
-                    liveData.postValue((T) Resource.response((ResponModel<Object>) o));
+                    liveData.setValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
-                    liveData.postValue((T) Resource.error((Throwable) throwable));
+                    liveData.setValue((T) Resource.error((Throwable) throwable));
                 });
 
         return liveData;
@@ -202,6 +207,7 @@ public abstract class BaseModel {
                         return DownFileUtils.saveFile((ResponseBody) requestBody, destDir, fileName, currentLength, liveData);
                     }
                 })
+                .compose(objectLifecycleTransformer)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(file -> {
                     liveData.postValue((T) Resource.success(file));
@@ -234,6 +240,7 @@ public abstract class BaseModel {
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 //防止RxJava内存泄漏
+                .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
                     liveData.postValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
