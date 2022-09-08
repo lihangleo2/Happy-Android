@@ -67,7 +67,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dp_40"
                 android:layout_weight="1"
-                android:background="@drawable/alertdialog_left_btn_selectbyleo"
+                android:background="@drawable/selector_dialog_ios_left_btn"
                 android:gravity="center"
                 android:text="拒绝并退出"
                 android:textColor="#1b1b1b"
