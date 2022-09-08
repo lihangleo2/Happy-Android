@@ -99,7 +99,7 @@ public class IosAlertDialogByleo {
 	public IosAlertDialogByleo dismissCancleBtn() {
 		btn_cancle.setVisibility(View.GONE);
 		line_cancle.setVisibility(View.GONE);
-		btn_confirm.setBackground(btn_confirm.getContext().getResources().getDrawable(R.drawable.selector_dialog_ios_one_btn));
+		btn_confirm.setBackground(btn_confirm.getContext().getResources().getDrawable(R.drawable.pressed_dialog_ios_one_btn));
 		return this;
 	}
 

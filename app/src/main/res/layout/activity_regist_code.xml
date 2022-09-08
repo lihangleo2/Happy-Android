@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp_10"
             android:layout_marginTop="@dimen/dp_50"
-            android:background="@drawable/selector_titlemenu"
+            android:background="@drawable/pressed_toolbar_back_bg"
             android:clickable="true"
             android:onClick="@{onClickListener}"
             android:padding="5dp">

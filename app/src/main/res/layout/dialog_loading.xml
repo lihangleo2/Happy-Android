@@ -2,28 +2,20 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-
     android:gravity="center_horizontal"
     android:orientation="vertical"
+    android:background="#ff0000"
     >
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_centerInParent="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="@drawable/progress_custom_bg"
-            android:visibility="gone"
-            />
-
         <ImageView
             android:id="@+id/spinnerImageView"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:background="@drawable/progressbar_animation"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:background="@drawable/animationlist_progressbar_loading"
             android:scaleType="centerCrop" />
     </RelativeLayout>
 
@@ -32,8 +24,7 @@
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-10dp"
-        android:textSize="12dp"
+        android:textSize="@dimen/sp_14"
         android:text="加载中"
         android:textColor="#FFFFFF" />
 

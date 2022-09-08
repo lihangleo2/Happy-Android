@@ -87,7 +87,7 @@
                     android:layout_marginTop="@dimen/dp_30"
                     android:max="100"
                     android:progress="0"
-                    android:progressDrawable="@drawable/progressbar" />
+                    android:progressDrawable="@drawable/layerlist_progressbar_update_app" />
 
 
                 <TextView

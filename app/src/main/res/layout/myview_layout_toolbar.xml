@@ -47,7 +47,7 @@
                 android:layout_height="@dimen/dp_30"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_5"
-                android:background="@drawable/selector_titlemenu"
+                android:background="@drawable/pressed_toolbar_back_bg"
                 android:clickable="true"
                 android:padding="@dimen/dp_5"
                 android:src="@mipmap/back_icon_white" />
@@ -74,7 +74,7 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="@dimen/dp_5"
-                    android:background="@drawable/selector_titlemenu"
+                    android:background="@drawable/pressed_toolbar_back_bg"
                     android:clickable="true"
                     android:padding="@dimen/dp_5"
                     android:src="@mipmap/back_icon_white" />
@@ -92,7 +92,7 @@
                     android:paddingRight="@dimen/dp_5"
                     android:paddingBottom="@dimen/dp_5"
                     android:text="保存"
-                    android:textColor="@drawable/selector_bar_text"
+                    android:textColor="@drawable/pressed_toolbar_save"
                     android:textSize="@dimen/sp_16" />
 
             </LinearLayout>
