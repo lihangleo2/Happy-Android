@@ -17,7 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by leo
@@ -31,7 +30,7 @@ public class WelComeActivity extends BaseActivity<NormalViewModel, WelcomActivit
 
     @Override
     protected void processLogic() {
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_welcome);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha_0_1_1500);
         binding.txt.startAnimation(animation);
 
         binding.imgSvg.setViewportSize(167, 220);

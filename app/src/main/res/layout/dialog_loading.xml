@@ -4,7 +4,6 @@
     android:layout_gravity="center"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:background="#ff0000"
     >
 
     <RelativeLayout

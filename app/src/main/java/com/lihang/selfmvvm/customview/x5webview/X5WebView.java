@@ -115,7 +115,7 @@ public class X5WebView extends WebView {
     @SuppressLint("SetJavaScriptEnabled")
     public X5WebView(Context arg0, AttributeSet arg1) {
         super(arg0, arg1);
-        animation = AnimationUtils.loadAnimation(arg0, R.anim.alpha_progress);
+        animation = AnimationUtils.loadAnimation(arg0, R.anim.alpha_1_to_0_500);
         mProgressBar = new ProgressBar(arg0, null,
                 android.R.attr.progressBarStyleHorizontal);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
