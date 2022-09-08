@@ -8,15 +8,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lihang.selfmvvm.R;
@@ -127,7 +123,7 @@ public class X5WebView extends WebView {
         mProgressBar.setLayoutParams(layoutParams);
 
         Drawable drawable = getContext().getResources().getDrawable(
-                R.drawable.shap_progressbar_web);
+                R.drawable.layerlist_progressbar_web_loading);
         mProgressBar.setProgressDrawable(drawable);
         addView(mProgressBar);
         initWebViewSettings();

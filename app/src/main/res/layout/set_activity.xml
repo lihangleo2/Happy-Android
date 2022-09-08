@@ -62,6 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
+
                     <ImageView
                         android:id="@+id/image_mine"
                         android:layout_width="@dimen/dp_30"
@@ -134,7 +135,7 @@
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30"
             android:layout_marginBottom="@dimen/dp_74"
-            android:background="@drawable/shape_no_net"
+            android:background="@drawable/shape_login_out"
             android:gravity="center"
             android:onClick="@{onClickListener}"
             android:text="退出登录"

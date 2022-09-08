@@ -47,7 +47,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp_12"
                 android:layout_marginRight="@dimen/dp_12"
-                android:background="@drawable/shape_textview_edittext"
+                android:background="@drawable/shape_edittext_bg"
                 android:gravity="left|center_vertical"
                 android:onClick="@{onClickListener}"
                 android:paddingLeft="@dimen/dp_15"

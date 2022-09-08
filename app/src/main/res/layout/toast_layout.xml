@@ -7,7 +7,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_toast"
+        android:background="@drawable/shape_toast_bg"
         android:paddingLeft="@dimen/dp_12"
         android:paddingTop="@dimen/dp_6"
         android:paddingRight="@dimen/dp_12"

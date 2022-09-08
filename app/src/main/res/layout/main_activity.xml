@@ -44,7 +44,7 @@
                 <ImageView
                     android:id="@+id/icon_0"
                     style="@style/imageStyle_tab"
-                    android:src="@drawable/tab_one" />
+                    android:src="@drawable/selected_tab_one" />
 
                 <TextView
                     style="@style/textStyle_tab"
@@ -68,7 +68,7 @@
                 <ImageView
                     android:id="@+id/icon_5"
                     style="@style/imageStyle_tab"
-                    android:src="@drawable/tab_two" />
+                    android:src="@drawable/selected_tab_two" />
 
                 <TextView
                     style="@style/textStyle_tab"
@@ -90,7 +90,7 @@
                 <ImageView
                     android:id="@+id/icon_3"
                     style="@style/imageStyle_tab"
-                    android:src="@drawable/tab_three" />
+                    android:src="@drawable/selected_tab_three" />
 
                 <TextView
                     style="@style/textStyle_tab"

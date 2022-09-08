@@ -51,7 +51,7 @@
             android:layout_alignBottom="@+id/edit_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/shape_textview_edittext" />
+            android:background="@drawable/shape_edittext_bg" />
 
         <EditText
             android:id="@+id/edit_content"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/dp_46"
-            android:background="@drawable/shape_textview_edittext"
+            android:background="@drawable/shape_edittext_bg"
             android:gravity="left|center_vertical"
             android:hint="我来补充两句~"
             android:imeOptions="actionSend"

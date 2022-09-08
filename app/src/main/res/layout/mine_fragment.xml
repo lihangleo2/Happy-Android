@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/relative"
             android:layout_marginTop="@dimen/dp_m_10"
-            android:background="@drawable/shape_corner_onlytop"
+            android:background="@drawable/shape_top_radius"
             android:orientation="vertical">
 
             <LinearLayout
@@ -212,7 +212,7 @@
                         android:layout_marginLeft="@dimen/dp_m_12"
                         android:layout_marginBottom="@dimen/dp_m_12"
                         android:layout_toRightOf="@+id/relative_tt"
-                        android:background="@drawable/shape_noread_number"
+                        android:background="@drawable/shape_no_read_point"
                         android:gravity="center"
                         android:text="5"
                         android:textColor="@color/white"

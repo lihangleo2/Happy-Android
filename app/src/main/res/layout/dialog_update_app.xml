@@ -20,7 +20,7 @@
             android:src="@mipmap/update_top" />
 
         <RelativeLayout
-            android:background="@drawable/shape_corner_onlybottom"
+            android:background="@drawable/shape_bottom_radius"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/image_title">
@@ -61,7 +61,7 @@
                     android:layout_below="@+id/text_message_other"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/dp_24"
-                    android:background="@drawable/shape_jianb_update"
+                    android:background="@drawable/gradient_shape_update_app"
                     android:gravity="center"
                     android:text="确认下载"
                     android:textColor="@color/white"
@@ -108,7 +108,7 @@
                     android:layout_below="@+id/progress_percent"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="@dimen/dp_24"
-                    android:background="@drawable/shape_jianb_update"
+                    android:background="@drawable/gradient_shape_update_app"
                     android:gravity="center"
                     android:text="取消下载"
                     android:textColor="@color/white"

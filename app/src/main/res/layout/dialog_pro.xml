@@ -17,7 +17,7 @@
             android:id="@+id/relative_"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/shape_dialog_style"
+            android:background="@drawable/shape_dialog_top_radius"
             android:minHeight="@dimen/dp_80">
 
             <TextView
