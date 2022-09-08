@@ -74,7 +74,7 @@
         android:drawable="@mipmap/card_zan_24"
         android:duration="20" />
     <item
-        android:drawable="@mipmap/card_zan_35"
+        android:drawable="@mipmap/card_zan_25"
         android:duration="20" />
 
 </animation-list>

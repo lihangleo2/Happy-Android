@@ -49,7 +49,7 @@ public class HomeAdapter extends BaseAdapter<HomeBean> {
         }
 
         if (itemBean.isCollect()) {
-            binding.imageZan.setImageResource(R.mipmap.card_zan_35);
+            binding.imageZan.setImageResource(R.mipmap.card_zan_25);
         } else {
             binding.imageZan.setImageResource(R.mipmap.card_zan_1);
         }
