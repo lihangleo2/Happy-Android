@@ -4,320 +4,37 @@
     >
 
     <item
-        android:drawable="@mipmap/ad_loading_view_0004"
+        android:drawable="@mipmap/common_loading4_1"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0005"
+        android:drawable="@mipmap/common_loading4_2"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0006"
+        android:drawable="@mipmap/common_loading4_3"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0007"
+        android:drawable="@mipmap/common_loading4_4"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0008"
+        android:drawable="@mipmap/common_loading4_5"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0009"
+        android:drawable="@mipmap/common_loading4_6"
         android:duration="30" />
-
     <item
-        android:drawable="@mipmap/ad_loading_view_0010"
+        android:drawable="@mipmap/common_loading4_7"
         android:duration="30" />
-
     <item
-        android:drawable="@mipmap/ad_loading_view_0011"
+        android:drawable="@mipmap/common_loading4_8"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0012"
+        android:drawable="@mipmap/common_loading4_9"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0013"
+        android:drawable="@mipmap/common_loading4_10"
         android:duration="30" />
     <item
-        android:drawable="@mipmap/ad_loading_view_0014"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0015"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0016"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0017"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0018"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0019"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0020"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0021"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0022"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0023"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0024"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0025"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0026"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0027"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0028"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0029"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0030"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0031"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0032"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0033"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0034"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0035"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0036"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0037"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0038"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0039"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0040"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0041"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0042"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0043"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0044"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0045"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0046"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0047"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0048"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0049"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0050"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0051"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0052"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0053"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0054"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0055"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0056"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0057"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0058"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0059"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0060"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0061"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0062"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0063"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0064"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0065"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0066"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0067"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0068"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0069"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0070"
-        android:duration="30" />
-
-    <item
-        android:drawable="@mipmap/ad_loading_view_0071"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0072"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0073"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0074"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0075"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0076"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0077"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0078"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0079"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0080"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0081"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0082"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0083"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0084"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0085"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0086"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0087"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0088"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0089"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0090"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0091"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0092"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0093"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0094"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0095"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0096"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0097"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0098"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0099"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0100"
-        android:duration="30" />
-    <item
-        android:drawable="@mipmap/ad_loading_view_0101"
+        android:drawable="@mipmap/common_loading4_11"
         android:duration="30" />
 
 </animation-list>
