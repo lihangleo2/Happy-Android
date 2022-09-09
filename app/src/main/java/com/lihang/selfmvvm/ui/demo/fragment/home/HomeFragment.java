@@ -3,6 +3,7 @@ package com.lihang.selfmvvm.ui.demo.fragment.home;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Space;
 
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.DataUtils;
@@ -12,6 +13,8 @@ import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseFragment;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.ResponModel;
+import com.lihang.selfmvvm.base.retrofitwithrxjava.RetrofitManager;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
@@ -27,10 +30,12 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by leo
@@ -87,6 +92,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
                 updateBanner(data);
             }
         }));
+
     }
 
 

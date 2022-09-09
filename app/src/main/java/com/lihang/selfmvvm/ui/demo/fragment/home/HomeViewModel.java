@@ -20,7 +20,8 @@ import androidx.lifecycle.LiveData;
 /**
  * Created by leo
  * on 2019/10/16.
- * 从每个页面的ViewModel里，就能看出每个页面的功能和联网请求。类似于MVP里的契约类
+ * 1、从每个页面的ViewModel里，就能看出每个页面的功能和联网请求。类似于MVP里的契约类
+ * 2、如果横竖屏转换的时候，也可以使用HomeViewModel进行一个保存
  */
 public class HomeViewModel extends BaseViewModel<RepositoryImpl> {
 

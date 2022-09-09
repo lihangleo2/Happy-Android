@@ -70,6 +70,7 @@ public abstract class BaseModel {
             paramsBuilder = paramsBuilder.build();
         }
         boolean showDialog = paramsBuilder.isShowDialog();
+        boolean closeDialog = paramsBuilder.isCloseDialog();
         String loadingMessage = paramsBuilder.getLoadingMessage();
         int onlineCacheTime = paramsBuilder.getOnlineCacheTime();
         int offlineCacheTime = paramsBuilder.getOfflineCacheTime();
@@ -99,7 +100,9 @@ public abstract class BaseModel {
                     if (!TextUtils.isEmpty(oneTag)) {
                         onNetTags.remove(oneTag);
                     }
-                    liveData.postValue((T) Resource.onFinaly());
+                    if (closeDialog){
+                        liveData.postValue((T) Resource.onFinaly());
+                    }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)
@@ -121,6 +124,7 @@ public abstract class BaseModel {
             paramsBuilder = paramsBuilder.build();
         }
         boolean showDialog = paramsBuilder.isShowDialog();
+        boolean closeDialog = paramsBuilder.isCloseDialog();
         String loadingMessage = paramsBuilder.getLoadingMessage();
         int onlineCacheTime = paramsBuilder.getOnlineCacheTime();
         int offlineCacheTime = paramsBuilder.getOfflineCacheTime();
@@ -165,7 +169,9 @@ public abstract class BaseModel {
                     if (!TextUtils.isEmpty(oneTag)) {
                         onNetTags.remove(oneTag);
                     }
-                    liveData.postValue((T) Resource.onFinaly());
+                    if (closeDialog){
+                        liveData.postValue((T) Resource.onFinaly());
+                    }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)

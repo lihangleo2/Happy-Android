@@ -20,6 +20,11 @@ public class ParamsBuilder {
     //是否显示加载loading （默认显示）
     private boolean isShowDialog = true;
 
+    //是否关闭dialog.(默认关闭)
+    //因为livaData无法使用RxJava组合操作符，当有2个或多个接口需要并行的时候，也就是接口1要执行完，才执行接口2，
+    //那么就存在，接口1执行的时候，首先showDialog，接口1调通以后，先不关闭dialog。执行完接口2才关闭dialog的情况
+    private boolean isCloseDialog = true;
+
     //加载进度条上是否显示文字（默认不显示文字）
     private String loadingMessage;
 
@@ -36,6 +41,11 @@ public class ParamsBuilder {
 
     public ParamsBuilder isShowDialog(boolean isShowDialog){
         this.isShowDialog = isShowDialog;
+        return this;
+    }
+
+    public ParamsBuilder isCloseDialog(boolean isCloseDialog){
+        this.isCloseDialog = isCloseDialog;
         return this;
     }
 
@@ -101,6 +111,16 @@ public class ParamsBuilder {
     public void setShowDialog(boolean showDialog) {
         isShowDialog = showDialog;
     }
+
+
+    public boolean isCloseDialog(){
+        return isCloseDialog;
+    }
+
+    public void setCloseDialog(boolean isCloseDialog){
+        this.isCloseDialog = isCloseDialog;
+    }
+
 
     public String getLoadingMessage() {
         return loadingMessage;
