@@ -54,11 +54,11 @@ public class Resource<T> {
         this.errorMsg = errorMsg;
     }
 
-    //单独为Disposable解决rxJava内存泄漏被关闭时做得。
     public Resource(int state) {
         this.state = state;
     }
 
+    //单独为Disposable解决rxJava内存泄漏被关闭时做得。
     public static <T> Resource<T> onFinaly() {
         return new Resource<>(ONFINALLY);
     }

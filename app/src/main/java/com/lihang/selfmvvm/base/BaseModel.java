@@ -104,7 +104,7 @@ public abstract class BaseModel {
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(objectLifecycleTransformer)
                 .subscribe(o -> {
-                    //setValue(同步)，接收端和发送端在同一现场。
+                    //setValue(同步)，接收端和发送端在同一线程。
                     //这里使用setValue是为了解决连续2次postVlaue会丢失数据，也就不触发finally
                     liveData.setValue((T) Resource.response((ResponModel<Object>) o));
                 }, throwable -> {
