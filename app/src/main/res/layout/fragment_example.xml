@@ -387,6 +387,34 @@
                 </com.lihang.ShadowLayout>
 
 
+
+                <com.lihang.ShadowLayout
+                    android:id="@+id/shadowLayout_anim"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:layout_marginBottom="@dimen/dp_20"
+                    android:onClick="@{onClickListener}"
+                    app:hl_cornerRadius="@dimen/dp_30"
+                    app:hl_layoutBackground="#32DAF8"
+                    app:hl_layoutBackground_true="#8032DAF8"
+                    app:hl_shapeMode="pressed">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/dp_17"
+                        android:paddingTop="@dimen/dp_7"
+                        android:paddingRight="@dimen/dp_17"
+                        android:paddingBottom="@dimen/dp_7"
+                        android:text="系统基础动画"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp_14" />
+
+                </com.lihang.ShadowLayout>
+
+
             </LinearLayout>
 
 

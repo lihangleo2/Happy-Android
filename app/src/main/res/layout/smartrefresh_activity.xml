@@ -35,6 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <!--UI_LEO 列表无数据的空占位符的统一使用-->
                 <include
                     android:id="@+id/include_empty"
                     layout="@layout/include_empty" />

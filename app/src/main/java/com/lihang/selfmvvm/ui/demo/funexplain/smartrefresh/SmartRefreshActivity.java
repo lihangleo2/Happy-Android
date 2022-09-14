@@ -25,6 +25,7 @@ public class SmartRefreshActivity extends BaseActivity<NormalViewModel, Smartref
 
     @Override
     protected void processLogic() {
+        // CODE_LEO: 列表无数据的空占位符统一使用
         binding.includeEmpty.setImageEmpty(R.mipmap.no_data);
         binding.includeEmpty.setTextEmpty("暂无收藏");
         //

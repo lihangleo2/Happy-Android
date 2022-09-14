@@ -16,14 +16,12 @@ public class X5WebTask extends Task {
 
             @Override
             public void onViewInitFinished(boolean arg0) {
-                // TODO Auto-generated method stub
                 //x5內核初始化完成的回调，为true表示x5内核加载成功，否则表示x5内核加载失败，会自动切换到系统内核。
                 LogUtils.i("x5初始化哦", " onViewInitFinished is " + arg0);
             }
 
             @Override
             public void onCoreInitFinished() {
-                // TODO Auto-generated method stub
             }
         };
         //x5内核初始化接口

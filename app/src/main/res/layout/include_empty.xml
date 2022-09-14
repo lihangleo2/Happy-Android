@@ -22,6 +22,7 @@
         android:gravity="center">
 
 
+        <!-- UI_LEO BinderAdapter的使用(utils-DataBindingHelper里)        -->
         <ImageView
             android:id="@+id/image_empty"
             android:layout_width="@dimen/dp_190"

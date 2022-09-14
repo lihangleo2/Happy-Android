@@ -1,18 +1,18 @@
-package com.lihang.selfmvvm.ui.home.adapter;
+package com.lihang.selfmvvm.ui.demo.fragment.home.adapter;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseViewHolder;
 import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.databinding.HomeItemListBinding;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by leo

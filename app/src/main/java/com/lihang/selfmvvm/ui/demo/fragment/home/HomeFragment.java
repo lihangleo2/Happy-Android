@@ -1,25 +1,20 @@
 package com.lihang.selfmvvm.ui.demo.fragment.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Space;
 
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.DataUtils;
-import com.leo.utilspro.utils.LogUtils;
-import com.leo.utilspro.utils.TimeUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseFragment;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
-import com.lihang.selfmvvm.base.bean.ResponModel;
-import com.lihang.selfmvvm.base.retrofitwithrxjava.RetrofitManager;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
 import com.lihang.selfmvvm.databinding.HomeFragmentBinding;
 import com.lihang.selfmvvm.ui.demo.activity.WebActivity;
+import com.lihang.selfmvvm.ui.demo.fragment.home.adapter.HomeAdapter;
 import com.lihang.selfmvvm.ui.demo.funexplain.bannerintro.ImageAdapter;
 import com.youth.banner.indicator.CircleIndicator;
 import com.youth.banner.listener.OnBannerListener;
@@ -27,22 +22,14 @@ import com.youth.banner.transformer.AlphaPageTransformer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.Scheduler;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by leo
  * on 2021/9/26.
  */
+
 public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBinding> implements BaseAdapter.OnItemClickListener<HomeBean> {
-    private com.lihang.selfmvvm.ui.home.adapter.HomeAdapter adapter;
+    private HomeAdapter adapter;
     private int curPage = 0;
     private ArrayList<HomeBean> homeBeans = new ArrayList<>();
     private ArrayList<BannerBean> bannerBeans = new ArrayList<>();
@@ -55,7 +42,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
     @Override
     protected void processLogic(Bundle savedInstanceState) {
 
-        adapter = new com.lihang.selfmvvm.ui.home.adapter.HomeAdapter(this);
+        adapter = new HomeAdapter(this);
         adapter.setOnItemClickListener(this);
         adapter.setDataList(homeBeans);
         binding.recyclerView.setAdapter(adapter);
@@ -64,6 +51,7 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
         getHomeArticles(curPage, null);
 
     }
+
 
     @Override
     protected void setListener() {
@@ -137,4 +125,6 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
                 .putExtra("url", item.getLink())
                 .startActivity();
     }
+
+
 }

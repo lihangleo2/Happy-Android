@@ -5,6 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.util.Pair;
+
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
@@ -13,6 +18,7 @@ import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.customview.popup.CommonPopupWindow;
 import com.lihang.selfmvvm.databinding.FragmentExampleBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
+import com.lihang.selfmvvm.ui.demo.funexplain.anim.AnimActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.bannerintro.BannerActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.coordinatorlayout.CoordinatorLayoutActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.edittext.EditTextViewActivity;
@@ -25,15 +31,14 @@ import com.lihang.selfmvvm.ui.demo.funexplain.selectandclipImage.SelectAndClipIm
 import com.lihang.selfmvvm.ui.demo.funexplain.shareanim.ShareAnimActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.smartrefresh.SmartRefreshActivity;
 import com.lihang.selfmvvm.ui.demo.funexplain.wximageeffect.LikeWxImageEffectActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.util.Pair;
 
 /**
  * Created by leo
  * on 2020/10/21.
+ * todo 各功能页面展示
  */
 public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentExampleBinding> {
+    private static final String TAG = "ExamplewhtaFragment";//按下logt快速生成代码
     int index;
 
     //退出登录pop
@@ -45,6 +50,7 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
         fragment.index = index;
         return fragment;
     }
+
 
     @Override
     protected int getContentViewId() {
@@ -61,10 +67,14 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
         binding.setOnClickListener(this);
     }
 
+
+    // FUN_LEO: 方法的注解
+    // CODE_LEO: 代码的注解
+    // UI_LEO: ui的注解
+    // VALUE_LEO: 变量的注解
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.shadowLayout_network:
                 //【网络请求】相关文档和用法
                 ActivitysBuilder.build(this, NetWorkExplainActivity.class)
@@ -72,9 +82,11 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                 break;
 
             case R.id.shadowLayout_image:
+
                 //【选择图片和剪裁图片】文档和用法
                 ActivitysBuilder.build(this, SelectAndClipImageActivity.class)
                         .startActivity();
+
                 break;
 
             case R.id.shadowLayout_likewx:
@@ -162,9 +174,15 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 getActivity().startActivity(intent);
                 break;
+
+
+            case R.id.shadowLayout_anim:
+                //系统基础动画演示界面
+                ActivitysBuilder.build(this, AnimActivity.class)
+                        .startActivity();
+                break;
         }
     }
-
 
     public void initPop() {
         View viewShare = LayoutInflater.from(getContext()).inflate(R.layout.pop_login_out, null);
