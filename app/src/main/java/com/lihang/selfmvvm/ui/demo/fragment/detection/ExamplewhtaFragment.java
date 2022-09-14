@@ -75,6 +75,12 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.shadowLayout_anim:
+                //系统基础动画演示界面
+                ActivitysBuilder.build(this, AnimActivity.class)
+                        .startActivity();
+                break;
+
             case R.id.shadowLayout_network:
                 //【网络请求】相关文档和用法
                 ActivitysBuilder.build(this, NetWorkExplainActivity.class)
@@ -175,12 +181,6 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
                 getActivity().startActivity(intent);
                 break;
 
-
-            case R.id.shadowLayout_anim:
-                //系统基础动画演示界面
-                ActivitysBuilder.build(this, AnimActivity.class)
-                        .startActivity();
-                break;
         }
     }
 
