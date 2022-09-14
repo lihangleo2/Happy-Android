@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:fromXDelta="0"
+    android:fromYDelta="0"
+    android:toXDelta="50%"
+    android:toYDelta="50%"
+    android:fillAfter="true"
+    >
+    <!-- 50%表示自身宽度的二分之一 -->
+    <!-- 50%p表示父容器宽度的二分之一，如果父容器为根布局则为屏幕二分之一 -->
+
+
+</translate>

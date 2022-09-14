@@ -41,6 +41,8 @@ public class ExamplewhtaFragment extends BaseFragment<NormalViewModel, FragmentE
     private static final String TAG = "ExamplewhtaFragment";//按下logt快速生成代码
     int index;
 
+
+
     //退出登录pop
     private CommonPopupWindow popupWindow_share;
 
