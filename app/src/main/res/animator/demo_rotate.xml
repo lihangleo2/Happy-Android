@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:propertyName="rotation"
+    android:valueFrom="0"
+    android:valueTo="360"
+    android:duration="3000"
+    android:valueType="floatType"
+    >
+
+    <!-- rotation 二维转圈转动 -->
+    <!-- rotationX 绕x轴3D旋转 -->
+    <!-- rotationY 绕y轴3D旋转 -->
+
+    <!-- 属性动画缩放中心点通过view来设置：view.setPivotX(binding.buttonProperty.getWidth()/2); -->
+    <!-- 属性动画缩放中心点通过view来设置：view.setPivotY(binding.buttonProperty.getHeight()/2); -->
+
+
+</objectAnimator>

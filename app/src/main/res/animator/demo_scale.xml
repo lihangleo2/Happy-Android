@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<objectAnimator xmlns:android="http://schemas.android.com/apk/res/android"
+    android:propertyName="scaleX"
+    android:valueFrom="0"
+    android:valueTo="1"
+    android:duration="5000"
+    >
+    <!-- 属性动画缩放中心点通过view来设置：view.setPivotX(binding.buttonProperty.getWidth()/2); -->
+    <!-- 属性动画缩放中心点通过view来设置：view.setPivotY(binding.buttonProperty.getHeight()/2); -->
+
+</objectAnimator>
