@@ -13,7 +13,7 @@ public class ResponModel<T> implements Serializable {
     private T data;
     private int errorCode;
     private String errorMsg;
-    //--------------------------//
+    //-------------举例如下-------------//
     private boolean result;
     private T source;
 
