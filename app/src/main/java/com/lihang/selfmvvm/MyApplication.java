@@ -3,10 +3,11 @@ package com.lihang.selfmvvm;
 import android.app.Application;
 import android.content.Context;
 
-import com.leo.utilspro.utils.PreferenceUtil;
+import com.leo.utilspro.utils.MmkvUtils;
 import com.leo.utilspro.utils.abase.LeoUtils;
 import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.morefunction.launchstater.TaskDispatcher;
+import com.lihang.selfmvvm.morefunction.launchstater.mytasks.MmkvTask;
 import com.lihang.selfmvvm.morefunction.launchstater.mytasks.SmartRefreshLayoutTask;
 import com.lihang.selfmvvm.morefunction.launchstater.mytasks.X5WebTask;
 
@@ -47,13 +48,14 @@ public class MyApplication extends Application {
         TaskDispatcher dispatcher = TaskDispatcher.createInstance();
         dispatcher.addTask(new SmartRefreshLayoutTask())
                 .addTask(new X5WebTask())
+                .addTask(new MmkvTask())
                 .start();
 
     }
 
     public static User getLoginUser() {
         if (loginUser == null) {
-            loginUser = PreferenceUtil.getByClass("user", User.class);
+            loginUser = MmkvUtils.getByClass("user",User.class);
         }
         return loginUser;
     }
@@ -69,13 +71,13 @@ public class MyApplication extends Application {
 
 
     public static void updateUser(User user) {
-        PreferenceUtil.putByClass("user", user);
+        MmkvUtils.putByClass("user",user);
         loginUser = user;
     }
 
     public static void logOut() {
         loginUser = null;
-        PreferenceUtil.clearByClass(User.class);
+        MmkvUtils.remove("user");
     }
 
 

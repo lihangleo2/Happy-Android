@@ -1,7 +1,9 @@
 package com.lihang.selfmvvm.base.retrofitwithrxjava.Interceptor;
 
 import android.text.TextUtils;
-import com.leo.utilspro.utils.PreferenceUtil;
+
+import com.leo.utilspro.utils.MmkvUtils;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -51,7 +53,7 @@ public class NetCacheInterceptor implements Interceptor {
 
         //这里坐了自动解析头部和取值。之前一个项目要用头部的Token字段。我也不知道为什么不用cookie
         //(到时候最好用csdn登录来做)
-        String token = (String) PreferenceUtil.get("USER_TOKEN", "");
+        String token = (String) MmkvUtils.get("USER_TOKEN", "");
         if (!TextUtils.isEmpty(token)) {
             builder1.addHeader("Token", token)
                     .build();
@@ -60,7 +62,7 @@ public class NetCacheInterceptor implements Interceptor {
         Response response = chain.proceed(request);
         List<String> list = response.headers().values("Token");
         if (list.size() > 0) {
-            PreferenceUtil.put("USER_TOKEN", list.get(0));
+            MmkvUtils.put("USER_TOKEN", list.get(0));
         }
 
         if (onlineCacheTime != 0) {

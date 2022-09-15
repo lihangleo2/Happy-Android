@@ -1,8 +1,8 @@
 package com.lihang.selfmvvm.ui.demo.login;
 
+import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
+
 import android.graphics.Color;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Editable;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -15,27 +15,18 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.gyf.immersionbar.ImmersionBar;
-import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.KeyBoardUtils;
-import com.leo.utilspro.utils.LogUtils;
+import com.leo.utilspro.utils.MmkvUtils;
 import com.leo.utilspro.utils.MoreUtils;
-import com.leo.utilspro.utils.PreferenceUtil;
 import com.leo.utilspro.utils.ToastUtils;
-import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
-import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.base.bean.EventBusBean;
-import com.lihang.selfmvvm.base.bean.ParamsBuilder;
-import com.lihang.selfmvvm.common.PARAMS;
 import com.lihang.selfmvvm.customview.dialog.ProDialog;
 import com.lihang.selfmvvm.customview.dialog.ProwebInterface;
 import com.lihang.selfmvvm.databinding.LoginActivityBinding;
-import com.lihang.selfmvvm.ui.demo.activity.WebActivity;
-import com.lihang.selfmvvm.utils.AppUtils;
 import com.lihang.selfmvvm.utils.TimeCount;
-import com.lihang.smartloadview.SmartLoadingView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -45,8 +36,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-
-import static com.leo.utilspro.utils.KeyBoardUtils.isShouldHideInput;
 
 
 /**
@@ -70,13 +59,14 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
         //
         ImmersionBar.with(this).statusBarDarkFont(true).init();
         EventBus.getDefault().register(this);
-        String phone = (String) PreferenceUtil.get("phone", "");
+        String phone = (String) MmkvUtils.get("phone","");
+
 //        binding.ShadowLayoutSelect.setSelected(true);
 
         if (!TextUtils.isEmpty(phone)) {
             binding.editPhone.setText(phone);
         } else {
-            int pro = (int) PreferenceUtil.get("isPro", 0);
+            int pro = (int) MmkvUtils.get("isPro",0);
             if (pro == 0) {
                 Observable.timer(1200, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).compose(bindToLifecycle()).subscribe(aLong -> {
                     proDialog.show();
@@ -132,7 +122,7 @@ public class LoginActivity extends BaseActivity<NormalViewModel, LoginActivityBi
                     binding.shadowLayoutNext.setClickable(false);
                 }
 
-                PreferenceUtil.put("isPro", 1);
+                MmkvUtils.put("isPro",1);
                 proDialog.dismiss();
                 break;
 

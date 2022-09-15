@@ -36,4 +36,5 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'com.github.lihangleo2:MoreAboutRecyclerView:1.0.1'
+    implementation 'com.tencent:mmkv:1.2.14'
 }

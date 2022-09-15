@@ -13,21 +13,16 @@ import com.gyf.immersionbar.ImmersionBar;
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.KeyBoardUtils;
 import com.leo.utilspro.utils.LogUtils;
-import com.leo.utilspro.utils.MoreUtils;
-import com.leo.utilspro.utils.PreferenceUtil;
+import com.leo.utilspro.utils.MmkvUtils;
 import com.lihang.selfmvvm.MyApplication;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
 import com.lihang.selfmvvm.base.bean.EventBusBean;
-import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.bean.User;
-import com.lihang.selfmvvm.common.JSONS;
 import com.lihang.selfmvvm.databinding.ActivityRegistCodeBinding;
 import com.lihang.selfmvvm.ui.MainActivity;
-import com.lihang.selfmvvm.utils.AppUtils;
 import com.lihang.selfmvvm.utils.TimeCount;
-
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -234,7 +229,7 @@ public class RegistCodeActivity extends BaseActivity<NormalViewModel, ActivityRe
             LogUtils.i("验证码是否是对的", code + "===");
             LogUtils.i("这个问题是什么", "22222==" + phone);
 
-            PreferenceUtil.put("phone", phone);
+            MmkvUtils.put("phone",phone);
             User user = new User();
             user.setToken("test");
             MyApplication.updateUser(user);

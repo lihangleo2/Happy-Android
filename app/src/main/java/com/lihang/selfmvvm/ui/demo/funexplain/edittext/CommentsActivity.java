@@ -6,9 +6,11 @@ import android.os.Message;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.NonNull;
+
 import com.leo.utilspro.utils.KeyBoardUtils;
 import com.leo.utilspro.utils.LogUtils;
-import com.leo.utilspro.utils.PreferenceUtil;
+import com.leo.utilspro.utils.MmkvUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
@@ -19,7 +21,6 @@ import com.lihang.selfmvvm.databinding.CommentActivityBinding;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import androidx.annotation.NonNull;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -48,7 +49,7 @@ public class CommentsActivity extends BaseActivity<NormalViewModel, CommentActiv
                     int[] location = new int[2];
                     relativeLayout.getLocationOnScreen(location);
                     keyBoard_Y = (int) (location[1] - getContext().getResources().getDimension(R.dimen.dp_50));
-                    PreferenceUtil.put("keyBoardHeight", keyBoard_Y);
+                    MmkvUtils.put("keyBoardHeight", keyBoard_Y);
                     LogUtils.i("这里没有数据吗",keyBoard_Y+"====板子的y");
 
 
