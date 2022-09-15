@@ -5,10 +5,13 @@ import android.view.View;
 
 import com.leo.utilspro.utils.ActivitysBuilder;
 import com.leo.utilspro.utils.DataUtils;
+import com.leo.utilspro.utils.GsonUtil;
+import com.leo.utilspro.utils.LogUtils;
 import com.lihang.nbadapter.BaseAdapter;
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseFragment;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
+import com.lihang.selfmvvm.base.bean.ResponModel;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
@@ -81,6 +84,20 @@ public class HomeFragment extends BaseFragment<HomeViewModel, HomeFragmentBindin
             }
         }));
 
+    }
+
+
+    private void getAllResult() {
+        /*
+        针对那些不安规律走的后台服务器，直接将ResponModel返回出去
+        Demo 展示
+         */
+        mViewModel.getAllResult().observe(this, resource -> resource.handler(new OnCallback<ResponModel>() {
+            @Override
+            public void onSuccess(ResponModel data) {
+                LogUtils.i("打印全部json", GsonUtil.ser(data));
+            }
+        }));
     }
 
 

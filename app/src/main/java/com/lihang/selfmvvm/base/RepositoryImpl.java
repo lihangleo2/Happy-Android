@@ -1,14 +1,12 @@
 package com.lihang.selfmvvm.base;
 
-import com.leo.utilspro.utils.GsonUtil;
 import com.lihang.selfmvvm.MyApplication;
+import com.lihang.selfmvvm.base.bean.ResponModel;
 import com.lihang.selfmvvm.bean.BannerBean;
-import com.lihang.selfmvvm.bean.User;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.base.bean.Resource;
 import com.lihang.selfmvvm.common.PARAMS;
-import com.lihang.selfmvvm.common.SystemConst;
 import com.lihang.selfmvvm.base.retrofitwithrxjava.uploadutils.UploadFileRequestBody;
 
 import java.io.File;
@@ -19,7 +17,6 @@ import java.util.Map;
 
 import androidx.lifecycle.MutableLiveData;
 
-import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
@@ -29,6 +26,15 @@ import okhttp3.RequestBody;
  * 这是所有的网络请求所在的位置
  */
 public class RepositoryImpl extends BaseModel {
+
+    /*
+    针对那些不安规律走的后台服务器，直接将ResponModel返回出去
+     */
+    public MutableLiveData<Resource<ResponModel>> getAllResult(ParamsBuilder paramsBuilder) {
+        MutableLiveData<Resource<ResponModel>> liveData = new MutableLiveData<>();
+        return observeAllResult(getApiService().getAllResult(), liveData, paramsBuilder);
+    }
+
 
     /*** For Exmaple - - - - - - - - - - - - - -- - - -- -- - - -- - - ---------------------------*/
 
