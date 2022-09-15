@@ -2,7 +2,6 @@ package com.lihang.selfmvvm.base;
 
 import android.text.TextUtils;
 
-import com.leo.utilspro.utils.LogUtils;
 import com.lihang.selfmvvm.base.bean.ParamsBuilder;
 import com.lihang.selfmvvm.base.bean.ResponModel;
 import com.lihang.selfmvvm.base.retrofitwithrxjava.Interceptor.NetCacheInterceptor;
@@ -256,4 +255,51 @@ public abstract class BaseModel {
         return liveData;
     }
 
+
+    public <T> MutableLiveData<T> observeAllResult(Observable observable, final MutableLiveData<T> liveData, ParamsBuilder paramsBuilder) {
+        if (paramsBuilder == null) {
+            paramsBuilder = paramsBuilder.build();
+        }
+        boolean showDialog = paramsBuilder.isShowDialog();
+        String loadingMessage = paramsBuilder.getLoadingMessage();
+        int onlineCacheTime = paramsBuilder.getOnlineCacheTime();
+        int offlineCacheTime = paramsBuilder.getOfflineCacheTime();
+
+        if (onlineCacheTime > 0) {
+            setOnlineCacheTime(onlineCacheTime);
+        }
+        if (offlineCacheTime > 0) {
+            setOfflineCacheTime(offlineCacheTime);
+        }
+        String oneTag = paramsBuilder.getOneTag();
+        if (!TextUtils.isEmpty(oneTag)) {
+            if (onNetTags.contains(oneTag)) {
+                return liveData;
+            }
+        }
+        observable.subscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable1 -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.add(oneTag);
+                    }
+                    if (showDialog) {
+                        liveData.postValue((T) Resource.loading(loadingMessage));
+                    }
+                })
+                .doFinally(() -> {
+                    if (!TextUtils.isEmpty(oneTag)) {
+                        onNetTags.remove(oneTag);
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                //.compose(objectLifecycleTransformer)
+                .subscribe(o -> {
+
+                    liveData.postValue((T) Resource.responseAllResult((ResponModel<Object>) o));
+                }, throwable -> {
+                    liveData.postValue((T) Resource.error((Throwable) throwable));
+                });
+
+        return liveData;
+    }
 }

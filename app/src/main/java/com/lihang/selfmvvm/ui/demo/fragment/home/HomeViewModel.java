@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.lihang.selfmvvm.base.BaseViewModel;
 import com.lihang.selfmvvm.base.RepositoryImpl;
+import com.lihang.selfmvvm.base.bean.ResponModel;
 import com.lihang.selfmvvm.bean.BannerBean;
 import com.lihang.selfmvvm.bean.HomeBean;
 import com.lihang.selfmvvm.bean.HomeFatherBean;
@@ -33,6 +34,10 @@ public class HomeViewModel extends BaseViewModel<RepositoryImpl> {
     //获取banner轮播
     public LiveData<Resource<List<BannerBean>>> getBanner() {
         return getRepository().getBannerList();
+    }
+
+    public LiveData<Resource<ResponModel>> getAllResult() {
+        return getRepository().getAllResult(ParamsBuilder.build());
     }
 
     //获取首页文章

@@ -42,6 +42,15 @@ import retrofit2.http.Url;
  */
 public interface RetrofitApiService {
 
+    /*
+    针对那些不安规律走的后台服务器，直接将ResponModel返回出去
+     */
+    @GET("banner/json")
+    Observable<ResponModel> getAllResult();
+
+
+
+
     /** For Example ----------------------------------------------------------------------------*/
     //wanAndroid的，轮播banner的接口
     @GET("banner/json")

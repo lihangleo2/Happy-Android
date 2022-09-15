@@ -86,6 +86,21 @@ public class Resource<T> {
     }
 
 
+    public static <T> Resource<T> responseAllResult(ResponModel<T> data) {
+        if (data != null) {
+            if (data.isSuccess()) {
+                return  new Resource<T>(SUCCESS, (T) data, null);
+            }
+
+            if (data.isOtherLogin()) {
+                return new Resource<>(OTHERLOGIN, null, data.getErrorMsg());
+            }
+            return new Resource<>(FAIL, data.getErrorCode(), data.getErrorMsg());
+        }
+        return new Resource<>(ERROR, null, null);
+    }
+
+
     public static <T> Resource<T> failure(String msg) {
         return new Resource<>(ERROR, null, msg);
     }
