@@ -1,17 +1,11 @@
 package com.lihang.selfmvvm.ui.demo.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.View;
-import android.webkit.JavascriptInterface;
 
 import com.lihang.selfmvvm.R;
 import com.lihang.selfmvvm.base.BaseActivity;
 import com.lihang.selfmvvm.base.NormalViewModel;
-import com.lihang.selfmvvm.base.bean.EventBusBean;
 import com.lihang.selfmvvm.databinding.WebActivityBinding;
-
-import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by leo
